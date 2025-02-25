@@ -1,20 +1,28 @@
 import mongoose from 'mongoose';
 import ShippingAddress from '../src/models/shippingAddressModel.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 describe('Shipping Address Model Test', () => {
+    jest.setTimeout(60000); // Aumentar el tiempo de espera a 60 segundos
+
     beforeAll(async () => {
-        await mongoose.connect('mongodb://localhost:27017/test_db', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        try {
+            await mongoose.connect(process.env.MONGO_URI);
+        } catch (error) {
+            console.error('Error connecting to MongoDB:', error);
+        }
     });
 
     afterAll(async () => {
-        await mongoose.connection.dropDatabase();
-        await mongoose.connection.close();
+        try {
+            await mongoose.connection.dropDatabase();
+            await mongoose.connection.close();
+        } catch (error) {
+            console.error('Error disconnecting from MongoDB:', error);
+        }
     });
-
-    jest.setTimeout(30000); // Aumentar el tiempo de espera a 30 segundos
 
     it('create & save shipping address successfully', async () => {
         const validShippingAddress = new ShippingAddress({

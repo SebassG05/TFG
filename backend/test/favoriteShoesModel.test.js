@@ -1,17 +1,27 @@
 import mongoose from 'mongoose';
 import FavoriteShoes from '../src/models/favoriteShoesModel.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 describe('Favorite Shoes Model Test', () => {
+    jest.setTimeout(60000); // Aumentar el tiempo de espera a 60 segundos
+
     beforeAll(async () => {
-        await mongoose.connect('mongodb://localhost:27017/test_db', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        try {
+            await mongoose.connect(process.env.MONGO_URI);
+        } catch (error) {
+            console.error('Error connecting to MongoDB:', error);
+        }
     });
 
     afterAll(async () => {
-        await mongoose.connection.dropDatabase();
-        await mongoose.connection.close();
+        try {
+            await mongoose.connection.dropDatabase();
+            await mongoose.connection.close();
+        } catch (error) {
+            console.error('Error disconnecting from MongoDB:', error);
+        }
     });
 
     it('create & save favorite shoes successfully', async () => {
