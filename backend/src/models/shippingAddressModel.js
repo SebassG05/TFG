@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const shippingAddressSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
     fullName: { type: String, required: true },
     street: { type: String, required: true },
     city: { type: String, required: true },
