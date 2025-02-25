@@ -1,9 +1,9 @@
 import express from 'express';
-import { loggerMiddleware } from '../middlewares/loggerMiddleware.js';
-import { errorHandlingMiddleware } from '../middlewares/errorHandlingMiddleware.js';
+import indexRoutes from '../routes/indexRoutes.js';
 
-export default function (app) {
-    app.use(loggerMiddleware);
+const expressLoader = (app) => {
     app.use(express.json());
-    app.use(errorHandlingMiddleware);
-}
+    app.use('/api', indexRoutes);
+};
+
+export default expressLoader;
