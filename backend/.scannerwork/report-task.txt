@@ -1,0 +1,7 @@
+organization=sebassg05
+projectKey=SebassG05_TFG
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.59973
+dashboardUrl=https://sonarcloud.io/dashboard?id=SebassG05_TFG
+ceTaskId=AZU8X6n9Z97ayYGVckXz
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZU8X6n9Z97ayYGVckXz
