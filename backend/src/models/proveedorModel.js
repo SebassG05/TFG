@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema({
+const proveedorSchema = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    role: { type: String, enum: ['user', 'admin', 'proveedor'], required: true },
+    status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date }
 });
 
-const User = mongoose.model('User', userSchema);
+const Proveedor = mongoose.model('Proveedor', proveedorSchema);
 
-export default User;
+export default Proveedor;

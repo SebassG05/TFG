@@ -1,4 +1,5 @@
 import User from '../models/userModel.js';
+import Proveedor from '../models/proveedorModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -8,6 +9,18 @@ export const register = async (req, res) => {
     try {
         if (role === 'admin' && adminPassword !== 'soyadmin') {
             return res.status(400).json({ message: 'Invalid admin password' });
+        }
+
+        if (role === 'proveedor') {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const newProveedor = new Proveedor({
+                username,
+                email,
+                password: hashedPassword
+            });
+
+            const savedProveedor = await newProveedor.save();
+            return res.status(201).json({ message: 'Proveedor registered successfully, awaiting approval', proveedorId: savedProveedor._id });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -20,6 +33,49 @@ export const register = async (req, res) => {
 
         const savedUser = await newUser.save();
         res.status(201).json({ message: 'User registered successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+export const approveProveedor = async (req, res) => {
+    const { proveedorId } = req.body;
+
+    try {
+        const proveedor = await Proveedor.findById(proveedorId);
+        if (!proveedor) {
+            return res.status(404).json({ message: 'Proveedor not found' });
+        }
+
+        proveedor.status = 'approved';
+        await proveedor.save();
+
+        const newUser = new User({
+            username: proveedor.username,
+            email: proveedor.email,
+            password: proveedor.password,
+            role: 'proveedor'
+        });
+
+        await newUser.save();
+        res.status(200).json({ message: 'Proveedor approved and user created successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+export const rejectProveedor = async (req, res) => {
+    const { proveedorId } = req.body;
+
+    try {
+        const proveedor = await Proveedor.findById(proveedorId);
+        if (!proveedor) {
+            return res.status(404).json({ message: 'Proveedor not found' });
+        }
+
+        proveedor.status = 'rejected';
+        await proveedor.save();
+        res.status(200).json({ message: 'Proveedor rejected successfully' });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
