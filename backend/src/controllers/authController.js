@@ -19,7 +19,7 @@ export const register = async (req, res) => {
         });
 
         const savedUser = await newUser.save();
-        res.status(201).json(savedUser);
+        res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -43,8 +43,13 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid admin password' });
         }
 
+        // Crear un token JWT
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
+
+        // Guardar el token en una cookie
+        res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+
+        res.json({ message: 'Login successful' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
