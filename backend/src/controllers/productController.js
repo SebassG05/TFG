@@ -57,3 +57,21 @@ export const deleteProduct = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+export const searchProducts = async (req, res) => {
+    const { name, brand, color, category } = req.query;
+
+    try {
+        const query = {};
+
+        if (name) query.name = { $regex: name, $options: 'i' };
+        if (brand) query.brand = { $regex: brand, $options: 'i' };
+        if (color) query.color = { $regex: color, $options: 'i' };
+        if (category) query.category = { $regex: category, $options: 'i' };
+
+        const products = await Product.find(query);
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
