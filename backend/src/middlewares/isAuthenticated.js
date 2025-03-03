@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 
-const isProveedor = async (req, res, next) => {
+const isAuthenticated = async (req, res, next) => {
     const token = req.cookies.token;
 
     if (!token) {
@@ -12,8 +12,8 @@ const isProveedor = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded.id);
 
-        if (!user || user.role !== 'proveedor') {
-            return res.status(403).json({ message: 'Access denied. You are not a proveedor.' });
+        if (!user) {
+            return res.status(403).json({ message: 'Access denied. User not found.' });
         }
 
         req.user = user;
@@ -23,4 +23,4 @@ const isProveedor = async (req, res, next) => {
     }
 };
 
-export default isProveedor;
+export default isAuthenticated;
