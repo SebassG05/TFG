@@ -5,7 +5,7 @@ import cartRoutes from './cartRoutes.js';
 
 const router = express.Router();
 
-router.use('/auth', authRoutes);
+router.use('/auth', authRoutes); // Asegúrate de que esta línea esté presente
 router.use('/products', productRoutes);
 router.use('/cart', cartRoutes);
 
