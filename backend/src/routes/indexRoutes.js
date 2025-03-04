@@ -9,6 +9,6 @@ const router = express.Router();
 router.use('/auth', authRoutes);
 router.use('/products', productRoutes);
 router.use('/cart', cartRoutes);
-router.use('/events', eventRoutes);
+router.use('/events', eventRoutes); // Asegúrate de que esta línea esté presente
 
 export default router;
