@@ -51,3 +51,29 @@ export const registerForEvent = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+export const updateEvent = async (req, res) => {
+    const { eventId } = req.params;
+    const { name, description, location, hasStands, registrationDates, eventDate } = req.body;
+
+    try {
+        const event = await Event.findById(eventId);
+        if (!event) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+
+        event.name = name || event.name;
+        event.description = description || event.description;
+        event.location = location || event.location;
+        event.hasStands = hasStands !== undefined ? hasStands : event.hasStands;
+        event.registrationDates = registrationDates || event.registrationDates;
+        event.eventDate = eventDate || event.eventDate;
+
+        event.updateIsActive();
+
+        const updatedEvent = await event.save();
+        res.status(200).json(updatedEvent);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
