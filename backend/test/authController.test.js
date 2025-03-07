@@ -3,8 +3,11 @@ import request from 'supertest';
 import app from '../src/app.js';
 import User from '../src/models/userModel.js';
 import dotenv from 'dotenv';
+import { sendEmail } from '../src/services/emailService.js';
 
 dotenv.config();
+
+jest.mock('../src/services/emailService.js');
 
 describe('Auth Controller Test', () => {
     jest.setTimeout(60000); // Aumentar el tiempo de espera a 60 segundos
@@ -101,5 +104,23 @@ describe('Auth Controller Test', () => {
 
         expect(response.status).toBe(400);
         expect(response.body.message).toBe('Invalid admin password');
+    });
+
+    it('should send forgot password email', async () => {
+        const user = new User({
+            username: 'testuser',
+            email: 'testuser@example.com',
+            password: await bcrypt.hash('password123', 10),
+            role: 'user'
+        });
+        await user.save();
+
+        const response = await request(app)
+            .post('/api/auth/forgot-password')
+            .send({ email: 'testuser@example.com' });
+
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe('Password reset email sent');
+        expect(sendEmail).toHaveBeenCalled();
     });
 });

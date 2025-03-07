@@ -2,6 +2,8 @@ import User from '../models/userModel.js';
 import Proveedor from '../models/proveedorModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+import { sendEmail } from '../services/emailService.js';
 
 export const register = async (req, res) => {
     const { username, email, password, role, adminPassword } = req.body;
@@ -126,5 +128,37 @@ export const getProfile = async (req, res) => {
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: error.message });
+    }
+};
+
+export const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const token = crypto.randomBytes(20).toString('hex');
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        await user.save();
+
+        const resetUrl = `http://${req.headers.host}/reset/${token}`;
+        const html = `
+            <h2>Password Reset Request</h2>
+            <p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
+            <p>Please click on the following link, or paste this into your browser to complete the process:</p>
+            <a href="${resetUrl}" style="color: blue; text-decoration: underline;">Reset Password</a>
+            <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+        `;
+
+        await sendEmail(user.email, 'Password Reset', html);
+
+        res.status(200).json({ message: 'Password reset email sent' });
+    } catch (error) {
+        res.status(500).json({ message: `Error sending email: ${error.message}` });
     }
 };
