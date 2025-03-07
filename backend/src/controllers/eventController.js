@@ -43,8 +43,12 @@ export const registerForEvent = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Aquí puedes agregar la lógica para registrar al usuario en el evento
-        // Por ejemplo, agregar el evento a una lista de eventos registrados del usuario
+        if (user.registeredEvents.includes(eventId)) {
+            return res.status(400).json({ message: 'You are already registered for this event' });
+        }
+
+        user.registeredEvents.push(eventId);
+        await user.save();
 
         res.status(200).json({ message: 'Successfully registered for the event' });
     } catch (error) {

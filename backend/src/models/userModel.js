@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, enum: ['user', 'admin', 'proveedor'], required: true },
+    registeredEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }], // Lista de eventos inscritos
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date }
 });

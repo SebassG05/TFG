@@ -118,7 +118,7 @@ export const getProfile = async (req, res) => {
     const userId = req.user._id;
 
     try {
-        const user = await User.findById(userId).select('-password');
+        const user = await User.findById(userId).select('-password').populate('registeredEvents');
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
