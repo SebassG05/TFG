@@ -137,28 +137,62 @@ export const forgotPassword = async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'Usuario no encontrado' });
         }
 
+        // Generar token de recuperación
         const token = crypto.randomBytes(20).toString('hex');
         user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hora
 
         await user.save();
 
-        const resetUrl = `http://${req.headers.host}/reset/${token}`;
+        // Enviar correo con el enlace
+        const resetUrl = `http://tuapp.com/reset/${token}`;
         const html = `
-            <h2>Password Reset Request</h2>
-            <p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
-            <p>Please click on the following link, or paste this into your browser to complete the process:</p>
-            <a href="${resetUrl}" style="color: blue; text-decoration: underline;">Reset Password</a>
-            <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+            <h2>Solicitud de Restablecimiento de Contraseña</h2>
+            <p>Haz clic en el enlace para restablecer tu contraseña:</p>
+            <a href="${resetUrl}" style="color: blue; text-decoration: underline;">Restablecer Contraseña</a>
+            <p>Si no solicitaste este cambio, ignora este mensaje.</p>
         `;
 
-        await sendEmail(user.email, 'Password Reset', html);
+        await sendEmail(user.email, 'Recuperación de Contraseña', html);
 
-        res.status(200).json({ message: 'Password reset email sent' });
+        res.status(200).json({ message: 'Correo enviado con éxito' });
     } catch (error) {
-        res.status(500).json({ message: `Error sending email: ${error.message}` });
+        res.status(500).json({ message: `Error enviando el correo: ${error.message}` });
+    }
+};
+
+export const resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { newPassword, confirmPassword } = req.body;
+
+    try {
+        // Buscar al usuario con el token
+        const user = await User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } });
+
+        if (!user) {
+            return res.status(400).json({ message: 'Token inválido o expirado' });
+        }
+
+        // Validar que ambas contraseñas coincidan
+        if (newPassword !== confirmPassword) {
+            return res.status(400).json({ message: 'Las contraseñas no coinciden' });
+        }
+
+        // Hashear la nueva contraseña
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Guardar la nueva contraseña y limpiar el token
+        user.password = hashedPassword;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+
+        await user.save();
+
+        res.status(200).json({ message: 'Contraseña restablecida correctamente' });
+    } catch (error) {
+        res.status(500).json({ message: `Error al restablecer la contraseña: ${error.message}` });
     }
 };
