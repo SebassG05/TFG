@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import Product from '../src/models/productModel.js';
 import dotenv from 'dotenv';
+import request from 'supertest';
+import app from '../src/app.js';
 
 dotenv.config();
 
@@ -52,5 +54,40 @@ describe('Product Model Test', () => {
         }
         expect(err).toBeInstanceOf(mongoose.Error.ValidationError);
         expect(err.errors.name).toBeDefined();
+    });
+});
+
+describe('Product Voting', () => {
+    let productId;
+
+    beforeAll(async () => {
+        const product = new Product({
+            name: 'Test Shoe',
+            brand: 'Test Brand',
+            size: 42,
+            color: 'Black',
+            price: 100,
+            stock: 10,
+            category: 'Sneakers'
+        });
+        const savedProduct = await product.save();
+        productId = savedProduct._id;
+    });
+
+    it('should vote for a product', async () => {
+        const res = await request(app)
+            .post('/api/products/vote')
+            .send({ productId });
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.product.votes).toEqual(1);
+    });
+
+    it('should get top products', async () => {
+        const res = await request(app)
+            .get('/api/products/top');
+
+        expect(res.statusCode).toEqual(200);
+        expect(res.body.length).toBeGreaterThan(0);
     });
 });
