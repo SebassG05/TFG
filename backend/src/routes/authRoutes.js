@@ -128,7 +128,62 @@ router.post('/reject-proveedor', isAdmin, rejectProveedor);
  */
 router.get('/profile', isAuthenticated, getProfile); // Nueva ruta para obtener el perfil del usuario
 
+/**
+ * @swagger
+ * /auth/forgot-password:
+ *   post:
+ *     summary: Send password reset email
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: The user's email
+ *     responses:
+ *       200:
+ *         description: Password reset email sent successfully
+ *       404:
+ *         description: User not found
+ */
 router.post('/forgot-password', forgotPassword);
+
+/**
+ * @swagger
+ * /auth/reset-password/{token}:
+ *   post:
+ *     summary: Reset user password
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: path
+ *         name: token
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Password reset token
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               newPassword:
+ *                 type: string
+ *                 description: The new password
+ *               confirmPassword:
+ *                 type: string
+ *                 description: Confirm the new password
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ *       400:
+ *         description: Invalid token or passwords do not match
+ */
 router.post('/reset-password/:token', resetPassword);
 
 export default router;
