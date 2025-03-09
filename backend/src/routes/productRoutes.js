@@ -52,8 +52,82 @@ const router = express.Router();
  */
 router.post('/create', isProveedor, validateSchema(createProductSchema), createProduct);
 
+/**
+ * @swagger
+ * /products/update/{id}:
+ *   put:
+ *     summary: Update an existing product
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the product to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The name of the product
+ *               brand:
+ *                 type: string
+ *                 description: The brand of the product
+ *               size:
+ *                 type: number
+ *                 description: The size of the product
+ *               color:
+ *                 type: string
+ *                 description: The color of the product
+ *               price:
+ *                 type: number
+ *                 description: The price of the product
+ *               stock:
+ *                 type: number
+ *                 description: The stock of the product
+ *               category:
+ *                 type: string
+ *                 description: The category of the product
+ *     responses:
+ *       200:
+ *         description: Product updated successfully
+ *       404:
+ *         description: Product not found
+ *       400:
+ *         description: Invalid input
+ */
 router.put('/update/:id', isProveedor, validateSchema(updateProductSchema), updateProduct);
+
+/**
+ * @swagger
+ * /products/delete/{id}:
+ *   delete:
+ *     summary: Delete a product
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the product to delete
+ *     responses:
+ *       200:
+ *         description: Product deleted successfully
+ *       404:
+ *         description: Product not found
+ */
 router.delete('/delete/:id', isProveedor, deleteProduct);
+
 router.get('/search', searchProducts);
 router.post('/vote', validateSchema(voteProductSchema), voteProduct);
 router.get('/top', getTopProducts);
