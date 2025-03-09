@@ -48,7 +48,18 @@ router.post('/register', validateSchema(registerSchema), register);
  */
 router.post('/login', validateSchema(loginSchema), login);
 
+/**
+ * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: Logout a user
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: Logout successful
+ */
 router.post('/logout', logout); // Asegúrate de que esta línea esté presente
+
 router.post('/approve-proveedor', isAdmin, approveProveedor);
 router.post('/reject-proveedor', isAdmin, rejectProveedor);
 router.get('/profile', isAuthenticated, getProfile); // Nueva ruta para obtener el perfil del usuario
