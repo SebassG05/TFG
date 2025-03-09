@@ -21,34 +21,24 @@ const router = express.Router();
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 description: The name of the product
- *               brand:
- *                 type: string
- *                 description: The brand of the product
- *               size:
- *                 type: number
- *                 description: The size of the product
- *               color:
- *                 type: string
- *                 description: The color of the product
- *               price:
- *                 type: number
- *                 description: The price of the product
- *               stock:
- *                 type: number
- *                 description: The stock of the product
- *               category:
- *                 type: string
- *                 description: The category of the product
+ *             $ref: '#/components/schemas/CreateProduct'
  *     responses:
  *       201:
  *         description: Product created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
  *       400:
  *         description: Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid input data"
  */
 router.post('/create', isProveedor, validateSchema(createProductSchema), createProduct);
 
@@ -72,36 +62,34 @@ router.post('/create', isProveedor, validateSchema(createProductSchema), createP
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 description: The name of the product
- *               brand:
- *                 type: string
- *                 description: The brand of the product
- *               size:
- *                 type: number
- *                 description: The size of the product
- *               color:
- *                 type: string
- *                 description: The color of the product
- *               price:
- *                 type: number
- *                 description: The price of the product
- *               stock:
- *                 type: number
- *                 description: The stock of the product
- *               category:
- *                 type: string
- *                 description: The category of the product
+ *             $ref: '#/components/schemas/UpdateProduct'
  *     responses:
  *       200:
  *         description: Product updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
  *       404:
  *         description: Product not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Product not found"
  *       400:
  *         description: Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid input data"
  */
 router.put('/update/:id', isProveedor, validateSchema(updateProductSchema), updateProduct);
 
@@ -123,8 +111,24 @@ router.put('/update/:id', isProveedor, validateSchema(updateProductSchema), upda
  *     responses:
  *       200:
  *         description: Product deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Product deleted successfully"
  *       404:
  *         description: Product not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Product not found"
  */
 router.delete('/delete/:id', isProveedor, deleteProduct);
 
@@ -158,8 +162,22 @@ router.delete('/delete/:id', isProveedor, deleteProduct);
  *     responses:
  *       200:
  *         description: Products retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
  *       400:
  *         description: Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid input data"
  */
 router.get('/search', searchProducts);
 
@@ -174,16 +192,30 @@ router.get('/search', searchProducts);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               productId:
- *                 type: string
- *                 description: The ID of the product to vote for
+ *             $ref: '#/components/schemas/VoteProduct'
  *     responses:
  *       200:
  *         description: Vote added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Vote added successfully"
+ *                 product:
+ *                   $ref: '#/components/schemas/Product'
  *       404:
  *         description: Product not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Product not found"
  */
 router.post('/vote', validateSchema(voteProductSchema), voteProduct);
 
@@ -196,6 +228,12 @@ router.post('/vote', validateSchema(voteProductSchema), voteProduct);
  *     responses:
  *       200:
  *         description: Top products retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
  */
 router.get('/top', getTopProducts);
 
