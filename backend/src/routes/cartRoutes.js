@@ -35,6 +35,27 @@ const router = express.Router();
  */
 router.post('/add', isAuthenticated, validateSchema(addToCartSchema), addToCart);
 
+/**
+ * @swagger
+ * /cart/remove/{productId}:
+ *   delete:
+ *     summary: Remove a product from the cart
+ *     tags: [Cart]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: productId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the product to remove
+ *     responses:
+ *       200:
+ *         description: Product removed from cart successfully
+ *       404:
+ *         description: Product not found in cart
+ */
 router.delete('/remove/:productId', isAuthenticated, removeFromCart);
 
 export default router;
