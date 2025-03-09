@@ -128,8 +128,65 @@ router.put('/update/:id', isProveedor, validateSchema(updateProductSchema), upda
  */
 router.delete('/delete/:id', isProveedor, deleteProduct);
 
+/**
+ * @swagger
+ * /products/search:
+ *   get:
+ *     summary: Search for products
+ *     tags: [Products]
+ *     parameters:
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         description: The name of the product to search for
+ *       - in: query
+ *         name: brand
+ *         schema:
+ *           type: string
+ *         description: The brand of the product to search for
+ *       - in: query
+ *         name: color
+ *         schema:
+ *           type: string
+ *         description: The color of the product to search for
+ *       - in: query
+ *         name: category
+ *         schema:
+ *           type: string
+ *         description: The category of the product to search for
+ *     responses:
+ *       200:
+ *         description: Products retrieved successfully
+ *       400:
+ *         description: Invalid input
+ */
 router.get('/search', searchProducts);
+
+/**
+ * @swagger
+ * /products/vote:
+ *   post:
+ *     summary: Vote for a product
+ *     tags: [Products]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 description: The ID of the product to vote for
+ *     responses:
+ *       200:
+ *         description: Vote added successfully
+ *       404:
+ *         description: Product not found
+ */
 router.post('/vote', validateSchema(voteProductSchema), voteProduct);
+
 router.get('/top', getTopProducts);
 
 export default router;
