@@ -187,6 +187,16 @@ router.get('/search', searchProducts);
  */
 router.post('/vote', validateSchema(voteProductSchema), voteProduct);
 
+/**
+ * @swagger
+ * /products/top:
+ *   get:
+ *     summary: Get top products
+ *     tags: [Products]
+ *     responses:
+ *       200:
+ *         description: Top products retrieved successfully
+ */
 router.get('/top', getTopProducts);
 
 export default router;
