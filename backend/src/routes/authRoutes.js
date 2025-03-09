@@ -112,7 +112,22 @@ router.post('/approve-proveedor', isAdmin, approveProveedor);
  */
 router.post('/reject-proveedor', isAdmin, rejectProveedor);
 
+/**
+ * @swagger
+ * /auth/profile:
+ *   get:
+ *     summary: Get user profile
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User profile retrieved successfully
+ *       404:
+ *         description: User not found
+ */
 router.get('/profile', isAuthenticated, getProfile); // Nueva ruta para obtener el perfil del usuario
+
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password/:token', resetPassword);
 
