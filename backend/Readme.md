@@ -1,6 +1,6 @@
 # Proyecto TFG - Backend
 
-Este proyecto es la parte backend de una aplicación de comercio electrónico. A continuación se describe la estructura del proyecto y la funcionalidad de cada archivo.
+Este proyecto es la parte backend de una aplicación de comercio electrónico sobre una tienda de zapatillas de baloncesto. A continuación se describe la estructura del proyecto y la funcionalidad de cada archivo.
 
 ## Estructura del Proyecto
 
