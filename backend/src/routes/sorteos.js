@@ -1,6 +1,6 @@
 import express from 'express';
 import auth from '../middlewares/auth.js';
-import { createSorteo, authorizeSorteo, inscribirUsuario } from '../controllers/sorteosController.js';
+import { createSorteo, authorizeSorteo, inscribirUsuario, getSorteoParticipants } from '../controllers/sorteosController.js';
 
 const router = express.Router();
 
@@ -9,5 +9,6 @@ router.post('/', auth, createSorteo);
 router.patch('/:id/authorize', auth, authorizeSorteo);
 router.post('/approve/:id', auth, authorizeSorteo);
 router.post('/:id/inscribirse', auth, inscribirUsuario);
+router.get('/:id/participants', auth, getSorteoParticipants);
 
 export default router;

@@ -1,8 +1,9 @@
 import Sorteo from '../models/Sorteo.js';
+import User from '../models/userModel.js';
 
 export const createSorteo = async (req, res) => {
     try {
-        const { title, description, expirationDate } = req.body;
+        const { title, description, expirationDate, hoopCoinsCost } = req.body;
         const providerId = req.user.providerId || req.user._id || req.user.id;
 
         if (!providerId) {
@@ -13,7 +14,8 @@ export const createSorteo = async (req, res) => {
             title,
             description,
             expirationDate,
-            providerId
+            providerId,
+            hoopCoinsCost: hoopCoinsCost || 0
         });
 
         await nuevoSorteo.save();
@@ -61,11 +63,47 @@ export const inscribirUsuario = async (req, res) => {
             return res.status(400).json({ error: 'Ya estás inscrito en este sorteo' });
         }
 
+        // Validar HoopCoins
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+        if ((user.hoopCoins || 0) < (sorteo.hoopCoinsCost || 0)) {
+            return res.status(400).json({ error: 'No tienes suficientes HoopCoins para inscribirte' });
+        }
+
+        // Descontar HoopCoins y guardar inscripción
+        user.hoopCoins -= sorteo.hoopCoinsCost || 0;
+        await user.save();
+
         sorteo.participants.push(userId);
         await sorteo.save();
 
-        res.json({ message: 'Inscripción exitosa' });
+        res.json({ message: 'Inscripción exitosa', hoopCoinsRestantes: user.hoopCoins });
     } catch (error) {
         res.status(500).json({ error: 'Error al inscribirse', details: error.message });
+    }
+};
+
+// Nuevo controlador para que el proveedor vea los inscritos
+export const getSorteoParticipants = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const sorteo = await Sorteo.findById(id).populate('participants', 'username email hoopCoins');
+        if (!sorteo) {
+            return res.status(404).json({ error: 'Sorteo no encontrado' });
+        }
+        if (!sorteo.providerId) {
+            return res.status(400).json({ error: 'El sorteo no tiene proveedor asignado' });
+        }
+        // LOG para depuración
+        console.log('providerId sorteo:', sorteo.providerId.toString());
+        console.log('req.user._id:', req.user._id?.toString());
+        if (sorteo.providerId.toString() !== req.user._id?.toString()) {
+            return res.status(403).json({ error: 'No autorizado' });
+        }
+        res.json({ participants: sorteo.participants });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener participantes', details: error.message });
     }
 };
