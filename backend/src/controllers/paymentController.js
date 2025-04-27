@@ -1,6 +1,8 @@
 import { createPaymentIntent } from '../services/paymentService.js';
 import Stripe from 'stripe';
 import Product from '../models/productModel.js'; // Asegúrate de que este modelo exista
+import User from '../models/userModel.js';
+import { calculateHoopCoins } from '../utils/hoopCoins.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -46,6 +48,11 @@ export const handlePayment = async (req, res) => {
             cancel_url: `${process.env.FRONTEND_URL}/cancel`,
         });
 
+        // Sumar HoopCoins al usuario
+        const userId = req.user._id;
+        const coins = calculateHoopCoins(product.price);
+        await User.findByIdAndUpdate(userId, { $inc: { hoopCoins: coins } });
+
         res.status(200).json({
             clientSecret: paymentIntent.client_secret,
             sessionId: session.id,
@@ -55,6 +62,7 @@ export const handlePayment = async (req, res) => {
                 name: product.name,
                 price: product.price,
             },
+            hoopCoinsEarned: coins
         });
     } catch (error) {
         res.status(500).json({ message: error.message });

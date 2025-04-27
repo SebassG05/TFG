@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, enum: ['user', 'admin', 'proveedor'], required: true },
+    hoopCoins: { type: Number, default: 0 },
     registeredEvents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }], // Lista de eventos inscritos
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
