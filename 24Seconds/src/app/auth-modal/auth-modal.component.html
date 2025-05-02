@@ -32,7 +32,7 @@
         </div>
         <div class="auth-modal__form-row">
           <button type="submit" class="auth-modal__main-btn">Acceder</button>
-          <a href="#" class="auth-modal__forgot">¿Has olvidado tu contraseña?</a>
+          <a href="#" class="auth-modal__forgot" (click)="showForgotPassword = true; $event.preventDefault();">¿Has olvidado tu contraseña?</a>
         </div>
       </form>
       <form *ngIf="activeTab === 'register'" (submit)="$event.preventDefault(); register();" class="auth-modal__form">
@@ -62,5 +62,16 @@
         <button type="submit" class="auth-modal__main-btn">Registrar</button>
       </form>
     </div>
+  </div>
+</div>
+
+<!-- MODAL DE RECUPERACIÓN DE CONTRASEÑA -->
+<div *ngIf="showForgotPassword" class="forgot-overlay">
+  <div class="forgot-modal">
+    <button class="forgot-close" (click)="showForgotPassword = false" aria-label="Cerrar">&times;</button>
+    <h3>Recuperar contraseña</h3>
+    <label>Introduce tu correo electrónico</label>
+    <input type="email" [(ngModel)]="forgotEmail" name="forgot_email" required />
+    <button (click)="forgotPassword()" class="auth-modal__main-btn" type="button" style="width:100%;margin-top:1rem;">Enviar enlace</button>
   </div>
 </div>

@@ -22,6 +22,8 @@ export class AuthModalComponent {
   role: 'user' | 'admin' | 'proveedor' = 'user';
   adminPassword = '';
   proveedorData = '';
+  showForgotPassword = false;
+  forgotEmail = '';
 
   constructor(private router: Router) {}
 
@@ -74,6 +76,23 @@ export class AuthModalComponent {
       if (!res.ok) throw new Error(data.message || 'Error al registrarse');
       alert(data.message || 'Registro exitoso');
       this.close();
+    } catch (err: any) {
+      alert(err.message);
+    }
+  }
+
+  async forgotPassword() {
+    try {
+      const res = await fetch('http://localhost:4001/api/auth/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: this.forgotEmail })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Error enviando el correo');
+      alert('Correo de recuperación enviado. Revisa tu bandeja de entrada.');
+      // No cierres el modal automáticamente
+      // this.showForgotPassword = false;
     } catch (err: any) {
       alert(err.message);
     }
