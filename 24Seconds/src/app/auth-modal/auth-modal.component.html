@@ -1,0 +1,66 @@
+<div class="auth-modal__backdrop" *ngIf="show">
+  <div class="auth-modal__split-container">
+    <div class="auth-modal__left">
+      <img src="assets/logo.png" alt="Logo" class="auth-modal__logo" />
+      <div class="auth-modal__left-bg"></div>
+      <div class="auth-modal__left-text">“CADA JUGADA CUENTA,<br> CADA PASO IMPORTA”</div>
+    </div>
+    <div class="auth-modal__right">
+      <button class="auth-modal__close" (click)="close()" aria-label="Cerrar">&times;</button>
+      <div class="auth-modal__tabs">
+        <button [class.active]="activeTab === 'login'" (click)="switchTab('login')">¿YA TIENES TU CUENTA?</button>
+        <button [class.active]="activeTab === 'register'" (click)="switchTab('register')">¿ERES NUEVO CLIENTE?</button>
+      </div>
+      <div class="auth-modal__tab-underline" [style.left]="activeTab === 'login' ? '0%' : '50%'"></div>
+      <div *ngIf="activeTab === 'register'" class="auth-modal__desc">
+        Bienvenido a nuestra pasión. Al registrarte en nuestra página, estás creando una cuenta centralizada que te permitirá acceder a todas las plataformas de <b>24Seconds</b> utilizando las mismas credenciales de inicio de sesión.
+      </div>
+      <form *ngIf="activeTab === 'login'" (submit)="$event.preventDefault(); login();" class="auth-modal__form">
+        <label>Rol</label>
+        <select [(ngModel)]="role" name="login_role">
+          <option value="user">Usuario</option>
+          <option value="admin">Administrador</option>
+          <option value="proveedor">Proveedor</option>
+        </select>
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="email" [(ngModel)]="email" name="login_email" required />
+        <label>Contraseña</label>
+        <input type="password" placeholder="contraseña" [(ngModel)]="password" name="login_password" required />
+        <div *ngIf="role === 'admin'">
+          <label>Clave de administrador</label>
+          <input type="password" placeholder="clave admin" [(ngModel)]="adminPassword" name="login_adminPassword" required />
+        </div>
+        <div class="auth-modal__form-row">
+          <button type="submit" class="auth-modal__main-btn">Acceder</button>
+          <a href="#" class="auth-modal__forgot">¿Has olvidado tu contraseña?</a>
+        </div>
+      </form>
+      <form *ngIf="activeTab === 'register'" (submit)="$event.preventDefault(); register();" class="auth-modal__form">
+        <label>Rol</label>
+        <select [(ngModel)]="role" name="reg_role">
+          <option value="user">Usuario</option>
+          <option value="admin">Administrador</option>
+          <option value="proveedor">Proveedor</option>
+        </select>
+        <label>Nombre de usuario</label>
+        <input type="text" placeholder="usuario" [(ngModel)]="username" name="reg_username" required />
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="" [(ngModel)]="email" name="reg_email" required />
+        <label>Contraseña</label>
+        <input type="password" placeholder="" [(ngModel)]="password" name="reg_password" required />
+        <label>Confirmar contraseña</label>
+        <input type="password" placeholder="" [(ngModel)]="confirmPassword" name="reg_confirm" required />
+        <div *ngIf="role === 'admin'">
+          <label>Clave de administrador</label>
+          <input type="password" placeholder="clave admin" [(ngModel)]="adminPassword" name="reg_adminPassword" required />
+        </div>
+        <div *ngIf="role === 'proveedor'">
+          <label>Datos de proveedor</label>
+          <input type="text" placeholder="empresa, CIF, etc." [(ngModel)]="proveedorData" name="reg_proveedorData" />
+        </div>
+
+        <button type="submit" class="auth-modal__main-btn">Registrar</button>
+      </form>
+    </div>
+  </div>
+</div>

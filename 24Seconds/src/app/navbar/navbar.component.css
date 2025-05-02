@@ -1,0 +1,292 @@
+/* Diseño moderno y exclusivo para el navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 3.5rem;
+  background: #181818;
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12);
+  border-radius: 2.2rem;
+  margin: 2.2rem auto;
+  max-width: 1400px;
+  position: relative;
+  min-height: 80px;
+  font-size: 1.18rem;
+}
+
+.navbar__logo {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.navbar__logo img {
+  height: 62px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px #fff3);
+  border-radius: 1.3rem;
+  background: #232323;
+  padding: 0.4rem 1.1rem;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 3.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.22rem;
+}
+
+.navbar__links li a {
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.navbar__links li a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, #ff0000, #ff0000);
+  transition: width 0.3s;
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  border-radius: 2px;
+}
+
+.navbar__links li a:hover::after {
+  background: linear-gradient(90deg, #ff3b3b, #ff7b7b);
+  width: 100%;
+}
+
+.navbar__links li a:hover {
+  color: #ff3b3b;
+}
+
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 3;
+}
+
+.navbar__toggle span {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: #ff0000;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  z-index: 3;
+}
+
+.navbar__icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem 0.3rem;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.navbar__icon-btn:active,
+.navbar__icon-btn:focus {
+  background: #ff3b3b22;
+}
+
+.navbar__search {
+  display: flex;
+  align-items: center;
+  background: #232323;
+  border-radius: 2rem;
+  margin: 0 2rem 0 2rem;
+  box-shadow: 0 2px 8px 0 rgba(255, 0, 0, 0.10);
+  transition: box-shadow 0.2s;
+  padding: 0.25rem 1.1rem 0.25rem 1.3rem;
+  min-width: 220px;
+  max-width: 340px;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+.navbar__search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0.7rem 0.7rem 0.7rem 0;
+  width: 100%;
+  transition: color 0.2s;
+}
+
+.navbar__search input::placeholder {
+  color: #bbb;
+  font-weight: 500;
+}
+
+.navbar__search input:focus {
+  color: #ff3b3b;
+}
+
+.navbar__search button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 0 0 0.3rem;
+  display: flex;
+  align-items: center;
+  transition: filter 0.2s;
+}
+
+.navbar__search button svg circle,
+.navbar__search button svg path {
+  stroke: #ff3b3b;
+}
+
+.navbar__search button:hover svg {
+  filter: brightness(1.2);
+}
+
+.navbar__search:focus-within {
+  box-shadow: 0 4px 16px 0 #ff3b3b44;
+}
+
+/* Ocultar barra de búsqueda tradicional en móvil */
+@media (max-width: 900px) {
+  .navbar__search {
+    display: none;
+  }
+  .navbar__actions {
+    display: flex;
+  }
+}
+
+/* Mostrar barra de búsqueda como overlay en móvil cuando está activa */
+@media (max-width: 900px) {
+  .navbar__search.mobile-open {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 64px;
+    background: #181818;
+    z-index: 100;
+    border-radius: 0 0 1.5rem 1.5rem;
+    box-shadow: 0 8px 32px 0 #ff3b3b33;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.2rem;
+    animation: searchOverlayIn 0.2s;
+  }
+  .navbar__search.mobile-open input {
+    font-size: 1.1rem;
+    width: 100%;
+    color: #ff3b3b;
+    background: transparent;
+  }
+  .navbar__search.mobile-open .close-search {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    margin-left: 0.7rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+}
+
+@keyframes searchOverlayIn {
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .navbar {
+    justify-content: space-between;
+    padding: 0.7rem 0.5rem;
+  }
+  .navbar__logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+    width: auto;
+  }
+  .navbar__toggle {
+    position: relative;
+    left: 0;
+  }
+  .navbar__actions {
+    position: relative;
+    right: 0;
+  }
+  .navbar__links {
+    gap: 1.7rem;
+    font-size: 1.08rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 1rem 0.5rem;
+    min-height: 60px;
+  }
+  .navbar__links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #232323ee;
+    flex-direction: column;
+    width: 180px;
+    align-items: flex-end;
+    gap: 1.5rem;
+    padding: 1.5rem 1.2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    z-index: 10;
+  }
+  .navbar__links.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .navbar__toggle {
+    display: flex;
+  }
+  .navbar__search {
+    order: 3;
+    width: 100%;
+    margin: 1rem 0 0.5rem 0;
+    max-width: none;
+    min-width: 0;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 0.18rem 0.7rem 0.18rem 1rem;
+  }
+}
