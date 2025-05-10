@@ -12,8 +12,7 @@ import { RouterModule } from '@angular/router';
         <ul>
           <li><a routerLink="/admin/proveedores">Aprobar Proveedores</a></li>
           <li><a routerLink="/admin/usuarios">Gestión de Usuarios</a></li>
-          <li><a routerLink="/admin/productos">Gestión de Productos</a></li>
-          <li><a routerLink="/admin/pedidos">Pedidos</a></li>
+          <li><a routerLink="/admin/pedidos">Productos en Tienda</a></li>
         </ul>
       </aside>
       <main class="admin-content">
@@ -30,13 +29,8 @@ import { RouterModule } from '@angular/router';
             <a routerLink="/admin/usuarios" class="btn">Ver Usuarios</a>
           </div>
           <div class="widget">
-            <h3>Productos</h3>
-            <p>Agrega, edita o elimina productos.</p>
-            <a routerLink="/admin/productos" class="btn">Gestionar Productos</a>
-          </div>
-          <div class="widget">
-            <h3>Pedidos</h3>
-            <p>Consulta y gestiona los pedidos recientes.</p>
+            <h3>Productos en Tienda</h3>
+            <p>Consulta todos los productos en la tienda.</p>
             <a routerLink="/admin/pedidos" class="btn">Ver Pedidos</a>
           </div>
         </section>
