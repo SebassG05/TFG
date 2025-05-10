@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 
 const isAdmin = async (req, res, next) => {
+    // Para debug: loguear el token recibido y el método
+    console.log('Método:', req.method, 'Token recibido:', req.header('authorization'));
     const token = req.header('authorization')?.split(' ')[1];
 
     if (!token) {
