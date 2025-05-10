@@ -2,6 +2,7 @@ import express from 'express';
 import { createProduct, updateProduct, deleteProduct, searchProducts, voteProduct, getTopProducts } from '../controllers/productController.js';
 import validateSchema from '../middlewares/validateSchema.js';
 import isProveedor from '../middlewares/isProveedor.js';
+import upload from '../middlewares/uploadImage.js';
 import createProductSchema from '../schemas/createProductSchema.js';
 import updateProductSchema from '../schemas/updateProductSchema.js';
 import voteProductSchema from '../schemas/voteProductSchema.js';
@@ -40,7 +41,10 @@ const router = express.Router();
  *                   type: string
  *                   example: "Invalid input data"
  */
-router.post('/create', isProveedor, validateSchema(createProductSchema), createProduct);
+router.post('/create', isProveedor, upload.array('images', 4), validateSchema(createProductSchema), async (req, res, next) => {
+  req.body.images = req.files ? req.files.map(f => f.path) : [];
+  next();
+}, createProduct);
 
 /**
  * @swagger

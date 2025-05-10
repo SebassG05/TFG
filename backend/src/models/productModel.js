@@ -9,6 +9,8 @@ const productSchema = new mongoose.Schema({
     stock: { type: Number, required: true },
     category: { type: String, required: true },
     votes: { type: Number, default: 0 },
+    imageUrl: { type: String }, // Para Cloudinary
+    images: [{ type: String }], // Array de URLs de imágenes
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date }
 });

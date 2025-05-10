@@ -1,0 +1,61 @@
+<div class="crear-producto-bg">
+  <canvas class="stars-bg" id="stars-bg"></canvas>
+  <form class="crear-producto-form" (ngSubmit)="crearProducto()" enctype="multipart/form-data">
+    <h2>Crear producto</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="producto.name" name="name" required />
+      </div>
+      <div class="form-group">
+        <label>Marca</label>
+        <input type="text" [(ngModel)]="producto.brand" name="brand" required />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Talla</label>
+        <input type="number" [(ngModel)]="producto.size" name="size" required />
+      </div>
+      <div class="form-group">
+        <label>Color</label>
+        <input type="text" [(ngModel)]="producto.color" name="color" required />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Precio</label>
+        <input type="number" [(ngModel)]="producto.price" name="price" required />
+      </div>
+      <div class="form-group">
+        <label>Stock</label>
+        <input type="number" [(ngModel)]="producto.stock" name="stock" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Categoría</label>
+      <input type="text" [(ngModel)]="producto.category" name="category" required placeholder="zapatilla, balón, calentador..." class="category-placeholder" />
+    </div>
+    <div class="form-group">
+      <label>Imágenes (hasta 4)</label>
+      <label class="custom-file-label">
+        <input type="file" (change)="onFileChange($event)" accept="image/*" multiple required hidden />
+        <span class="custom-file-text">Elegir imágenes</span>
+      </label>
+      <span class="file-count" *ngIf="producto.images.length">{{ producto.images.length }} archivo{{ producto.images.length > 1 ? 's' : '' }}</span>
+      <div class="img-preview-multi" *ngIf="producto.images.length">
+        <div class="img-preview-item" *ngFor="let img of producto.images; let i = index">
+          <img [src]="getImagePreview(img)" alt="preview" />
+          <button type="button" class="img-remove-btn" (click)="removeImage(i)">✕</button>
+          <div class="img-main-radio">
+            <input type="radio" name="mainImage" [checked]="mainImageIndex === i" (change)="setMainImage(i)" />
+            <label>Principal</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" [disabled]="loading">{{ loading ? 'Creando...' : 'Crear producto' }}</button>
+    <div class="success-msg" *ngIf="successMsg">{{ successMsg }}</div>
+    <div class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</div>
+  </form>
+</div>

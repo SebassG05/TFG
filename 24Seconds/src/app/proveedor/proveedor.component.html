@@ -1,14 +1,19 @@
 <div class="proveedor-bg">
   <img src="assets/logo.png" alt="Logo" class="proveedor-logo-bg" />
-  <div class="proveedor-container animate__animated animate__fadeInDown" data-aos="zoom-in" data-aos-duration="1200">
-    <h1 class="animate__animated animate__fadeIn">Bienvenido, Proveedor</h1>
-    <p class="animate__animated animate__fadeIn animate__delay-1s">
-      Desde este panel puedes gestionar tus productos, eventos y sorteos.
-    </p>
-    <div class="proveedor-actions">
-      <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="400">Crear producto</button>
-      <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="600">Crear evento</button>
-      <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="800">Crear sorteo</button>
+  <ng-container *ngIf="!mostrarCrearProducto; else crearProducto">
+    <div class="proveedor-container animate__animated animate__fadeInDown" data-aos="zoom-in" data-aos-duration="1200">
+      <h1 class="animate__animated animate__fadeIn">Bienvenido, Proveedor</h1>
+      <p class="animate__animated animate__fadeIn animate__delay-1s">
+        Desde este panel puedes gestionar tus productos, eventos y sorteos.
+      </p>
+      <div class="proveedor-actions">
+        <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="400" (click)="irACrearProducto()">Crear producto</button>
+        <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="600">Crear evento</button>
+        <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="800">Crear sorteo</button>
+      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-template #crearProducto>
+    <app-crear-producto></app-crear-producto>
+  </ng-template>
 </div>

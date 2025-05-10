@@ -1,23 +1,37 @@
 import Product from '../models/productModel.js';
 
 export const createProduct = async (req, res) => {
-    const { name, brand, size, color, price, stock, category } = req.body;
-
+    // Convierte los campos numéricos a number si vienen como string (por FormData)
+    let { name, brand, size, color, price, stock, category } = req.body;
+    // Si algún campo falta, responde con error claro
+    if (!name || !brand || !size || !color || !price || !stock || !category) {
+        return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
+    }
+    size = Number(size);
+    price = Number(price);
+    stock = Number(stock);
+    if (isNaN(size) || isNaN(price) || isNaN(stock)) {
+        return res.status(400).json({ message: 'Talla, precio y stock deben ser números válidos.' });
+    }
+    let images = req.body.images || [];
+    if (req.files && Array.isArray(req.files)) {
+        images = req.files.map(file => file.path);
+    }
     try {
         const newProduct = new Product({
-            name,
-            brand,
-            size,
-            color,
-            price,
-            stock,
-            category
+            name: name,
+            brand: brand,
+            size: size,
+            color: color,
+            price: price,
+            stock: stock,
+            category: category,
+            images: images
         });
-
         const savedProduct = await newProduct.save();
         res.status(201).json(savedProduct);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: error.message, errors: error.errors });
     }
 };
 
