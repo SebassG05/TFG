@@ -24,6 +24,7 @@ export class AuthModalComponent {
   proveedorData = '';
   showForgotPassword = false;
   forgotEmail = '';
+  waitingApproval = false;
 
   constructor(private router: Router) {}
 
@@ -74,8 +75,12 @@ export class AuthModalComponent {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Error al registrarse');
-      alert(data.message || 'Registro exitoso');
-      this.close();
+      if (data.role === 'proveedor') {
+        this.waitingApproval = true;
+      } else {
+        alert(data.message || 'Registro exitoso');
+        this.close();
+      }
     } catch (err: any) {
       alert(err.message);
     }
