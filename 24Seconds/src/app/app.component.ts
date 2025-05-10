@@ -18,4 +18,9 @@ export class AppComponent {
   isAdminRoute(): boolean {
     return window.location.pathname.startsWith('/admin');
   }
+
+  isAdminOrProveedorRoute(): boolean {
+    const path = window.location.pathname;
+    return path.startsWith('/admin') || path.startsWith('/proveedor');
+  }
 }

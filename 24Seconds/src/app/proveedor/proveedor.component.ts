@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-proveedor',
   standalone: true,
-  template: `<h2>Panel de proveedor</h2>`
+  templateUrl: './proveedor.component.html',
+  styleUrls: ['./proveedor.component.css']
 })
-export class ProveedorComponent {}
+export class ProveedorComponent implements AfterViewInit {
+  ngAfterViewInit() {
+    AOS.init({ once: true });
+  }
+}
