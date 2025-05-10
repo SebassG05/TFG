@@ -62,8 +62,20 @@
       </ng-container>
       <ng-template #waitingBox>
         <div class="waiting-approval-box">
-          <div class="loader"></div>
-          <p>Esperando aprobación del admin...</p>
+          <ng-container [ngSwitch]="proveedorApprovalStatus">
+            <div *ngSwitchCase="'pending'">
+              <div class="loader"></div>
+              <p>Esperando aprobación del admin...</p>
+            </div>
+            <div *ngSwitchCase="'approved'">
+              <div class="approval-icon success">✔️</div>
+              <p>¡Tu cuenta de proveedor ha sido aprobada! Ya puedes iniciar sesión.</p>
+            </div>
+            <div *ngSwitchCase="'rejected'">
+              <div class="approval-icon error">❌</div>
+              <p>Tu solicitud de proveedor ha sido rechazada.<br>Contacta con soporte para más información.</p>
+            </div>
+          </ng-container>
         </div>
       </ng-template>
     </div>

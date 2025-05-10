@@ -198,3 +198,13 @@ export const resetPassword = async (req, res) => {
         res.status(500).json({ message: `Error al restablecer la contraseña: ${error.message}` });
     }
 };
+
+// Obtener proveedores pendientes
+export const getProveedoresPendientes = async (req, res) => {
+    try {
+        const proveedores = await Proveedor.find({ status: 'pending' }, '-password');
+        res.status(200).json(proveedores);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

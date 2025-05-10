@@ -370,3 +370,26 @@
   100% { transform: rotate(360deg); }
 }
 
+.approval-icon {
+  font-size: 4.2rem;
+  margin-bottom: 1.2rem;
+  margin-top: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+}
+.approval-icon.success {
+  background: linear-gradient(135deg, #4ade80 60%, #bbf7d0 100%);
+  color: #1a7f37;
+  border: 2.5px solid #22c55e;
+}
+.approval-icon.error {
+  background: linear-gradient(135deg, #f87171 60%, #fee2e2 100%);
+  color: #b91c1c;
+  border: 2.5px solid #ef4444;
+}
+

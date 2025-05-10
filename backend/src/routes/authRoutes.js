@@ -1,5 +1,5 @@
 import express from 'express';
-import { register, login, logout, approveProveedor, rejectProveedor, getProfile, forgotPassword, resetPassword } from '../controllers/authController.js';
+import { register, login, logout, approveProveedor, rejectProveedor, getProfile, forgotPassword, resetPassword, getProveedoresPendientes } from '../controllers/authController.js';
 import validateSchema from '../middlewares/validateSchema.js';
 import isAdmin from '../middlewares/isAdmin.js';
 import isAuthenticated from '../middlewares/isAuthenticated.js';
@@ -185,5 +185,21 @@ router.post('/forgot-password', forgotPassword);
  *         description: Invalid token or passwords do not match
  */
 router.post('/reset-password/:token', resetPassword);
+
+/**
+ * @swagger
+ * /auth/proveedores-pendientes:
+ *   get:
+ *     summary: Get pending proveedores
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Pending proveedores retrieved successfully
+ *       404:
+ *         description: No pending proveedores found
+ */
+router.get('/proveedores-pendientes', isAdmin, getProveedoresPendientes);
 
 export default router;
