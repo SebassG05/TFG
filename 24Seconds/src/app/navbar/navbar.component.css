@@ -10,7 +10,7 @@
   margin: 2.2rem auto;
   max-width: 1000px;
   position: relative;
-  min-height: 80px;
+  min-height: 50px;
   font-size: 1.18rem;
 }
 
@@ -116,7 +116,7 @@
   align-items: center;
   background: #232323;
   border-radius: 2rem;
-  margin: 0 2rem 0 2rem;
+  margin: 0 2rem 0 4rem;
   margin-left: 60px;
   box-shadow: 0 2px 8px 0 rgba(255, 0, 0, 0.10);
   transition: box-shadow 0.2s;

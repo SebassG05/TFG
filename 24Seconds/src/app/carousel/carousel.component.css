@@ -1,7 +1,7 @@
 .carousel-container {
   width: 100vw;
   max-width: 100vw;
-  height: 78vh;
+  height: 58vh;
   max-height: 900px;
   min-height: 400px;
   position: relative;
@@ -22,7 +22,7 @@
 .carousel-slide img {
   width: 100vw;
   max-width: 100vw;
-  height: 80vh;
+  height: 60vh;
   max-height: 900px;
   min-height: 400px;
   object-fit: cover;
@@ -32,15 +32,16 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
+  background: none;
   color: #fff;
   border: none;
   font-size: 2.5rem;
   padding: 0.5rem 1.2rem;
-  border-radius: 50%;
+  border-radius: 0;
   cursor: pointer;
   z-index: 2;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: none;
 }
 .carousel-arrow.left {
   left: 2vw;
@@ -49,7 +50,8 @@
   right: 2vw;
 }
 .carousel-arrow:hover {
-  background: rgba(255,0,0,0.7);
+  background: none;
+  color: #ff0000;
 }
 .carousel-dots {
   position: absolute;

@@ -12,9 +12,7 @@
         <button [class.active]="activeTab === 'register'" (click)="switchTab('register')">¿ERES NUEVO CLIENTE?</button>
       </div>
       <div class="auth-modal__tab-underline" [style.left]="activeTab === 'login' ? '0%' : '50%'"></div>
-      <div *ngIf="activeTab === 'register'" class="auth-modal__desc">
-        Bienvenido a nuestra pasión. Al registrarte en nuestra página, estás creando una cuenta centralizada que te permitirá acceder a todas las plataformas de <b>24Seconds</b> utilizando las mismas credenciales de inicio de sesión.
-      </div>
+
       <form *ngIf="activeTab === 'login'" (submit)="$event.preventDefault(); login();" class="auth-modal__form">
         <label>Rol</label>
         <select [(ngModel)]="role" name="login_role">

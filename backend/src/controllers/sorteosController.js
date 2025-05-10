@@ -10,12 +10,19 @@ export const createSorteo = async (req, res) => {
             return res.status(400).json({ error: 'No providerId found in token' });
         }
 
+        // Obtener la URL de la imagen subida a Cloudinary
+        let imageUrl = undefined;
+        if (req.file && req.file.path) {
+            imageUrl = req.file.path;
+        }
+
         const nuevoSorteo = new Sorteo({
             title,
             description,
             expirationDate,
             providerId,
-            hoopCoinsCost: hoopCoinsCost || 0
+            hoopCoinsCost: hoopCoinsCost || 0,
+            imageUrl // Guardar la URL de la imagen
         });
 
         await nuevoSorteo.save();

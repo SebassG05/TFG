@@ -8,7 +8,8 @@ const sorteoSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
     expirationDate: { type: Date, required: true },
     participants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    hoopCoinsCost: { type: Number, default: 0 } // Nuevo campo
+    hoopCoinsCost: { type: Number, default: 0 }, // Nuevo campo
+    imageUrl: { type: String }
 });
 
 export default mongoose.model('Sorteo', sorteoSchema);

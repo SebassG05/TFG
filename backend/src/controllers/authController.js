@@ -22,7 +22,7 @@ export const register = async (req, res) => {
             });
 
             const savedProveedor = await newProveedor.save();
-            return res.status(201).json({ message: 'Proveedor registered successfully, awaiting approval', proveedorId: savedProveedor._id });
+            return res.status(201).json({ message: 'Proveedor registered successfully, awaiting approval', proveedorId: savedProveedor._id, role: 'proveedor' });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -34,7 +34,7 @@ export const register = async (req, res) => {
         });
 
         const savedUser = await newUser.save();
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'User registered successfully', role });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -106,7 +106,7 @@ export const login = async (req, res) => {
 
         // Guardar el token en una cookie
 
-        res.json({ message: 'Login successful', token: token });
+        res.json({ message: 'Login successful', token: token, role: user.role });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
