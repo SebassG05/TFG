@@ -62,18 +62,32 @@
       </ng-container>
       <ng-template #waitingBox>
         <div class="waiting-approval-box">
-          <ng-container [ngSwitch]="proveedorApprovalStatus">
-            <div *ngSwitchCase="'pending'">
-              <div class="loader"></div>
-              <p>Esperando aprobación del admin...</p>
+          <ng-container *ngIf="proveedorApprovalStatus === 'pending'">
+            <div class="loader"></div>
+            <p style="opacity:1;animation:none;">Esperando aprobación del admin...</p>
+          </ng-container>
+          <ng-container *ngIf="proveedorApprovalStatus === 'approved'">
+            <div class="approval-icon success">
+              <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="27" cy="27" r="26" stroke="#22c55e" stroke-width="2.5" fill="#e0fbe6"/>
+                <path d="M16 28.5L24.5 37L38 20" stroke="#22c55e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </div>
-            <div *ngSwitchCase="'approved'">
-              <div class="approval-icon success">✔️</div>
-              <p>¡Tu cuenta de proveedor ha sido aprobada! Ya puedes iniciar sesión.</p>
+            <div class="approval-message">
+              <h3 class="approval-title">¡Enhorabuena!</h3>
+              <p class="approval-desc">Tu cuenta de proveedor ha sido <b>aprobada</b>.<br>Puedes acceder a tu panel exclusivo.</p>
             </div>
-            <div *ngSwitchCase="'rejected'">
-              <div class="approval-icon error">❌</div>
-              <p>Tu solicitud de proveedor ha sido rechazada.<br>Contacta con soporte para más información.</p>
+          </ng-container>
+          <ng-container *ngIf="proveedorApprovalStatus === 'rejected'">
+            <div class="approval-icon error">
+              <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="27" cy="27" r="26" stroke="#ef4444" stroke-width="2.5" fill="#fee2e2"/>
+                <path d="M19 19L35 35M35 19L19 35" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="approval-message">
+              <h3 class="approval-title">Solicitud rechazada</h3>
+              <p class="approval-desc">No ha sido posible validar tu acceso como proveedor.<br>Si crees que es un error, contacta con nuestro equipo.</p>
             </div>
           </ng-container>
         </div>

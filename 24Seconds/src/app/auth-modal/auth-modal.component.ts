@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './auth-modal.component.html',
   styleUrls: ['./auth-modal.component.css'],
   standalone: true,
-  imports: [FormsModule, NgIf, NgSwitch, NgSwitchCase]
+  imports: [FormsModule, NgIf]
 })
 export class AuthModalComponent implements OnDestroy {
   activeTab: 'login' | 'register' = 'login';
