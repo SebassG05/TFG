@@ -1,3 +1,7 @@
-<app-navbar></app-navbar>
-<app-carousel></app-carousel>
+<!-- Quitar navbar solo en rutas de admin -->
+<ng-container *ngIf="!isAdminRoute(); else adminOnly">
+  <app-navbar></app-navbar>
+</ng-container>
+<router-outlet></router-outlet>
 <app-auth-modal></app-auth-modal>
+<ng-template #adminOnly></ng-template>

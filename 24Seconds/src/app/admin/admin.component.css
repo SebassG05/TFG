@@ -1,0 +1,90 @@
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6fa;
+  margin-top: 0;
+}
+.admin-sidebar {
+  width: 240px;
+  background: #23272f;
+  color: #fff;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+}
+.admin-sidebar h2 {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.admin-sidebar li {
+  margin: 1.2rem 0;
+}
+.admin-sidebar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.admin-sidebar a:hover {
+  color: #ff3c00;
+  cursor: pointer;
+}
+.admin-sidebar li:hover {
+  cursor: pointer;
+}
+.admin-content {
+  flex: 1;
+  padding: 2.5rem 3rem 0 3rem;
+  margin-top: 0;
+}
+.admin-content h1 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+.admin-widgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+.widget {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.widget:hover {
+  cursor: pointer;
+}
+.widget h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
+}
+.widget p {
+  flex: 1;
+  color: #555;
+  margin-bottom: 1.2rem;
+}
+.widget .btn {
+  background: #ff3c00;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.widget .btn:hover {
+  background: #d12e00;
+  cursor: pointer;
+}
