@@ -23,4 +23,8 @@ export class ProveedorComponent implements AfterViewInit {
   irACrearProducto() {
     this.router.navigate(['/proveedor/crear-producto']);
   }
+
+  irACrearEvento() {
+    this.router.navigate(['/proveedor/crear-evento']);
+  }
 }

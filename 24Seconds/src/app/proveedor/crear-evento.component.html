@@ -1,0 +1,40 @@
+<div class="crear-producto-bg">
+  <div class="basketball-vintage-bg">
+    <img src="/assets/poster1.png" alt="Basketball vintage" class="basketball-vintage-img" />
+    <img src="/assets/poster2.png" alt="Final Liga Nacional" class="poster-liga-nacional" />
+  </div>
+  <canvas class="stars-bg" id="stars-bg"></canvas>
+  <div class="crear-evento-container">
+    <h2>Crear Evento</h2>
+    <form [formGroup]="eventoForm" (ngSubmit)="submit()">
+      <label>Nombre del evento
+        <input formControlName="name" type="text" required />
+      </label>
+      <label>Descripción
+        <textarea formControlName="description" required></textarea>
+      </label>
+      <label>Ubicación
+        <input formControlName="location" type="text" required />
+      </label>
+      <label>¿Tiene gradas?
+        <input formControlName="hasStands" type="checkbox" />
+      </label>
+      <label>Inicio de inscripción
+        <input formControlName="registrationStart" type="date" required />
+      </label>
+      <label>Fin de inscripción
+        <input formControlName="registrationEnd" type="date" required />
+      </label>
+      <label>Fecha del evento
+        <input formControlName="eventDate" type="date" required />
+      </label>
+      <label>Imagen del evento
+        <input type="file" (change)="onFileChange($event)" accept="image/*" required />
+      </label>
+      <div *ngIf="imagenPreview" class="img-preview">
+        <img [src]="imagenPreview" alt="Previsualización" />
+      </div>
+      <button type="submit" [disabled]="!eventoForm.valid">Crear evento</button>
+    </form>
+  </div>
+</div>

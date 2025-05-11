@@ -3,7 +3,12 @@ import User from '../models/userModel.js';
 
 export const createEvent = async (req, res) => {
     const { name, description, location, hasStands, registrationDates, eventDate } = req.body;
-
+    let img = '';
+    if (req.file && req.file.path) {
+        img = req.file.path;
+    } else {
+        return res.status(400).json({ message: 'La imagen del evento es obligatoria.' });
+    }
     try {
         const newEvent = new Event({
             name,
@@ -11,11 +16,10 @@ export const createEvent = async (req, res) => {
             location,
             hasStands,
             registrationDates,
-            eventDate
+            eventDate,
+            img
         });
-
         newEvent.updateIsActive();
-
         const savedEvent = await newEvent.save();
         res.status(201).json(savedEvent);
     } catch (error) {

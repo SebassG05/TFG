@@ -1,0 +1,133 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+/* Fondo de ladrillos con imagen de basketball vintage superpuesta */
+.crear-producto-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+  background:
+    url('/assets/ladrillos.png') center center/cover no-repeat,
+    linear-gradient(135deg, #23272f 0%, #181818 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.basketball-vintage-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50vw;
+  height: 70vh;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  background: none;
+}
+
+.basketball-vintage-img {
+  max-width: 30vw;
+  max-height: 40vh;
+  margin-top: 20vh;
+  margin-left: 5vw;
+  object-fit: contain;
+  transform: rotate(-15deg);
+  position: relative;
+  z-index: 1;
+}
+
+.poster-liga-nacional {
+  max-width: 28vw;
+  max-height: 38vh;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.1);
+  margin-top: -9rem;
+  margin-left: 15vw;
+  margin-bottom: 0;
+  transform: rotate(15deg);
+  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.18);
+  position: relative;
+  z-index: 2;
+}
+
+.crear-evento-container {
+  background: rgba(255,255,255,0.97);
+  border-radius: 2rem;
+  box-shadow: 0 8px 48px 0 rgba(0,0,0,0.18);
+  max-width: 420px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  z-index: 2;
+  margin-left: -14%;
+}
+
+.crear-evento-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #181818;
+  text-shadow: 2px 2px 8px #e0e0e0, 0 0 2px #ff00cc;
+}
+
+.crear-evento-container label {
+  display: block;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.crear-evento-container input[type="text"],
+.crear-evento-container input[type="date"],
+.crear-evento-container textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.85);
+}
+
+.crear-evento-container input[type="checkbox"] {
+  margin-left: 0.5rem;
+}
+
+.crear-evento-container button {
+  background: #181818;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px #ff00cc44;
+  letter-spacing: 1px;
+}
+
+.crear-evento-container button:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
+.img-preview {
+  margin: 1rem 0;
+}
+
+.img-preview img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+

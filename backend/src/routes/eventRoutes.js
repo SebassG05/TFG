@@ -1,7 +1,8 @@
 import express from 'express';
 import { createEvent, registerForEvent, updateEvent, deleteEvent } from '../controllers/eventController.js';
-import isAdmin from '../middlewares/isAdmin.js';
+import isProveedor from '../middlewares/isProveedor.js';
 import isAuthenticated from '../middlewares/isAuthenticated.js';
+import upload from '../middlewares/uploadImage.js';
 
 const router = express.Router();
 
@@ -53,7 +54,7 @@ const router = express.Router();
  *       400:
  *         description: Invalid input
  */
-router.post('/create', isAdmin, createEvent);
+router.post('/create', isProveedor, upload.single('img'), createEvent);
 
 /**
  * @swagger
@@ -135,7 +136,7 @@ router.post('/register/:eventId', isAuthenticated, registerForEvent);
  *       404:
  *         description: Event not found
  */
-router.put('/update/:eventId', isAdmin, updateEvent);
+router.put('/update/:eventId', isProveedor, updateEvent);
 
 /**
  * @swagger
@@ -158,6 +159,6 @@ router.put('/update/:eventId', isAdmin, updateEvent);
  *       404:
  *         description: Event not found
  */
-router.delete('/delete/:eventId', isAdmin, deleteEvent); // Asegúrate de que esta línea esté presente
+router.delete('/delete/:eventId', isProveedor, deleteEvent);
 
 export default router;

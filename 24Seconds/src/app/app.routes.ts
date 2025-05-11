@@ -9,6 +9,7 @@ export const routes: Routes = [
   { path: 'admin/usuarios', component: AdminUsuariosComponent },
   { path: 'proveedor', loadComponent: () => import('./proveedor/proveedor.component').then(m => m.ProveedorComponent) },
   { path: 'proveedor/crear-producto', loadComponent: () => import('./proveedor/crear-producto.component').then(m => m.CrearProductoComponent) },
+  { path: 'proveedor/crear-evento', loadComponent: () => import('./proveedor/crear-evento.component').then(m => m.CrearEventoComponent) },
   { path: 'reset/:token', loadComponent: () => import('./reset-password.component').then(m => m.ResetPasswordComponent) },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 
