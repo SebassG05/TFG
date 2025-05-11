@@ -43,6 +43,20 @@ body, html {
   z-index: 1;
 }
 
+.poster-canasta{
+    max-width: 28vw;
+  max-height: 38vh;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.1);
+  margin-top: -30rem;
+  margin-left: 75vw;
+  margin-bottom: 0;
+  transform: rotate(15deg);
+  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.18);
+  position: relative;
+  z-index: 2;
+}
+
 .poster-liga-nacional {
   max-width: 28vw;
   max-height: 38vh;
