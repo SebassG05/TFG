@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { Router } from '@angular/router';
@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [FormsModule, NgIf]
 })
-export class AuthModalComponent implements OnDestroy {
+export class AuthModalComponent implements OnInit, OnDestroy {
   activeTab: 'login' | 'register' = 'login';
-  show = true;
+  show = false; // Cambiar a false por defecto
   username = '';
   password = '';
   email = '';
@@ -29,6 +29,16 @@ export class AuthModalComponent implements OnDestroy {
   private approvalInterval: any;
 
   constructor(private router: Router) {}
+
+  ngOnInit() {
+    // Si hay un token en localStorage, no mostrar el modal
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.show = false;
+    } else {
+      this.show = true;
+    }
+  }
 
   switchTab(tab: 'login' | 'register') {
     this.activeTab = tab;
