@@ -1,0 +1,27 @@
+<div class="crear-sorteo-bg">
+  <canvas id="particles-bg"></canvas>
+  <div class="crear-sorteo-container">
+    <h2>Crear Sorteo</h2>
+    <form [formGroup]="sorteoForm" (ngSubmit)="submit()">
+      <label>Título del sorteo
+        <input formControlName="title" type="text" required />
+      </label>
+      <label>Descripción
+        <textarea formControlName="description" required></textarea>
+      </label>
+      <label>Fecha de expiración
+        <input formControlName="expirationDate" type="date" required />
+      </label>
+      <label>Coste en HoopCoins
+        <input formControlName="hoopCoinsCost" type="number" min="0" required />
+      </label>
+      <label>Imagen del sorteo
+        <input type="file" (change)="onFileChange($event)" accept="image/*" />
+      </label>
+      <div *ngIf="imagenPreview" class="img-preview">
+        <img [src]="imagenPreview" alt="Previsualización" />
+      </div>
+      <button type="submit" [disabled]="!sorteoForm.valid">Crear sorteo</button>
+    </form>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import AOS from 'aos';
 import { CrearProductoComponent } from './crear-producto.component';
+import { CrearSorteoComponent } from './crear-sorteo.component';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -26,5 +27,9 @@ export class ProveedorComponent implements AfterViewInit {
 
   irACrearEvento() {
     this.router.navigate(['/proveedor/crear-evento']);
+  }
+
+  irACrearSorteo() {
+    this.router.navigate(['/proveedor/crear-sorteo']);
   }
 }
