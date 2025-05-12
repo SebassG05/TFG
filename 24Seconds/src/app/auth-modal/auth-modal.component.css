@@ -135,7 +135,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-  margin-top: 1.2rem;
+  margin-top: 6rem; /* Aumenta el espacio superior para bajar el formulario */
   margin-bottom: 0.2rem;
   align-self: flex-start;
   max-height: 600px;
@@ -437,3 +437,23 @@
   box-shadow: 0 0 0 4px #fee2e2aa;
 }
 
+.register-role-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  gap: 1rem;
+}
+.register-role-toggle button {
+  background: #f3f4f6;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  color: #23272f;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.register-role-toggle button.selected {
+  background: #23272f;
+  color: #fff;
+}

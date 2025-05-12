@@ -14,7 +14,6 @@ import { NgFor, NgIf, DatePipe } from '@angular/common';
           <tr>
             <th>Usuario</th>
             <th>Email</th>
-            <th>Rol</th>
             <th>HoopCoins</th>
             <th>Fecha de Registro</th>
             <th>Eliminar</th>
@@ -24,7 +23,6 @@ import { NgFor, NgIf, DatePipe } from '@angular/common';
           <tr *ngFor="let usuario of usuariosPaginados">
             <td>{{ usuario.username }}</td>
             <td>{{ usuario.email }}</td>
-            <td>{{ usuario.role }}</td>
             <td>{{ usuario.hoopCoins }}</td>
             <td>{{ usuario.createdAt | date:'short' }}</td>
             <td>

@@ -19,14 +19,13 @@ export class AuthModalComponent implements OnDestroy {
   confirmPassword = '';
   newsletter = false;
   terms = false;
-  role: 'user' | 'admin' | 'proveedor' = 'user';
-  adminPassword = '';
   proveedorData = '';
   showForgotPassword = false;
   forgotEmail = '';
   waitingApproval = false;
   proveedorApprovalStatus: 'pending' | 'approved' | 'rejected' | null = null;
   proveedorId: string | null = null;
+  isProveedor = false;
   private approvalInterval: any;
 
   constructor(private router: Router) {}
@@ -41,7 +40,6 @@ export class AuthModalComponent implements OnDestroy {
 
   async login() {
     const body: any = { email: this.email, password: this.password };
-    if (this.role === 'admin') body.adminPassword = this.adminPassword;
     try {
       const res = await fetch('http://localhost:4001/api/auth/login', {
         method: 'POST',
@@ -51,7 +49,6 @@ export class AuthModalComponent implements OnDestroy {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Error al iniciar sesión');
       localStorage.setItem('token', data.token); // Guardar el token para autenticación
-      // Redirección según el rol devuelto por el backend
       if (data.role === 'admin') this.router.navigate(['/admin']);
       else if (data.role === 'proveedor') this.router.navigate(['/proveedor']);
       else this.router.navigate(['/home']);
@@ -65,11 +62,9 @@ export class AuthModalComponent implements OnDestroy {
     const body: any = {
       username: this.username,
       email: this.email,
-      password: this.password,
-      role: this.role
+      password: this.password
     };
-    if (this.role === 'admin') body.adminPassword = this.adminPassword;
-    if (this.role === 'proveedor') body.proveedorData = this.proveedorData;
+    if (this.isProveedor) body.proveedorData = this.proveedorData;
     try {
       const res = await fetch('http://localhost:4001/api/auth/register', {
         method: 'POST',

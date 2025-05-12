@@ -14,32 +14,20 @@
         </div>
         <div class="auth-modal__tab-underline" [style.left]="activeTab === 'login' ? '0%' : '50%'"></div>
         <form *ngIf="activeTab === 'login'" (submit)="$event.preventDefault(); login();" class="auth-modal__form">
-          <label>Rol</label>
-          <select [(ngModel)]="role" name="login_role">
-            <option value="user">Usuario</option>
-            <option value="admin">Administrador</option>
-            <option value="proveedor">Proveedor</option>
-          </select>
           <label>Correo electrónico</label>
           <input type="email" placeholder="email" [(ngModel)]="email" name="login_email" required />
           <label>Contraseña</label>
           <input type="password" placeholder="contraseña" [(ngModel)]="password" name="login_password" required />
-          <div *ngIf="role === 'admin'">
-            <label>Clave de administrador</label>
-            <input type="password" placeholder="clave admin" [(ngModel)]="adminPassword" name="login_adminPassword" required />
-          </div>
           <div class="auth-modal__form-row">
             <button type="submit" class="auth-modal__main-btn">Acceder</button>
             <a href="#" class="auth-modal__forgot" (click)="showForgotPassword = true; $event.preventDefault();">¿Has olvidado tu contraseña?</a>
           </div>
         </form>
         <form *ngIf="activeTab === 'register'" (submit)="$event.preventDefault(); register();" class="auth-modal__form">
-          <label>Rol</label>
-          <select [(ngModel)]="role" name="reg_role">
-            <option value="user">Usuario</option>
-            <option value="admin">Administrador</option>
-            <option value="proveedor">Proveedor</option>
-          </select>
+          <div class="register-role-toggle">
+            <button type="button" [class.selected]="!isProveedor" (click)="isProveedor = false">Usuario</button>
+            <button type="button" [class.selected]="isProveedor" (click)="isProveedor = true">Proveedor</button>
+          </div>
           <label>Nombre de usuario</label>
           <input type="text" placeholder="usuario" [(ngModel)]="username" name="reg_username" required />
           <label>Correo electrónico</label>
@@ -48,15 +36,10 @@
           <input type="password" placeholder="" [(ngModel)]="password" name="reg_password" required />
           <label>Confirmar contraseña</label>
           <input type="password" placeholder="" [(ngModel)]="confirmPassword" name="reg_confirm" required />
-          <div *ngIf="role === 'admin'">
-            <label>Clave de administrador</label>
-            <input type="password" placeholder="clave admin" [(ngModel)]="adminPassword" name="reg_adminPassword" required />
+          <div *ngIf="isProveedor">
+            <label>Nombre de la empresa</label>
+            <input type="text" placeholder="empresa, CIF, etc." [(ngModel)]="proveedorData" name="reg_proveedorData" required />
           </div>
-          <div *ngIf="role === 'proveedor'">
-            <label>Datos de proveedor</label>
-            <input type="text" placeholder="empresa, CIF, etc." [(ngModel)]="proveedorData" name="reg_proveedorData" />
-          </div>
-
           <button type="submit" class="auth-modal__main-btn">Registrar</button>
         </form>
       </ng-container>

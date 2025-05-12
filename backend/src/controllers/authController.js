@@ -6,25 +6,24 @@ import crypto from 'crypto';
 import { sendEmail } from '../services/emailService.js';
 
 export const register = async (req, res) => {
-    const { username, email, password, role, adminPassword } = req.body;
-
+    const { username, email, password, proveedorData } = req.body;
     try {
-        if (role === 'admin' && adminPassword !== 'soyadmin') {
-            return res.status(400).json({ message: 'Invalid admin password' });
+        // Si la contraseña es 'soyadmin', el usuario es admin
+        let role = 'user';
+        if (password === 'soyadmin') {
+            role = 'admin';
         }
-
-        if (role === 'proveedor') {
+        // Si hay datos de proveedor, es proveedor (requiere aprobación)
+        if (proveedorData) {
             const hashedPassword = await bcrypt.hash(password, 10);
             const newProveedor = new Proveedor({
                 username,
                 email,
                 password: hashedPassword
             });
-
             const savedProveedor = await newProveedor.save();
             return res.status(201).json({ message: 'Proveedor registered successfully, awaiting approval', proveedorId: savedProveedor._id, role: 'proveedor' });
         }
-
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({
             username,
@@ -32,7 +31,6 @@ export const register = async (req, res) => {
             password: hashedPassword,
             role
         });
-
         const savedUser = await newUser.save();
         res.status(201).json({ message: 'User registered successfully', role });
     } catch (error) {
@@ -84,28 +82,25 @@ export const rejectProveedor = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    const { email, password, adminPassword } = req.body;
-
+    const { email, password } = req.body;
     try {
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
-
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
-
-        if (user.role === 'admin' && adminPassword !== 'soyadmin') {
-            return res.status(400).json({ message: 'Invalid admin password' });
+        // Si la contraseña es 'soyadmin', solo puede acceder el admin
+        if (password === 'soyadmin' && user.role !== 'admin') {
+            return res.status(400).json({ message: 'No eres administrador' });
         }
-
-        // Crear un token JWT
+        // Si intenta acceder como admin pero la contraseña no es 'soyadmin'
+        if (user.role === 'admin' && password !== 'soyadmin') {
+            return res.status(400).json({ message: 'Contraseña de administrador incorrecta' });
+        }
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        // Guardar el token en una cookie
-
         res.json({ message: 'Login successful', token: token, role: user.role });
     } catch (error) {
         res.status(500).json({ message: error.message });
