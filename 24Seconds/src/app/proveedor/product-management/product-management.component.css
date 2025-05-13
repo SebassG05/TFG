@@ -1,4 +1,33 @@
 .product-management-bg {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  overflow: hidden;
+}
+
+.gestion-bg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.32;
+  filter: blur(0.5px) brightness(1.08);
+  transition: opacity 0.4s;
+}
+
+.product-management-table-container {
+  position: relative;
+  z-index: 2;
+}
+
+.product-management-bg {
   position: fixed;
   inset: 0;
   background: rgba(20, 20, 30, 0.98);
@@ -24,6 +53,8 @@
   min-width: 820px;
   max-width: 98vw;
   padding: 3.5rem 3.5rem 2.5rem 3.5rem;
+  padding-top: 0.5rem !important;
+  padding-bottom: 1.5rem !important;
 }
 .product-table {
   width: 100%;
@@ -268,4 +299,57 @@
     width: 38px;
     height: 38px;
   }
+}
+
+.gestion-title {
+  text-align: center;
+  margin-top: 2.7rem;
+  margin-bottom: 2.7rem;
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.5px;
+  /* Animación sutil de entrada */
+  opacity: 0;
+  transform: translateY(-18px) scale(0.98);
+  animation: fadeInPop 0.7s cubic-bezier(.4,1.3,.6,1) 0.1s forwards;
+}
+
+@keyframes fadeInPop {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1.04);
+  }
+}
+
+.paginacion-productos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 1.2rem 0 0.2rem 0;
+}
+.paginacion-productos button {
+  background: linear-gradient(90deg, #ff3b3b 0%, #ff1a1a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: 700;
+  font-size: 1.08rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px 0 rgba(255,60,0,0.08);
+}
+.paginacion-productos button:disabled {
+  background: #bdbdbd;
+  color: #fff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.paginacion-productos span {
+  color: #fff;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }

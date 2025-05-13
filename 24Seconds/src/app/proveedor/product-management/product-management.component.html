@@ -1,6 +1,7 @@
 <div class="product-management-bg" *ngIf="show">
+  <canvas class="gestion-bg-canvas" id="gestion-bg-canvas"></canvas>
   <div class="product-management-table-container large">
-    <h2>Gestión de productos</h2>
+    <h2 class="gestion-title">Gestión de productos</h2>
     <table class="product-table" *ngIf="productos.length > 0; else sinProductos">
       <thead>
         <tr>
@@ -13,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let producto of productos">
+        <tr *ngFor="let producto of productosPaginados">
           <td>
             <img *ngIf="producto.images && producto.images.length > 0" [src]="producto.images[0]" alt="img" class="product-img-thumb editable-cell" />
           </td>
@@ -39,6 +40,11 @@
         </tr>
       </tbody>
     </table>
+    <div *ngIf="totalPaginas > 1" class="paginacion-productos">
+      <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+      <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+      <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+    </div>
     <ng-template #sinProductos>
       <div style="color:#fff; margin:2rem 0;">No tienes productos creados.</div>
     </ng-template>
