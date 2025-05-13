@@ -83,6 +83,18 @@
   box-shadow: 0 6px 24px 0 rgba(0,0,0,0.18);
 }
 
+.proveedor-actions-col {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.proveedor-actions-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+}
+
 .exit-btn {
   position: fixed;
   right: 32px;
@@ -132,5 +144,13 @@
   .proveedor-actions {
     flex-direction: column;
     gap: 18px;
+  }
+  .proveedor-actions-row {
+    flex-direction: column;
+    gap: 18px;
+    align-items: stretch;
+  }
+  .proveedor-actions-col {
+    gap: 14px;
   }
 }

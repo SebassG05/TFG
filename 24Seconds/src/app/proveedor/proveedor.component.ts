@@ -4,17 +4,21 @@ import { CrearProductoComponent } from './crear-producto.component';
 import { CrearSorteoComponent } from './crear-sorteo.component';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { ProductManagementComponent } from './product-management/product-management.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-proveedor',
   standalone: true,
   templateUrl: './proveedor.component.html',
   styleUrls: ['./proveedor.component.css'],
-  imports: [NgIf, CrearProductoComponent],
+  imports: [NgIf, CrearProductoComponent, ProductManagementComponent, CommonModule],
 })
 export class ProveedorComponent implements AfterViewInit {
   mostrarCrearProducto = false;
   mensajeLogout: string | null = null;
+  showProductManagement = false;
+  productosProveedor: any[] = [];
 
   constructor(private router: Router) {}
 
@@ -32,6 +36,14 @@ export class ProveedorComponent implements AfterViewInit {
 
   irACrearSorteo() {
     this.router.navigate(['/proveedor/crear-sorteo']);
+  }
+
+  mostrarGestionProducto() {
+    this.router.navigate(['/proveedor/gestion-producto']);
+  }
+
+  cerrarGestionProducto() {
+    this.showProductManagement = false;
   }
 
   logout() {

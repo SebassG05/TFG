@@ -1,5 +1,5 @@
 import express from 'express';
-import { createProduct, updateProduct, deleteProduct, searchProducts, voteProduct, getTopProducts } from '../controllers/productController.js';
+import { createProduct, updateProduct, deleteProduct, searchProducts, voteProduct, getTopProducts, getProductosProveedor } from '../controllers/productController.js';
 import validateSchema from '../middlewares/validateSchema.js';
 import isProveedor from '../middlewares/isProveedor.js';
 import upload from '../middlewares/uploadImage.js';
@@ -240,5 +240,35 @@ router.post('/vote', validateSchema(voteProductSchema), voteProduct);
  *                 $ref: '#/components/schemas/Product'
  */
 router.get('/top', getTopProducts);
+
+/**
+ * @swagger
+ * /products/mis-productos:
+ *   get:
+ *     summary: Get products of the provider
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Products retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
+ *       404:
+ *         description: Products not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Products not found"
+ */
+router.get('/mis-productos', isProveedor, getProductosProveedor);
 
 export default router;

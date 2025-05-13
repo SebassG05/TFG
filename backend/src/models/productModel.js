@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema({
     votes: { type: Number, default: 0 },
     imageUrl: { type: String }, // Para Cloudinary
     images: [{ type: String }], // Array de URLs de imágenes
+    proveedor: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date }
 });

@@ -10,11 +10,19 @@
       <p class="animate__animated animate__fadeIn animate__delay-1s">
         Desde este panel puedes gestionar tus productos, eventos y sorteos.
       </p>
-      <div class="proveedor-actions">
-        <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="400" (click)="irACrearProducto()">Crear producto</button>
-        <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="600" (click)="irACrearEvento()">Crear evento</button>
-        <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="800" (click)="irACrearSorteo()">Crear sorteo</button>
+      <div class="proveedor-actions proveedor-actions-col">
+        <div class="proveedor-actions-row">
+          <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="400" (click)="irACrearProducto()">Crear producto</button>
+          <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="600" (click)="irACrearEvento()">Crear evento</button>
+          <button class="animate__animated animate__fadeInUp animate__delay-2s" data-aos="fade-up" data-aos-delay="800" (click)="irACrearSorteo()">Crear sorteo</button>
+        </div>
+        <div class="proveedor-actions-row">
+          <button class="animate__animated animate__fadeInUp animate__delay-2s gestion-btn" data-aos="fade-up" data-aos-delay="1000" (click)="mostrarGestionProducto()">Gestión del producto</button>
+          <button class="animate__animated animate__fadeInUp animate__delay-2s gestion-btn" data-aos="fade-up" data-aos-delay="1200">Gestión de eventos</button>
+          <button class="animate__animated animate__fadeInUp animate__delay-2s gestion-btn" data-aos="fade-up" data-aos-delay="1400">Gestión de sorteos</button>
+        </div>
       </div>
+      <app-product-management *ngIf="showProductManagement"></app-product-management>
     </div>
   </ng-container>
   <ng-template #crearProducto>

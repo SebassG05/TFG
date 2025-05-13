@@ -1,0 +1,47 @@
+<div class="product-management-bg" *ngIf="show">
+  <div class="product-management-table-container large">
+    <h2>Gestión de productos</h2>
+    <table class="product-table" *ngIf="productos.length > 0; else sinProductos">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Categoría</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <td>
+            <img *ngIf="producto.images && producto.images.length > 0" [src]="producto.images[0]" alt="img" class="product-img-thumb editable-cell" />
+          </td>
+          <td>
+            <span *ngIf="!producto.editandoNombre" (click)="editarNombre(producto)" class="editable-cell">{{ producto.name }}</span>
+            <input *ngIf="producto.editandoNombre" [(ngModel)]="producto.name" (blur)="guardarNombre(producto)" (keydown.enter)="guardarNombre(producto)" class="edit-input" />
+          </td>
+          <td>
+            <span *ngIf="!producto.editandoPrecio" (click)="editarPrecio(producto)" class="editable-cell">{{ producto.price | currency:'EUR' }}</span>
+            <input *ngIf="producto.editandoPrecio" type="number" [(ngModel)]="producto.price" (blur)="guardarPrecio(producto)" (keydown.enter)="guardarPrecio(producto)" class="edit-input price-input" />
+          </td>
+          <td>
+            <span *ngIf="!producto.editandoCategoria" (click)="editarCategoria(producto)" class="editable-cell">{{ producto.category }}</span>
+            <input *ngIf="producto.editandoCategoria" [(ngModel)]="producto.category" (blur)="guardarCategoria(producto)" (keydown.enter)="guardarCategoria(producto)" class="edit-input" />
+          </td>
+          <td>
+            <span *ngIf="!producto.editandoStock" (click)="editarStock(producto)" class="editable-cell">{{ producto.stock }}</span>
+            <input *ngIf="producto.editandoStock" type="number" [(ngModel)]="producto.stock" (blur)="guardarStock(producto)" (keydown.enter)="guardarStock(producto)" class="edit-input" />
+          </td>
+          <td>
+            <button class="action-btn delete" (click)="eliminarProducto(producto._id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #sinProductos>
+      <div style="color:#fff; margin:2rem 0;">No tienes productos creados.</div>
+    </ng-template>
+    <button class="close-table-btn" (click)="router.navigate(['/proveedor'])">Cerrar</button>
+  </div>
+</div>

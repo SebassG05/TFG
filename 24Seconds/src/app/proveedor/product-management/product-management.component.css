@@ -1,0 +1,271 @@
+.product-management-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 30, 0.98);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-management-table-container {
+  background: #181818;
+  color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.28);
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  min-width: 420px;
+  max-width: 90vw;
+  min-height: 320px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: center;
+}
+.product-management-table-container.large {
+  min-width: 820px;
+  max-width: 98vw;
+  padding: 3.5rem 3.5rem 2.5rem 3.5rem;
+}
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+.product-table th, .product-table td {
+  border: 1px solid #333;
+  padding: 1.1rem 1.5rem;
+  font-size: 1.18rem;
+}
+.product-table th {
+  background: #23272f;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.22rem;
+  letter-spacing: 0.02em;
+}
+.product-table th:last-child {
+  text-align: center;
+}
+.product-table td:last-child {
+  text-align: center;
+}
+.product-table tr:nth-child(even) {
+  background: #23272f;
+}
+.product-table tr:nth-child(odd) {
+  background: #181818;
+}
+.product-img-thumb {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #00000022;
+  cursor: pointer;
+  border: 2px solid #23272f;
+  transition: box-shadow 0.18s, border 0.18s;
+}
+.product-img-thumb:hover {
+  border: 2px solid #b266ff;
+  box-shadow: 0 4px 16px #b266ff33;
+  filter: brightness(1.08);
+}
+.img-edit-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-edit-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(24,24,24,0.82);
+  border-radius: 10px;
+  z-index: 2;
+}
+.edit-img-url {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #b266ff;
+  color: #fff;
+  font-size: 1.1rem;
+  width: 90%;
+  outline: none;
+  text-align: center;
+  box-shadow: none;
+  caret-color: #b266ff;
+  padding: 0.2em 0.4em;
+  transition: border 0.18s;
+}
+.edit-img-url:focus {
+  border-bottom: 2.5px solid #ffb700;
+}
+.edit-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #b266ff;
+  color: #fff;
+  font-size: 1.1rem;
+  width: 60%; /* Menos ancho para que no se expanda tanto */
+  min-width: 60px;
+  max-width: 120px;
+  outline: none;
+  text-align: center;
+  box-shadow: none;
+  caret-color: #b266ff;
+  padding: 0.2em 0.4em;
+  margin: 0 auto;
+  transition: border 0.18s;
+  display: inline-block;
+}
+.edit-input:focus {
+  border-bottom: 2.5px solid #ffb700;
+}
+
+/* Oculta los controles de número (spinners) en todos los navegadores */
+.edit-input[type=number],
+.edit-input.price-input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+.edit-input[type=number]::-webkit-outer-spin-button,
+.edit-input[type=number]::-webkit-inner-spin-button,
+.edit-input.price-input[type=number]::-webkit-outer-spin-button,
+.edit-input.price-input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Input de precio: símbolo € a la derecha */
+.edit-input.price-input {
+  text-align: center; /* Centrado como los demás */
+  padding-right: 0;
+  position: relative;
+}
+.edit-input.price-input::after {
+  content: '€';
+  position: absolute;
+  right: -1.2em;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b266ff;
+  font-size: 1.08em;
+  pointer-events: none;
+}
+
+.action-btn {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0.2rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.action-btn.update {
+  background: #23272f;
+  color: #fff;
+}
+.action-btn.update:hover {
+  background: #444;
+}
+.action-btn.delete {
+  background: #ff0000;
+  color: #fff;
+}
+.action-btn.delete:hover {
+  background: #b80000;
+}
+.close-table-btn {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+.close-table-btn:hover {
+  background: #b80000;
+}
+.notificacion-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #23272f;
+  color: #fff;
+  padding: 2.2rem 2.5rem 1.7rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 40px 0 rgba(0,0,0,0.28);
+  z-index: 20000;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  font-size: 1.18rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  animation: fadeInDown 0.4s cubic-bezier(.4,1.3,.6,1);
+}
+.notificacion-modal.success { background: #1bbf4c; color: #fff; }
+.notificacion-modal.error { background: #ff3b3b; color: #fff; }
+.notificacion-modal.warning { background: #23272f; color: #fffbe6; border: 2px solid #ffb700; }
+
+.notificacion-text {
+  font-size: 1.18rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+}
+.notif-btn {
+  padding: 0.6rem 1.7rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px #00000022;
+}
+.notif-btn.aceptar {
+  background: #ffb700;
+  color: #23272f;
+}
+.notif-btn.aceptar:hover {
+  background: #ffe08a;
+}
+.notif-btn.cancelar {
+  background: #23272f;
+  color: #fff;
+  border: 1.5px solid #ffb700;
+}
+.notif-btn.cancelar:hover {
+  background: #181818;
+  color: #ffb700;
+}
+@keyframes fadeInDown {
+  0% { transform: translate(-50%, -70%) scale(0.95); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+@media (max-width: 900px) {
+  .product-management-table-container.large {
+    min-width: 0;
+    padding: 1.2rem 0.2rem 1.2rem 0.2rem;
+  }
+  .product-table th, .product-table td {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.98rem;
+  }
+  .product-img-thumb {
+    width: 38px;
+    height: 38px;
+  }
+}
