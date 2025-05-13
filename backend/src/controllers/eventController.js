@@ -17,7 +17,8 @@ export const createEvent = async (req, res) => {
             hasStands,
             registrationDates,
             eventDate,
-            img
+            img,
+            proveedor: req.user._id
         });
         newEvent.updateIsActive();
         const savedEvent = await newEvent.save();
@@ -97,6 +98,16 @@ export const deleteEvent = async (req, res) => {
         }
 
         res.status(200).json({ message: 'Event deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+// Obtener eventos del proveedor autenticado
+export const getMyEvents = async (req, res) => {
+    try {
+        const eventos = await Event.find({ proveedor: req.user._id }).sort({ createdAt: -1 });
+        res.status(200).json(eventos);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

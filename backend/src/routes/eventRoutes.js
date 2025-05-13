@@ -1,5 +1,5 @@
 import express from 'express';
-import { createEvent, registerForEvent, updateEvent, deleteEvent } from '../controllers/eventController.js';
+import { createEvent, registerForEvent, updateEvent, deleteEvent, getMyEvents } from '../controllers/eventController.js';
 import isProveedor from '../middlewares/isProveedor.js';
 import isAuthenticated from '../middlewares/isAuthenticated.js';
 import upload from '../middlewares/uploadImage.js';
@@ -160,5 +160,21 @@ router.put('/update/:eventId', isProveedor, updateEvent);
  *         description: Event not found
  */
 router.delete('/delete/:eventId', isProveedor, deleteEvent);
+
+/**
+ * @swagger
+ * /events/mis-eventos:
+ *   get:
+ *     summary: Get events of the authenticated provider
+ *     tags: [Events]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved events
+ *       404:
+ *         description: No events found
+ */
+router.get('/mis-eventos', isProveedor, getMyEvents);
 
 export default router;

@@ -13,6 +13,7 @@ export const routes: Routes = [
   { path: 'proveedor/crear-evento', loadComponent: () => import('./proveedor/crear-evento.component').then(m => m.CrearEventoComponent) },
   { path: 'proveedor/crear-sorteo', loadComponent: () => import('./proveedor/crear-sorteo.component').then(m => m.CrearSorteoComponent) },
   { path: 'proveedor/gestion-producto', loadChildren: () => import('./proveedor/product-management/product-management.routes').then(m => m.default) },
+  { path: 'proveedor/gestion-evento', loadChildren: () => import('./proveedor/event-management/event-management.routes').then(m => m.default) },
   { path: 'reset/:token', loadComponent: () => import('./reset-password.component').then(m => m.ResetPasswordComponent) },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 

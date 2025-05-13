@@ -6,6 +6,7 @@ const eventSchema = new mongoose.Schema({
     location: { type: String, required: true },
     hasStands: { type: Boolean, required: true },
     img: { type: String, required: true },
+    proveedor: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     registrationDates: {
         start: { type: Date, required: true },
         end: { type: Date, required: true }

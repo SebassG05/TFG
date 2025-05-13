@@ -1,0 +1,39 @@
+<div class="event-management-bg">
+  <canvas class="gestion-eventos-bg-canvas" id="gestion-eventos-bg-canvas"></canvas>
+  <div class="event-management-table-container large">
+    <h2 class="gestion-title">Gestión de eventos</h2>
+    <table class="event-table" *ngIf="eventos.length > 0; else sinEventos">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Fecha evento</th>
+          <th>Inicio inscripción</th>
+          <th>Fin inscripción</th>
+          <th>Ubicación</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let evento of eventosPaginados">
+          <td>{{ evento.name }}</td>
+          <td>{{ evento.eventDate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ evento.registrationDates?.start | date:'yyyy-MM-dd' }}</td>
+          <td>{{ evento.registrationDates?.end | date:'yyyy-MM-dd' }}</td>
+          <td>{{ evento.location }}</td>
+          <td>
+            <button class="action-btn delete" (click)="eliminarEvento(evento._id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="totalPaginas > 1" class="paginacion-eventos">
+      <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+      <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+      <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+    </div>
+    <ng-template #sinEventos>
+      <div style="color:#fff; margin:2rem 0;">No tienes eventos creados.</div>
+    </ng-template>
+    <button class="close-table-btn" (click)="router.navigate(['/proveedor'])">Cerrar</button>
+  </div>
+</div>
