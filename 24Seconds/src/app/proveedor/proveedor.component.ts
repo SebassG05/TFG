@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import AOS from 'aos';
 import { CrearProductoComponent } from './crear-producto.component';
 import { CrearSorteoComponent } from './crear-sorteo.component';
@@ -14,13 +14,26 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./proveedor.component.css'],
   imports: [NgIf, CrearProductoComponent, ProductManagementComponent, CommonModule],
 })
-export class ProveedorComponent implements AfterViewInit {
+export class ProveedorComponent implements AfterViewInit, OnInit {
   mostrarCrearProducto = false;
   mensajeLogout: string | null = null;
   showProductManagement = false;
   productosProveedor: any[] = [];
+  empresa: string | null = null;
 
   constructor(private router: Router) {}
+
+  async ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    const res = await fetch('http://localhost:4001/api/auth/profile', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (res.ok) {
+      const user = await res.json();
+      this.empresa = user.proveedorData || user.username || null;
+    }
+  }
 
   ngAfterViewInit() {
     AOS.init({ once: true });

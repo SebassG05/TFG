@@ -37,13 +37,13 @@
 }
 
 .proveedor-container h1 {
-  margin-bottom: 18px;
-  color: #181818;
-  font-size: 2.5rem;
-  font-family: 'Montserrat', sans-serif;
+  font-size: 2.1rem;
   font-weight: 800;
-  letter-spacing: 1px;
-  animation: fadeIn 1.2s 0.2s both;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.18;
+  /* Reduce el tamaño para que el nombre de empresa quepa en una sola línea */
 }
 
 .proveedor-container p {
