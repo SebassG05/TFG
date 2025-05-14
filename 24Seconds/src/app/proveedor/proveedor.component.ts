@@ -46,6 +46,10 @@ export class ProveedorComponent implements AfterViewInit {
     this.router.navigate(['/proveedor/gestion-evento']);
   }
 
+  mostrarGestionSorteo() {
+    this.router.navigate(['/proveedor/gestion-sorteo']);
+  }
+
   cerrarGestionProducto() {
     this.showProductManagement = false;
   }

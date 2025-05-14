@@ -1,0 +1,49 @@
+<div class="sorteo-management-bg">
+  <canvas class="gestion-sorteos-bg-canvas" id="gestion-sorteos-bg-canvas"></canvas>
+  <div class="sorteo-management-table-container large">
+    <h2 class="gestion-title">Gestión de sorteos</h2>
+    <table class="sorteo-table" *ngIf="sorteos.length > 0; else sinSorteos">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Fecha sorteo</th>
+          <th>Fin inscripción</th>
+          <th>Coste HoopCoins</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sorteo of sorteosPaginados">
+          <td>
+            <span *ngIf="!sorteo.editandoTitle" (click)="editarTitle(sorteo)" class="editable-cell">{{ sorteo.title }}</span>
+            <input *ngIf="sorteo.editandoTitle" [(ngModel)]="sorteo.title" (blur)="guardarTitle(sorteo)" (keydown.enter)="guardarTitle(sorteo)" class="edit-input" />
+          </td>
+          <td>
+            <span *ngIf="!sorteo.editandoExpirationDate" (click)="editarExpirationDate(sorteo)" class="editable-cell">{{ sorteo.expirationDate | date:'yyyy-MM-dd' }}</span>
+            <input *ngIf="sorteo.editandoExpirationDate" type="date" [(ngModel)]="sorteo.expirationDate" (blur)="guardarExpirationDate(sorteo)" (keydown.enter)="guardarExpirationDate(sorteo)" class="edit-input" />
+          </td>
+          <td>
+            <span *ngIf="!sorteo.editandoFinInscripcion" (click)="editarFinInscripcion(sorteo)" class="editable-cell">{{ sorteo.expirationDate | date:'yyyy-MM-dd' }}</span>
+            <input *ngIf="sorteo.editandoFinInscripcion" type="date" [(ngModel)]="sorteo.expirationDate" (blur)="guardarFinInscripcion(sorteo)" (keydown.enter)="guardarFinInscripcion(sorteo)" class="edit-input" />
+          </td>
+          <td>
+            <span *ngIf="!sorteo.editandoHoopCoinsCost" (click)="editarHoopCoinsCost(sorteo)" class="editable-cell">{{ sorteo.hoopCoinsCost }}</span>
+            <input *ngIf="sorteo.editandoHoopCoinsCost" type="number" min="0" [(ngModel)]="sorteo.hoopCoinsCost" (blur)="guardarHoopCoinsCost(sorteo)" (keydown.enter)="guardarHoopCoinsCost(sorteo)" class="edit-input" />
+          </td>
+          <td>
+            <button class="action-btn delete" (click)="eliminarSorteo(sorteo._id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="totalPaginas > 1" class="paginacion-sorteos">
+      <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+      <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+      <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+    </div>
+    <ng-template #sinSorteos>
+      <div style="color:#fff; margin:2rem 0;">No tienes sorteos creados.</div>
+    </ng-template>
+    <button class="close-table-btn" (click)="router.navigate(['/proveedor'])">Cerrar</button>
+  </div>
+</div>

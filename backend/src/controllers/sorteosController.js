@@ -114,3 +114,36 @@ export const getSorteoParticipants = async (req, res) => {
         res.status(500).json({ error: 'Error al obtener participantes', details: error.message });
     }
 };
+
+// Obtener sorteos del proveedor autenticado
+export const getMySorteos = async (req, res) => {
+    try {
+        const sorteos = await Sorteo.find({ providerId: req.user._id }).sort({ createdAt: -1 });
+        res.status(200).json(sorteos);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+// PUT /api/sorteos/:id (actualizar sorteo)
+export const updateSorteo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, expirationDate, hoopCoinsCost } = req.body;
+        const sorteo = await Sorteo.findById(id);
+        if (!sorteo) {
+            return res.status(404).json({ error: 'Sorteo no encontrado' });
+        }
+        // Solo el proveedor dueño puede editar
+        if (sorteo.providerId.toString() !== req.user._id?.toString()) {
+            return res.status(403).json({ error: 'No autorizado' });
+        }
+        if (title !== undefined) sorteo.title = title;
+        if (expirationDate !== undefined) sorteo.expirationDate = expirationDate;
+        if (hoopCoinsCost !== undefined) sorteo.hoopCoinsCost = hoopCoinsCost;
+        await sorteo.save();
+        res.json({ message: 'Sorteo actualizado', sorteo });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar sorteo', details: error.message });
+    }
+};
