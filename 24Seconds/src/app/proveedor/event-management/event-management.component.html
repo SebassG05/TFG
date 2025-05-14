@@ -15,11 +15,26 @@
       </thead>
       <tbody>
         <tr *ngFor="let evento of eventosPaginados">
-          <td>{{ evento.name }}</td>
-          <td>{{ evento.eventDate | date:'yyyy-MM-dd' }}</td>
-          <td>{{ evento.registrationDates?.start | date:'yyyy-MM-dd' }}</td>
-          <td>{{ evento.registrationDates?.end | date:'yyyy-MM-dd' }}</td>
-          <td>{{ evento.location }}</td>
+          <td>
+            <span *ngIf="!evento.editandoNombre" (click)="editarNombre(evento)" class="editable-cell">{{ evento.name }}</span>
+            <input *ngIf="evento.editandoNombre" [(ngModel)]="evento.name" (blur)="guardarNombre(evento)" (keydown.enter)="guardarNombre(evento)" class="edit-input" />
+          </td>
+          <td>
+            <span *ngIf="!evento.editandoEventDate" (click)="editarEventDate(evento)" class="editable-cell">{{ evento.eventDate | date:'yyyy-MM-dd' }}</span>
+            <input *ngIf="evento.editandoEventDate" type="date" [(ngModel)]="evento.eventDate" (blur)="guardarEventDate(evento)" (keydown.enter)="guardarEventDate(evento)" class="edit-input" />
+          </td>
+          <td>
+            <span *ngIf="!evento.editandoRegStart" (click)="editarRegStart(evento)" class="editable-cell">{{ evento.registrationDates?.start | date:'yyyy-MM-dd' }}</span>
+            <input *ngIf="evento.editandoRegStart" type="date" [(ngModel)]="evento.registrationDates.start" (blur)="guardarRegStart(evento)" (keydown.enter)="guardarRegStart(evento)" class="edit-input" />
+          </td>
+          <td>
+            <span *ngIf="!evento.editandoRegEnd" (click)="editarRegEnd(evento)" class="editable-cell">{{ evento.registrationDates?.end | date:'yyyy-MM-dd' }}</span>
+            <input *ngIf="evento.editandoRegEnd" type="date" [(ngModel)]="evento.registrationDates.end" (blur)="guardarRegEnd(evento)" (keydown.enter)="guardarRegEnd(evento)" class="edit-input" />
+          </td>
+          <td>
+            <span *ngIf="!evento.editandoLocation" (click)="editarLocation(evento)" class="editable-cell">{{ evento.location }}</span>
+            <input *ngIf="evento.editandoLocation" [(ngModel)]="evento.location" (blur)="guardarLocation(evento)" (keydown.enter)="guardarLocation(evento)" class="edit-input" />
+          </td>
           <td>
             <button class="action-btn delete" (click)="eliminarEvento(evento._id)">Eliminar</button>
           </td>

@@ -131,7 +131,8 @@ export class CrearEventoComponent implements AfterViewInit {
       })
       .then(() => {
         alert('Evento creado correctamente');
-        this.router.navigate(['/proveedor']);
+        this.eventoForm.reset();
+        this.imagenPreview = null;
       })
       .catch(err => {
         alert('Error al crear evento: ' + err.message);

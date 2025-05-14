@@ -63,6 +63,50 @@ export class EventManagementComponent implements OnInit, AfterViewInit {
     }
   }
 
+  editarNombre(evento: any) { evento.editandoNombre = true; setTimeout(() => this.focusInput('.edit-input')); }
+  async guardarNombre(evento: any) { evento.editandoNombre = false; await this.guardarCampo(evento); }
+
+  editarEventDate(evento: any) { evento.editandoEventDate = true; setTimeout(() => this.focusInput('.edit-input')); }
+  async guardarEventDate(evento: any) { evento.editandoEventDate = false; await this.guardarCampo(evento); }
+
+  editarRegStart(evento: any) { evento.editandoRegStart = true; setTimeout(() => this.focusInput('.edit-input')); }
+  async guardarRegStart(evento: any) { evento.editandoRegStart = false; await this.guardarCampo(evento); }
+
+  editarRegEnd(evento: any) { evento.editandoRegEnd = true; setTimeout(() => this.focusInput('.edit-input')); }
+  async guardarRegEnd(evento: any) { evento.editandoRegEnd = false; await this.guardarCampo(evento); }
+
+  editarLocation(evento: any) { evento.editandoLocation = true; setTimeout(() => this.focusInput('.edit-input')); }
+  async guardarLocation(evento: any) { evento.editandoLocation = false; await this.guardarCampo(evento); }
+
+  private focusInput(selector: string) {
+    setTimeout(() => {
+      const input = document.querySelector(selector) as HTMLInputElement;
+      if (input) input.focus();
+    });
+  }
+
+  async guardarCampo(evento: any) {
+    const token = localStorage.getItem('token');
+    await fetch(`http://localhost:4001/api/events/update/${evento._id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          name: evento.name,
+          location: evento.location,
+          eventDate: evento.eventDate,
+          registrationDates: {
+            start: evento.registrationDates?.start,
+            end: evento.registrationDates?.end
+          }
+        })
+      }
+    );
+  }
+
   ngAfterViewInit() {
     this.initAnimatedBg();
   }
