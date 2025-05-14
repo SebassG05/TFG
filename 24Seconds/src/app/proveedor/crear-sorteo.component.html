@@ -19,7 +19,7 @@
         <input type="file" (change)="onFileChange($event)" accept="image/*" />
       </label>
       <div *ngIf="imagenPreview" class="img-preview">
-        <img [src]="imagenPreview" alt="Previsualización" />
+        <span class="file-name">{{ selectedFileName }}</span>
       </div>
       <button type="submit" [disabled]="!sorteoForm.valid">Crear sorteo</button>
     </form>

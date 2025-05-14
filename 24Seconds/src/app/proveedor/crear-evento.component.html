@@ -33,7 +33,7 @@
         <input type="file" (change)="onFileChange($event)" accept="image/*" required />
       </label>
       <div *ngIf="imagenPreview" class="img-preview">
-        <img [src]="imagenPreview" alt="Previsualización" />
+        <span class="file-name">{{ selectedFileName }}</span>
       </div>
       <button type="submit" [disabled]="!eventoForm.valid">Crear evento</button>
     </form>

@@ -143,10 +143,17 @@ html, body {
 }
 
 .img-preview img {
-  max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(120,0,120,0.13);
-  border: 1.5px solid #e0d7f7;
+  display: none;
+}
+
+.file-name {
+  color: #b266ff;
+  font-size: 1.08rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  display: block;
+  text-align: center;
+  word-break: break-all;
 }
 
 /* Sombra decorativa detrás del cuadro */

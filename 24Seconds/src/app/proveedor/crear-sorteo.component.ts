@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class CrearSorteoComponent implements AfterViewInit {
   sorteoForm: FormGroup;
   imagenPreview: string | ArrayBuffer | null = null;
+  selectedFileName: string | null = null;
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.sorteoForm = this.fb.group({
@@ -75,10 +76,8 @@ export class CrearSorteoComponent implements AfterViewInit {
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
+      this.selectedFileName = file.name;
       this.sorteoForm.patchValue({ image: file });
-      const reader = new FileReader();
-      reader.onload = () => this.imagenPreview = reader.result;
-      reader.readAsDataURL(file);
     }
   }
 

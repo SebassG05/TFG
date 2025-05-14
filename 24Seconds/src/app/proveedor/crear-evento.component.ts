@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class CrearEventoComponent implements AfterViewInit {
   eventoForm: FormGroup;
   imagenPreview: string | ArrayBuffer | null = null;
+  selectedFileName: string | null = null;
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.eventoForm = this.fb.group({
@@ -98,10 +99,9 @@ export class CrearEventoComponent implements AfterViewInit {
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
+      this.selectedFileName = file.name;
       this.eventoForm.patchValue({ img: file });
-      const reader = new FileReader();
-      reader.onload = () => this.imagenPreview = reader.result;
-      reader.readAsDataURL(file);
+      // No preview
     }
   }
 
