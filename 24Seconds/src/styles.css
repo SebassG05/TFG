@@ -9,9 +9,13 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   height: 100%;
+  background: #181a20 !important;
+  color: #fff;
 }
 body {
   width: 100vw;
   min-height: 100vh;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #181a20 !important;
+  color: #fff;
 }

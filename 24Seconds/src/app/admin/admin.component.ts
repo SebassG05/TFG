@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, NgIf],
   template: `
     <div class="admin-dashboard">
       <aside class="admin-sidebar">
@@ -35,8 +37,44 @@ import { RouterModule } from '@angular/router';
           </div>
         </section>
       </main>
+      <button class="exit-btn" (click)="logout()" title="Salir">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#23272f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+      <div *ngIf="mensajeLogout" class="logout-toast">{{ mensajeLogout }}</div>
     </div>
   `,
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent {}
+export class AdminComponent {
+  mensajeLogout: string | null = null;
+
+  constructor(private router: Router) {}
+
+  logout() {
+    fetch('http://localhost:4001/api/auth/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(() => {
+      this.mensajeLogout = 'Sesión cerrada correctamente.';
+      setTimeout(() => {
+        this.mensajeLogout = null;
+        localStorage.removeItem('token');
+        this.router.navigate(['/home']).then(() => {
+          window.dispatchEvent(new CustomEvent('mostrar-login-modal'));
+        });
+      }, 1800);
+    })
+    .catch(() => {
+      this.mensajeLogout = 'Sesión cerrada.';
+      setTimeout(() => {
+        this.mensajeLogout = null;
+        localStorage.removeItem('token');
+        this.router.navigate(['/home']);
+      }, 1800);
+    });
+  }
+}

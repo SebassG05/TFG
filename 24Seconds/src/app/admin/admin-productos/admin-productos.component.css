@@ -1,0 +1,129 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #181a20 !important;
+  overflow-x: hidden;
+}
+
+:host ::ng-deep body {
+  background: #181a20 !important;
+}
+
+:host ::ng-deep html {
+  background: #181a20 !important;
+}
+
+.fondo-animado-admin {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.admin-productos-container {
+  background: #23272f;
+  padding: 2rem;
+  border-radius: 1rem;
+  color: #fff;
+  max-width: 1200px;
+  margin-top: 9%;
+  margin-left: 17%;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.productos-title {
+  font-size: 2rem;
+  margin-bottom: 1.9rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.productos-table {
+  width: 95%;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #181a20;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  border: 2px solid #23272f;
+}
+
+.productos-table th, .productos-table td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #333;
+  color: #fff;
+}
+
+.productos-table tr:last-child td {
+  border-bottom: none;
+}
+
+.productos-table th {
+  background: #23272f;
+  color: #ffffff;
+}
+
+.product-img-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 1px solid #444;
+}
+
+.btn-eliminar {
+  background: #ff1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn-eliminar:hover {
+  background: #b30000;
+}
+
+.paginacion-productos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0 0 0;
+}
+
+.paginacion-productos button {
+  background: #ff1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.3rem 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.paginacion-productos button:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
+.paginacion-productos span {
+  color: #fff;
+  font-weight: bold;
+}

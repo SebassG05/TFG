@@ -134,7 +134,7 @@ router.put('/update/:id', isProveedor, validateSchema(updateProductSchema), upda
  *                   type: string
  *                   example: "Product not found"
  */
-router.delete('/delete/:id', isProveedor, deleteProduct);
+router.delete('/delete/:id', deleteProduct);
 
 /**
  * @swagger

@@ -84,7 +84,8 @@ export const searchProducts = async (req, res) => {
         if (color) query.color = { $regex: color, $options: 'i' };
         if (category) query.category = { $regex: category, $options: 'i' };
 
-        const products = await Product.find(query);
+        // POBLAR proveedor para que el frontend tenga el nombre
+        const products = await Product.find(query).populate('proveedor', 'username empresa email');
         res.status(200).json(products);
     } catch (error) {
         res.status(400).json({ message: error.message });
