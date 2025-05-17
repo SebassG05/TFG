@@ -5,7 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
   selector: 'app-admin-proveedores',
   standalone: true,
   imports: [NgFor, NgIf],
-  styleUrls: ['./admin-usuarios.estetica.css'],
+  styleUrls: ['./admin-usuarios.estetica.css', './admin-proveedores-responsive.css'],
   template: `
     <div class="product-management-bg">
       <canvas class="gestion-bg-canvas" id="gestion-bg-canvas"></canvas>
@@ -21,9 +21,9 @@ import { NgFor, NgIf } from '@angular/common';
           </thead>
           <tbody>
             <tr *ngFor="let proveedor of proveedores">
-              <td>{{ proveedor.username }}</td>
-              <td>{{ proveedor.email }}</td>
-              <td>
+              <td data-label="Usuario">{{ proveedor.username }}</td>
+              <td data-label="Email">{{ proveedor.email }}</td>
+              <td data-label="Acciones">
                 <button class="btn-eliminar" (click)="aprobarProveedor(proveedor._id)">Aprobar</button>
                 <button class="btn-eliminar" (click)="denegarProveedor(proveedor._id)">Denegar</button>
               </td>

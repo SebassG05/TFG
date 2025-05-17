@@ -1,0 +1,90 @@
+/* Responsive styles for admin proveedores approval view */
+@media (max-width: 900px) {
+  .usuarios-admin-table-container {
+    max-width: 92vw;
+    padding: 1.2rem 3vw 1.2rem 3vw;
+    border-radius: 2rem;
+  }
+}
+@media (max-width: 700px) {
+  .usuarios-admin-table-container {
+    max-width: 90vw;
+    padding: 0.7rem 4vw 0.7rem 4vw;
+    border-radius: 1.2rem;
+    min-width: 0;
+    min-height: 0;
+  }
+  .usuarios-title {
+    font-size: 1.1rem;
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+  .usuarios-table th, .usuarios-table td {
+    padding: 0.4rem 0.2rem;
+    font-size: 0.92rem;
+  }
+  .usuarios-table {
+    font-size: 0.92rem;
+    min-width: 0;
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+  }
+  .usuarios-table thead {
+    display: none;
+  }
+  .usuarios-table tr {
+    display: block;
+    margin-bottom: 1.2rem;
+    background: #23272f;
+    border-radius: 0.7rem;
+    box-shadow: 0 2px 8px 0 rgba(255,60,0,0.10);
+    padding: 0.7rem 0.5rem;
+  }
+  .usuarios-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.98rem;
+    border-bottom: 1px solid #23272f;
+  }
+  .usuarios-table td:before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #ff3b3b;
+    margin-right: 0.7rem;
+    min-width: 90px;
+    display: inline-block;
+  }
+  .btn-eliminar {
+    width: 100%;
+    margin: 0.2rem 0;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.98rem;
+  }
+  .usuarios-empty-img {
+    width: 60px;
+  }
+}
+@media (max-width: 500px) {
+  .usuarios-admin-table-container {
+    max-width: 96vw;
+    padding: 0.5rem 2vw 0.5rem 2vw;
+    border-radius: 0.8rem;
+  }
+  .usuarios-title {
+    font-size: 0.98rem;
+  }
+  .usuarios-empty-img {
+    width: 40px;
+  }
+}
+@media (max-width: 400px) {
+  .usuarios-admin-table-container {
+    max-width: 78vw;
+    padding: 0.3rem 1vw 0.3rem 1vw;
+    border-radius: 0.6rem;
+  }
+}
