@@ -11,33 +11,51 @@ import { NgFor, NgIf, DatePipe } from '@angular/common';
       <canvas class="gestion-bg-canvas" id="gestion-bg-canvas"></canvas>
       <div class="usuarios-admin-table-container">
         <h2 class="usuarios-title">Usuarios Registrados</h2>
-        <table class="usuarios-table">
-          <thead>
-            <tr>
-              <th>Usuario</th>
-              <th>Email</th>
-              <th>HoopCoins</th>
-              <th>Fecha de Registro</th>
-              <th>Eliminar</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let usuario of usuariosPaginados">
-              <td>{{ usuario.username }}</td>
-              <td>{{ usuario.email }}</td>
-              <td>{{ usuario.hoopCoins }}</td>
-              <td>{{ usuario.createdAt | date:'short' }}</td>
-              <td>
+        <ng-container *ngIf="!isMobile">
+          <table class="usuarios-table">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>HoopCoins</th>
+                <th>Fecha de Registro</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of usuariosPaginados">
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.hoopCoins }}</td>
+                <td>{{ usuario.createdAt | date:'short' }}</td>
+                <td>
+                  <button class="btn-eliminar" (click)="eliminarUsuario(usuario._id)">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngIf="isMobile">
+          <div class="usuarios-list-responsive">
+            <div *ngFor="let usuario of usuarios; let i = index" class="usuario-item-responsive">
+              <div class="usuario-email-row" (click)="toggleExpand(i)">
+                <span class="usuario-email">{{ usuario.email }}</span>
+                <span class="expand-icon">{{ expandedIndex === i ? '▲' : '▼' }}</span>
+              </div>
+              <div class="usuario-details-responsive" *ngIf="expandedIndex === i">
+                <div><b>Usuario:</b> {{ usuario.username }}</div>
+                <div><b>HoopCoins:</b> {{ usuario.hoopCoins }}</div>
+                <div><b>Fecha de Registro:</b> {{ usuario.createdAt | date:'short' }}</div>
                 <button class="btn-eliminar" (click)="eliminarUsuario(usuario._id)">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+          </div>
+        </ng-container>
         <div *ngIf="usuarios.length === 0" class="usuarios-empty">
           <img src="/assets/logo.png" alt="Sin usuarios" class="usuarios-empty-img" />
           <p>No hay usuarios registrados.</p>
         </div>
-        <div *ngIf="usuarios.length > tamanoPagina" class="usuarios-paginacion">
+        <div *ngIf="usuarios.length > tamanoPagina && !isMobile" class="usuarios-paginacion">
           <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
           <span>Página {{paginaActual}} de {{totalPaginas}}</span>
           <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
@@ -51,6 +69,8 @@ export class AdminUsuariosComponent implements OnInit, AfterViewInit {
   usuarios: any[] = [];
   paginaActual: number = 1;
   tamanoPagina: number = 6;
+  isMobile = false;
+  expandedIndex: number | null = null;
 
   get totalPaginas(): number {
     return Math.ceil(this.usuarios.length / this.tamanoPagina);
@@ -61,7 +81,15 @@ export class AdminUsuariosComponent implements OnInit, AfterViewInit {
     return this.usuarios.slice(inicio, inicio + this.tamanoPagina);
   }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.isMobile = window.innerWidth <= 700;
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth <= 700;
+    });
+    this.cargarUsuarios();
+  }
+
+  cargarUsuarios = async () => {
     const token = localStorage.getItem('token');
     const res = await fetch('http://localhost:4001/api/admin/usuarios', {
       headers: { 'Authorization': `Bearer ${token}` }
@@ -144,5 +172,9 @@ export class AdminUsuariosComponent implements OnInit, AfterViewInit {
     } else {
       alert('Error al eliminar el usuario');
     }
+  }
+
+  toggleExpand(idx: number) {
+    this.expandedIndex = this.expandedIndex === idx ? null : idx;
   }
 }
