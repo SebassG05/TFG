@@ -22,31 +22,51 @@
   background: #23272f;
   color: #fff;
   padding: 2.5rem 1.2rem 2.5rem 1.2rem;
-  box-shadow: 2px 0 16px 0 rgba(0,0,0,0.10);
+  box-shadow: 2px 0 32px 0 rgba(255,60,0,0.10), 0 0 0 4px #ff3b3b11;
   border-top-left-radius: 2.2rem;
   border-bottom-left-radius: 2.2rem;
   z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
+  overflow: visible;
+}
+.admin-sidebar::after {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  border-radius: 2.2rem;
+  box-shadow: 0 0 32px 8px #ff3b3b22, 0 8px 32px 0 #fff2;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.18;
 }
 .admin-sidebar h2 {
   font-size: 1.7rem;
   margin-bottom: 2.5rem;
   text-align: left;
   font-weight: 900;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   color: #fff;
-  text-shadow: 0 2px 8px #ff3b3b22;
+  text-shadow: 0 2px 16px #ff3b3b44, 0 1px 0 #23272f;
+  position: relative;
+  z-index: 2;
 }
 .admin-sidebar ul {
   list-style: none;
   padding: 0;
   width: 100%;
+  position: relative;
+  z-index: 2;
 }
 .admin-sidebar li {
   margin: 1.5rem 0;
   width: 100%;
+  transition: transform 0.18s, box-shadow 0.18s;
 }
 .admin-sidebar a {
   color: #fff;
@@ -57,11 +77,39 @@
   border-radius: 0.8rem;
   display: block;
   transition: background 0.18s, color 0.18s;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px 0 rgba(255,60,0,0.04);
 }
 .admin-sidebar a:hover, .admin-sidebar a:focus {
   background: linear-gradient(90deg, #ff3b3b 0%, #ff1a1a 100%);
   color: #fffbe6;
   outline: none;
+  box-shadow: 0 4px 16px 0 #ff3b3b33;
+  transform: scale(1.04);
+}
+/* Separador decorativo */
+.admin-sidebar ul::before {
+  content: '';
+  display: block;
+  width: 80%;
+  height: 2px;
+  margin: 0.7rem auto 1.2rem auto;
+  background: linear-gradient(90deg, #ff3b3b 0%, #fff 100%);
+  border-radius: 2px;
+  opacity: 0.18;
+}
+/* Iconos decorativos */
+.admin-sidebar li::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 0.7rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff3b3b 60%, #fff 100%);
+  opacity: 0.22;
+  vertical-align: middle;
+  box-shadow: 0 0 8px 0 #ff3b3b44;
 }
 .admin-content {
   flex: 1;
