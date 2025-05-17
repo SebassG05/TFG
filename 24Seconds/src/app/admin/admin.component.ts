@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
           <li><a routerLink="/admin/usuarios">Gestión de Usuarios</a></li>
           <li><a routerLink="/admin/pedidos">Productos en Tienda</a></li>
           <li><a routerLink="/admin/eventos">Eventos Tienda</a></li>
+          <li><a routerLink="/admin/sorteos">Sorteos Tienda</a></li>
         </ul>
       </aside>
       <main class="admin-content">
@@ -40,6 +41,11 @@ import { Router } from '@angular/router';
             <h3>Eventos Tienda</h3>
             <p>Consulta y elimina eventos de la tienda.</p>
             <a routerLink="/admin/eventos" class="btn">Ver Eventos</a>
+          </div>
+          <div class="widget">
+            <h3>Sorteos Tienda</h3>
+            <p>Consulta y elimina sorteos de la tienda.</p>
+            <a routerLink="/admin/sorteos" class="btn">Ver Sorteos</a>
           </div>
         </section>
       </main>

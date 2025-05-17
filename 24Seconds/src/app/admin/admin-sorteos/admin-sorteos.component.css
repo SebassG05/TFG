@@ -1,0 +1,33 @@
+@import '../admin-usuarios.estetica.css';
+
+.admin-eventos-bg {
+  position: fixed;
+  inset: 0;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 30, 0.98);
+  z-index: 9999;
+  overflow: hidden;
+}
+.fondo-animado-admin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55; /* Más visible */
+  filter: blur(0.2px) brightness(1.18) saturate(1.5); /* Más brillo y saturación */
+  transition: opacity 0.4s;
+}
+.usuarios-admin-table-container {
+  position: relative;
+  z-index: 2;
+}
+.usuarios-title {
+  color: #fff;
+}

@@ -1,7 +1,7 @@
 import express from 'express';
 import auth from '../middlewares/auth.js';
 import upload from '../middlewares/uploadImage.js';
-import { createSorteo, authorizeSorteo, inscribirUsuario, getSorteoParticipants, getMySorteos, updateSorteo } from '../controllers/sorteosController.js';
+import { createSorteo, authorizeSorteo, inscribirUsuario, getSorteoParticipants, getMySorteos, updateSorteo, deleteSorteo, getAllSorteos } from '../controllers/sorteosController.js';
 
 const router = express.Router();
 
@@ -13,5 +13,7 @@ router.post('/:id/inscribirse', auth, inscribirUsuario);
 router.get('/:id/participants', auth, getSorteoParticipants);
 router.get('/mis-sorteos', auth, getMySorteos);
 router.put('/:id', auth, updateSorteo);
+router.delete('/:id', auth, deleteSorteo);
+router.get('/all', auth, getAllSorteos);
 
 export default router;

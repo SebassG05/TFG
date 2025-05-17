@@ -147,3 +147,35 @@ export const updateSorteo = async (req, res) => {
         res.status(500).json({ error: 'Error al actualizar sorteo', details: error.message });
     }
 };
+
+// Obtener todos los sorteos (admin)
+export const getAllSorteos = async (req, res) => {
+    try {
+        if (req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Solo el admin puede ver todos los sorteos' });
+        }
+        const sorteos = await Sorteo.find({}).populate('providerId', 'username email empresa');
+        res.status(200).json(sorteos);
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener los sorteos', details: error.message });
+    }
+};
+
+// Eliminar sorteo (solo admin o proveedor dueño)
+export const deleteSorteo = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const sorteo = await Sorteo.findById(id);
+        if (!sorteo) {
+            return res.status(404).json({ error: 'Sorteo no encontrado' });
+        }
+        // Permitir solo admin o proveedor dueño
+        if (req.user.role !== 'admin' && !(req.user.role === 'proveedor' && sorteo.providerId.toString() === req.user._id.toString())) {
+            return res.status(403).json({ error: 'No autorizado para eliminar este sorteo' });
+        }
+        await Sorteo.findByIdAndDelete(id);
+        res.status(200).json({ message: 'Sorteo eliminado correctamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al eliminar el sorteo', details: error.message });
+    }
+};

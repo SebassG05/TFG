@@ -1,0 +1,36 @@
+<div class="admin-eventos-bg">
+  <canvas class="fondo-animado-admin" id="fondoAnimadoSorteos"></canvas>
+  <div class="usuarios-admin-table-container">
+    <h2 class="usuarios-title">Gestión de Sorteos</h2>
+    <table class="usuarios-table" *ngIf="sorteos.length > 0; else sinSorteos">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Proveedor</th>
+          <th>Expira</th>
+          <th>Coste HoopCoins</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sorteo of sorteosPaginados">
+          <td>{{ sorteo.title }}</td>
+          <td>{{ sorteo.providerId?.username || '-' }}</td>
+          <td>{{ sorteo.expirationDate | date:'shortDate' }}</td>
+          <td>{{ sorteo.hoopCoinsCost }}</td>
+          <td>
+            <button class="btn-eliminar" (click)="eliminarSorteo(sorteo._id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="totalPaginas > 1" class="usuarios-paginacion">
+      <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+      <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+      <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+    </div>
+    <ng-template #sinSorteos>
+      <div style="color:#fff; margin:2rem 0;">No hay sorteos en la tienda.</div>
+    </ng-template>
+  </div>
+</div>
