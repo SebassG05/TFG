@@ -255,20 +255,153 @@
   animation: fadeInDown 0.7s cubic-bezier(.4,1.3,.6,1);
 }
 @media (max-width: 900px) {
-  .admin-content {
-    padding: 1.2rem 0.2rem 1.2rem 0.2rem;
-  }
-  .admin-widgets {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-  }
-  .widget {
-    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
-    min-width: 0;
+  .admin-dashboard {
+    flex-direction: column;
+    min-height: 100vh;
   }
   .admin-sidebar {
-    width: 100px;
-    padding: 1.2rem 0.5rem;
+    width: 100vw;
+    min-width: unset;
+    min-height: unset;
+    max-width: 100vw;
+    border-radius: 0 0 2.2rem 2.2rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-right: none;
+    border-bottom: 2.5px solid #23272f;
+    background: linear-gradient(90deg, #23272f 80%, #18181b 100%);
+    box-shadow: 0 4px 24px 0 rgba(255,60,0,0.10);
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.7rem 0.2rem 0.7rem 0.2rem;
+    position: relative;
+    z-index: 10;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+  .admin-sidebar h2 {
+    display: none;
+  }
+  .admin-sidebar ul {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    gap: 0.2rem;
+    margin: 0;
+  }
+  .admin-sidebar li {
+    margin: 0 0.2rem;
+    width: auto;
+    border-radius: 0.7rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .admin-sidebar a {
+    font-size: 0.98rem;
+    padding: 0.5rem 0.7rem 0.5rem 1.2rem;
+    border-radius: 0.7rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(90deg, #23272f 80%, #23272f00 100%);
+    box-shadow: none;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.18s;
+  }
+  .admin-sidebar a:hover, .admin-sidebar a:focus, .admin-sidebar li.active a, .admin-sidebar a.router-link-active {
+    background: linear-gradient(90deg, #ff3b3b 0%, #ff1a1a 100%);
+    color: #fffbe6;
+    box-shadow: 0 4px 16px 0 #ff3b3b33;
+    transform: scale(1.04) translateY(-2px);
+  }
+  .admin-sidebar ul::before, .admin-sidebar li::before {
+    display: none;
+  }
+  .admin-content {
+    padding: 1.2rem 0.5rem 0 0.5rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 54px);
+    min-height: 0;
+    width: 100vw;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    background: none;
+  }
+  .admin-widgets {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100vw;
+    padding: 0 0.2rem 2.5rem 0.2rem;
+    align-items: center;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
+    min-height: 0;
+    background: none;
+    margin-top: 0;
+  }
+  .widget {
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+  .widget::after {
+    display: none !important;
+  }
+}
+@media (max-width: 600px) {
+  .admin-content h1 {
+    font-size: 1.1rem;
+    margin-bottom: 0.7rem;
+  }
+  .admin-widgets {
+    gap: 0.7rem;
+    padding: 0.7rem 0.1rem 1.2rem 0.1rem;
+  }
+  .widget {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .widget::after {
+    display: none !important;
+  }
+}
+@media (max-width: 400px) {
+  .admin-widgets {
+    gap: 0.8rem;
+    padding: 0.7rem 0.15rem 1.2rem 0.15rem; /* padding igual a ambos lados */
+    align-items: center;
+  }
+  .widget {
+    max-width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+}
+@media (max-width: 360px) {
+  .admin-widgets {
+    gap: 0.6rem;
+    padding: 0.7rem 0.05rem 0.2rem 0rem; /* padding igual a ambos lados */
+    align-items: center;
+  }
+  .widget {
+    max-width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 }
 @keyframes fadeInDown {

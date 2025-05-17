@@ -1,0 +1,13 @@
+<div class="admin-mobile-navbar" [class.open]="menuAbierto">
+  <button class="admin-mobile-hamburger" (click)="toggleMenu()" [attr.aria-label]="menuAbierto ? 'Cerrar menú' : 'Abrir menú'">
+    <span></span><span></span><span></span>
+  </button>
+  <nav *ngIf="menuAbierto" class="admin-mobile-menu">
+    <ul>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link" (click)="closeMenu()">{{ item.label }}</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<ng-content></ng-content>
