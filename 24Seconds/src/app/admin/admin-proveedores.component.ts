@@ -5,7 +5,10 @@ import { NgFor, NgIf } from '@angular/common';
   selector: 'app-admin-proveedores',
   standalone: true,
   imports: [NgFor, NgIf],
-  styleUrls: ['./admin-usuarios.estetica.css', './admin-proveedores-responsive.css'],
+  styleUrls: [
+    './admin-usuarios.estetica.css',
+    './adminproveedores responsive/admin-proveedores-responsive.css'
+  ],
   template: `
     <div class="product-management-bg">
       <canvas class="gestion-bg-canvas" id="gestion-bg-canvas"></canvas>
