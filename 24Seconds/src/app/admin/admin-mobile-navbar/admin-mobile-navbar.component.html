@@ -2,6 +2,7 @@
   <button class="admin-mobile-hamburger" (click)="toggleMenu()" [attr.aria-label]="menuAbierto ? 'Cerrar menú' : 'Abrir menú'">
     <span></span><span></span><span></span>
   </button>
+  <div class="admin-mobile-brand">24Seconds</div>
   <nav *ngIf="menuAbierto" class="admin-mobile-menu">
     <ul>
       <li *ngFor="let item of menuItems">
