@@ -1,0 +1,44 @@
+<div class="admin-eventos-bg">
+  <canvas class="fondo-animado-admin" id="fondoAnimadoEventos"></canvas>
+  <div class="admin-eventos-container">
+    <h2 class="eventos-title">Eventos en Tienda</h2>
+    <table class="eventos-table" *ngIf="eventos.length > 0; else sinEventos">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Lugar</th>
+          <th>Fecha Evento</th>
+          <th>Registro</th>
+          <th>Proveedor</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let evento of eventosPaginados">
+          <td>
+            <img *ngIf="evento.img" [src]="evento.img" alt="img" class="evento-img-thumb" />
+          </td>
+          <td>{{ evento.name }}</td>
+          <td>{{ evento.description }}</td>
+          <td>{{ evento.location }}</td>
+          <td>{{ evento.eventDate | date:'short' }}</td>
+          <td>{{ evento.registrationDates?.start | date:'short' }}<br>-<br>{{ evento.registrationDates?.end | date:'short' }}</td>
+          <td>{{ evento.proveedor?.empresa || evento.proveedor?.username || '-' }}</td>
+          <td>
+            <button class="btn-eliminar" (click)="eliminarEvento(evento._id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="totalPaginas > 1" class="paginacion-eventos">
+      <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+      <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+      <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+    </div>
+    <ng-template #sinEventos>
+      <div style="color:#fff; margin:2rem 0;">No hay eventos en la tienda.</div>
+    </ng-template>
+  </div>
+</div>

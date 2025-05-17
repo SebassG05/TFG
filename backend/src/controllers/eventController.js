@@ -112,3 +112,13 @@ export const getMyEvents = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+// Obtener todos los eventos (admin)
+export const getAllEvents = async (req, res) => {
+  try {
+    const eventos = await Event.find({}).populate('proveedor', 'empresa username');
+    res.status(200).json(eventos);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};

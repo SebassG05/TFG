@@ -1,0 +1,159 @@
+/* Estética coherente y elegante para eventos admin */
+.admin-eventos-bg {
+  position: fixed;
+  inset: 0;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 30, 0.98);
+  z-index: 9999;
+  overflow: hidden;
+}
+.fondo-animado-admin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.32;
+  filter: blur(0.5px) brightness(1.08);
+  transition: opacity 0.4s;
+}
+.admin-eventos-container {
+  position: relative;
+  z-index: 2;
+  background: #181818;
+  color: #fff;
+  border-radius: 2.5rem;
+  box-shadow: 0 12px 48px 0 rgba(0,0,0,0.28);
+  padding: 2rem 1.5rem 1.2rem 1.5rem;
+  min-width: 480px;
+  max-width: 1200px;
+  min-height: 220px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: center;
+  animation: fadeInPop 0.7s cubic-bezier(.4,1.3,.6,1) 0.1s forwards;
+}
+.eventos-title {
+  text-align: center;
+  margin-top: 2.7rem;
+  margin-bottom: 2.7rem;
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  transform: translateY(-18px) scale(0.98);
+  animation: fadeInPop 0.7s cubic-bezier(.4,1.3,.6,1) 0.1s forwards;
+}
+@keyframes fadeInPop {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1.04);
+  }
+}
+.eventos-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 1.2rem;
+  background: rgba(35,39,47,0.98);
+  border-radius: 1.2rem;
+  overflow: hidden;
+  box-shadow: 0 2px 16px 0 rgba(255,60,0,0.10);
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  table-layout: fixed;
+}
+.eventos-table th, .eventos-table td {
+  padding: 0.7rem 0.5rem;
+  text-align: center;
+  font-size: 0.98rem;
+  color: #fff;
+  border-bottom: 1.5px solid #23272f;
+  transition: background 0.18s;
+  word-break: break-word;
+}
+.eventos-table th {
+  background: linear-gradient(90deg, #23272f 60%, #181818 100%);
+  font-weight: 800;
+  font-size: 1.08rem;
+  letter-spacing: 0.04em;
+  border-bottom: 2.5px solid #ff3b3b;
+  text-shadow: 0 2px 8px #ff3b3b22;
+}
+.eventos-table tr:nth-child(even) {
+  background: #23272f;
+}
+.eventos-table tr:nth-child(odd) {
+  background: #181818;
+}
+.eventos-table td {
+  border-right: 1px solid #23272f;
+}
+.eventos-table td:last-child {
+  border-right: none;
+}
+
+.evento-img-thumb {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #00000022;
+  border: 2px solid #23272f;
+  transition: box-shadow 0.18s, border 0.18s;
+}
+.btn-eliminar {
+  background: linear-gradient(90deg, #ff3b3b 0%, #ff1a1a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.9rem;
+  padding: 0.6rem 1.7rem;
+  font-weight: 700;
+  font-size: 1.13rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px 0 rgba(255,60,0,0.13);
+  margin: 0 0.2rem;
+}
+.btn-eliminar:hover {
+  background: linear-gradient(90deg, #ff1a1a 0%, #ff3b3b 100%);
+  color: #fffbe6;
+  box-shadow: 0 4px 16px #ff3b3b44;
+}
+.paginacion-eventos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 1.2rem 0 0.2rem 0;
+}
+.paginacion-eventos button {
+  background: linear-gradient(90deg, #ff3b3b 0%, #ff1a1a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.5rem 1.5rem;
+  font-weight: 700;
+  font-size: 1.08rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px 0 rgba(255,60,0,0.08);
+}
+.paginacion-eventos button:disabled {
+  background: #bdbdbd;
+  color: #fff;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.paginacion-eventos span {
+  color: #fff;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}

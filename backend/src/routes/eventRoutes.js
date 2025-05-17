@@ -1,8 +1,9 @@
 import express from 'express';
-import { createEvent, registerForEvent, updateEvent, deleteEvent, getMyEvents } from '../controllers/eventController.js';
+import { createEvent, registerForEvent, updateEvent, deleteEvent, getMyEvents, getAllEvents } from '../controllers/eventController.js';
 import isProveedor from '../middlewares/isProveedor.js';
 import isAuthenticated from '../middlewares/isAuthenticated.js';
 import upload from '../middlewares/uploadImage.js';
+import isAdmin from '../middlewares/isAdmin.js';
 
 const router = express.Router();
 
@@ -159,7 +160,12 @@ router.put('/update/:eventId', isProveedor, updateEvent);
  *       404:
  *         description: Event not found
  */
-router.delete('/delete/:eventId', isProveedor, deleteEvent);
+router.delete('/delete/:eventId', isAuthenticated, (req, res, next) => {
+  if (req.user.role === 'admin' || req.user.role === 'proveedor') {
+    return next();
+  }
+  return res.status(403).json({ message: 'No autorizado para eliminar eventos' });
+}, deleteEvent);
 
 /**
  * @swagger
@@ -176,5 +182,19 @@ router.delete('/delete/:eventId', isProveedor, deleteEvent);
  *         description: No events found
  */
 router.get('/mis-eventos', isProveedor, getMyEvents);
+
+/**
+ * @swagger
+ * /events/all:
+ *   get:
+ *     summary: Get all events (admin)
+ *     tags: [Events]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved all events
+ */
+router.get('/all', getAllEvents);
 
 export default router;
