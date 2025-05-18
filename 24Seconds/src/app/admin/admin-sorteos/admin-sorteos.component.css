@@ -1,4 +1,19 @@
 @import '../admin-usuarios.estetica.css';
+@import '../admin-sorteos-responsive.css';
+
+/* Oculta la tabla y paginación de escritorio en móvil */
+@media (max-width: 700px) {
+  .usuarios-table, .usuarios-paginacion {
+    display: none !important;
+  }
+}
+
+/* Oculta la vista responsive en escritorio/tablet */
+@media (min-width: 701px) {
+  .sorteos-list-responsive, .usuarios-paginacion {
+    display: none !important;
+  }
+}
 
 .admin-eventos-bg {
   position: fixed;

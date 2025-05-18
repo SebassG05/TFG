@@ -11,10 +11,16 @@ import { NgFor, NgIf, DatePipe } from '@angular/common';
 export class AdminSorteosComponent implements OnInit {
   sorteos: any[] = [];
   paginaActual = 1;
-  sorteosPorPagina = 6;
+  sorteosPorPagina = 5;
   totalPaginas = 1;
+  isMobile = false;
+  expandedIndex: number | null = null;
 
   async ngOnInit() {
+    this.isMobile = window.innerWidth <= 700;
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth <= 700;
+    });
     const token = localStorage.getItem('token');
     const res = await fetch('http://localhost:4001/api/sorteos/all', {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
@@ -100,5 +106,9 @@ export class AdminSorteosComponent implements OnInit {
     } else {
       alert('Error al eliminar el sorteo');
     }
+  }
+
+  toggleExpand(idx: number) {
+    this.expandedIndex = this.expandedIndex === idx ? null : idx;
   }
 }

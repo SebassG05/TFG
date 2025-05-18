@@ -2,7 +2,8 @@
   <canvas class="fondo-animado-admin" id="fondoAnimadoSorteos"></canvas>
   <div class="usuarios-admin-table-container">
     <h2 class="usuarios-title">Gestión de Sorteos</h2>
-    <table class="usuarios-table" *ngIf="sorteos.length > 0; else sinSorteos">
+    <!-- Vista de escritorio/tablet -->
+    <table class="usuarios-table" *ngIf="sorteos.length > 0 && !(isMobile ?? false); else sinSorteos">
       <thead>
         <tr>
           <th>Título</th>
@@ -24,13 +25,37 @@
         </tr>
       </tbody>
     </table>
-    <div *ngIf="totalPaginas > 1" class="usuarios-paginacion">
+    <div *ngIf="totalPaginas > 1 && !(isMobile ?? false)" class="usuarios-paginacion">
       <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
       <span>Página {{paginaActual}} de {{totalPaginas}}</span>
       <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
     </div>
+    <!-- Vista responsive móvil -->
+    <ng-container *ngIf="isMobile ?? false">
+      <div *ngIf="sorteos.length > 0; else sinSorteos" class="sorteos-list-responsive">
+        <div *ngFor="let sorteo of sorteosPaginados; let i = index" class="sorteo-item-responsive">
+          <div class="sorteo-main-row" (click)="toggleExpand(i)">
+            <span class="sorteo-titulo">{{ sorteo.title }}</span>
+            <span class="expand-icon">{{ expandedIndex === i ? '▲' : '▼' }}</span>
+          </div>
+          <div class="sorteo-details-responsive" *ngIf="expandedIndex === i">
+            <div class="sorteo-details-fields">
+              <div><b>Proveedor:</b> {{ sorteo.providerId?.username || '-' }}</div>
+              <div><b>Expira:</b> {{ sorteo.expirationDate | date:'shortDate' }}</div>
+              <div><b>Coste HoopCoins:</b> {{ sorteo.hoopCoinsCost }}</div>
+            </div>
+            <button class="btn-eliminar" (click)="eliminarSorteo(sorteo._id)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="totalPaginas > 1" class="usuarios-paginacion">
+        <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+        <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+        <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+      </div>
+    </ng-container>
     <ng-template #sinSorteos>
-      <div style="color:#fff; margin:2rem 0;">No hay sorteos en la tienda.</div>
+      <div *ngIf="sorteos.length === 0" style="color:#fff; margin:2rem 0;">No hay sorteos en la tienda.</div>
     </ng-template>
   </div>
 </div>
