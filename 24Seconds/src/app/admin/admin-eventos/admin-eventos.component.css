@@ -1,4 +1,5 @@
 /* Estética coherente y elegante para eventos admin */
+@import '../admin-eventos-responsive/admin-eventos-responsive.css';
 .admin-eventos-bg {
   position: fixed;
   inset: 0;

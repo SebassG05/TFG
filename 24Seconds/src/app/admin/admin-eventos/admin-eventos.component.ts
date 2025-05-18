@@ -12,6 +12,8 @@ export class AdminEventosComponent implements OnInit {
   eventos: any[] = [];
   paginaActual: number = 1;
   eventosPorPagina: number = 5;
+  isMobile = false;
+  expandedIndex: number | null = null;
 
   get eventosPaginados() {
     const start = (this.paginaActual - 1) * this.eventosPorPagina;
@@ -30,6 +32,10 @@ export class AdminEventosComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.isMobile = window.innerWidth <= 700;
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth <= 700;
+    });
     const token = localStorage.getItem('token');
     const res = await fetch('http://localhost:4001/api/events/all', {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
@@ -86,6 +92,10 @@ export class AdminEventosComponent implements OnInit {
       requestAnimationFrame(animate);
     }
     animate();
+  }
+
+  toggleExpand(idx: number) {
+    this.expandedIndex = this.expandedIndex === idx ? null : idx;
   }
 
   async eliminarEvento(id: string) {
