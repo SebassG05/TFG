@@ -12,6 +12,8 @@ export class AdminProductosComponent implements OnInit, AfterViewInit {
   productos: any[] = [];
   paginaActual: number = 1;
   productosPorPagina: number = 5;
+  isMobile = false;
+  expandedIndex: number | null = null;
 
   get productosPaginados() {
     const start = (this.paginaActual - 1) * this.productosPorPagina;
@@ -29,7 +31,21 @@ export class AdminProductosComponent implements OnInit, AfterViewInit {
     }
   }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.isMobile = window.innerWidth <= 700;
+    this.productosPorPagina = this.isMobile ? 6 : 5;
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth <= 700;
+      this.productosPorPagina = this.isMobile ? 6 : 5;
+    });
+    this.cargarProductos();
+  }
+
+  toggleExpand(idx: number) {
+    this.expandedIndex = this.expandedIndex === idx ? null : idx;
+  }
+
+  async cargarProductos() {
     const token = localStorage.getItem('token');
     // Obtener productos y poblar el proveedor
     const res = await fetch('http://localhost:4001/api/products/search', {
