@@ -156,3 +156,125 @@ body, html {
   word-break: break-all;
 }
 
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+
+  .crear-evento-container {
+    margin: 8vh auto 0 auto;
+    max-width: 420px;
+    width: 95vw;
+    padding: 1.2rem 0.5rem;
+    left: 0;
+    right: 0;
+    position: relative;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .crear-evento-container input[type="text"],
+  .crear-evento-container input[type="date"],
+  .crear-evento-container textarea {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .crear-producto-bg {
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .basketball-vintage-bg,
+  .basketball-vintage-img,
+  .poster-liga-nacional,
+  .poster-canasta {
+    display: none !important;
+  }
+  .crear-evento-container {
+    margin-top: -80px;
+    max-width: 340px;
+    width: 98vw;
+    padding: 1rem 0.2rem;
+    border-radius: 1.2rem;
+    left: 0;
+    right: 0;
+    color: #181818;
+    position: relative;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  .crear-evento-container input[type="text"],
+  .crear-evento-container input[type="date"],
+  .crear-evento-container textarea {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .crear-producto-bg {
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+/* Ajuste específico para iPhone 14 Pro (393px) */
+@media (max-width: 410px) {
+  .crear-evento-container {
+    max-width: 88vw;
+    width: 98vw;
+    padding: 0.7rem 0.1rem;
+    margin: -30vw auto 0 auto;
+  }
+}
+
+/* Ajuste específico para Pixel 7 Pro (480px) */
+@media (min-width: 411px) and (max-width: 500px) {
+  .crear-evento-container {
+    max-width: 96vw;
+    width: 96vw;
+    padding: 1rem 0.2rem;
+    margin: -5vw auto 0 auto;
+  }
+}
+
+/* Ajuste específico para iPad Pro 11 (581px) */
+@media (min-width: 501px) and (max-width: 650px) {
+  .crear-evento-container {
+    max-width: 90vw;
+    width: 90vw;
+    padding: 1.2rem 1rem;
+    margin: -18vw auto 0 auto;
+  }
+}
+
+/* Ajuste específico para iPad (767px) */
+@media (min-width: 651px) and (max-width: 800px) {
+  .crear-evento-container {
+    max-width: 70vw;
+    width: 70vw;
+    padding: 1.5rem 2rem;
+    margin: -20vw auto 0 auto;
+  }
+}
+
+.crear-evento-container,
+.crear-evento-container input[type="text"],
+.crear-evento-container input[type="date"],
+.crear-evento-container textarea,
+.crear-evento-container button {
+  box-sizing: border-box;
+}
+
