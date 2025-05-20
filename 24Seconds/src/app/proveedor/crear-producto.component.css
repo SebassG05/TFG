@@ -206,9 +206,118 @@ button[type="submit"]:hover {
   .crear-producto-form {
     padding: 1.2rem 0.5rem;
     border-radius: 1rem;
+    margin-top: 15px;
+    max-width: 78vw;
+    max-height: 190vw;
+    min-width: 0;
   }
   .form-row {
     flex-direction: column;
     gap: 0.5rem;
+  }
+  .img-preview-multi {
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .img-preview-item {
+    width: 90px;
+    height: 110px;
+  }
+  .img-preview-item img {
+    height: 70px;
+  }
+  .custom-file-label {
+    min-width: 120px;
+    min-height: 38px;
+    font-size: 1rem;
+    padding: 0.5em 1em;
+  }
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 0.7rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .crear-producto-form {
+    padding: 0.7rem 0.2rem;
+    border-radius: 0.7rem;
+    max-width: 90vw;
+  }
+  .crear-producto-form h2 {
+    font-size: 1.3rem;
+  }
+  .form-group label {
+    font-size: 0.98rem;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="number"],
+  .form-group input[type="file"],
+  .category-placeholder {
+    font-size: 0.98rem;
+    padding: 0.5rem 0.6rem;
+  }
+  .img-preview-item {
+    width: 70px;
+    height: 70px;
+  }
+  .img-preview-item img {
+    height: 40px;
+  }
+  .img-main-radio {
+    font-size: 0.9rem;
+  }
+  .custom-file-label {
+    min-width: 90px;
+    min-height: 30px;
+    font-size: 0.95rem;
+    padding: 0.3em 0.7em;
+  }
+  .file-count {
+    font-size: 0.95em;
+  }
+  button[type="submit"] {
+    font-size: 0.95rem;
+    padding: 0.6rem 0;
+  }
+}
+
+@media (max-width: 350px) {
+  .crear-producto-form {
+    padding: 0.3rem 0.05rem;
+    border-radius: 0.4rem;
+  }
+  .img-preview-item {
+    width: 50px;
+    height: 50px;
+  }
+}
+@media (min-width: 570px) and (max-width: 580px) {
+  .crear-producto-bg {
+    min-height: 100vh;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .crear-producto-form {
+    max-width: 430px;
+    width: 100%;
+    margin: 10 auto;
+    padding: 0.4rem 0.1rem 0.4rem 0.1rem;
+    align-self: flex-start;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="number"],
+  .category-placeholder {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.3rem;
+  }
+  .custom-file-label,
+  button[type="submit"] {
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
   }
 }
