@@ -42,6 +42,7 @@
   margin-bottom: 1.2rem;
   text-align: center;
   letter-spacing: 0.5px;
+  color: #181818;
   line-height: 1.18;
   /* Reduce el tamaño para que el nombre de empresa quepa en una sola línea */
 }
@@ -137,20 +138,93 @@
 }
 
 @media (max-width: 700px) {
+  .proveedor-bg {
+    padding: 0 0;
+  }
   .proveedor-container {
-    padding: 24px 8px 20px 8px;
-    border-radius: 18px;
+    padding: 16px 4vw 16px 4vw;
+    border-radius: 14px;
+    max-width: 400px;
+    width: 92vw;
+    min-width: unset;
+    margin: 24px auto 24px auto;
+    box-sizing: border-box;
+  }
+  .proveedor-container h1 {
+    font-size: 1.2rem;
+  }
+  .proveedor-container p {
+    font-size: 1rem;
+    margin-bottom: 18px;
   }
   .proveedor-actions {
     flex-direction: column;
-    gap: 18px;
+    gap: 12px;
+    margin-top: 10px;
   }
   .proveedor-actions-row {
     flex-direction: column;
-    gap: 18px;
+    gap: 10px;
     align-items: stretch;
   }
-  .proveedor-actions-col {
-    gap: 14px;
+  .proveedor-actions button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+  .exit-btn {
+    right: 12px;
+    bottom: 12px;
+    width: 44px;
+    height: 44px;
+  }
+  .logout-toast {
+    top: 12px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  .proveedor-bg {
+    padding: 0 0;
+  }
+  .proveedor-container {
+    padding: 32px 32px 28px 32px;
+    border-radius: 22px;
+    max-width: 520px;
+    width: 90vw;
+    margin: 32px auto 32px auto;
+    box-sizing: border-box;
+  }
+  .proveedor-container h1 {
+    font-size: 1.6rem;
+  }
+  .proveedor-container p {
+    font-size: 1.08rem;
+    margin-bottom: 24px;
+  }
+  .proveedor-actions {
+    gap: 18px;
+  }
+  .proveedor-actions-row {
+    gap: 18px;
+  }
+  .proveedor-actions button {
+    font-size: 1.05rem;
+    padding: 14px 0;
+  }
+  .exit-btn {
+    right: 18px;
+    bottom: 18px;
+    width: 48px;
+    height: 48px;
+  }
+  .logout-toast {
+    top: 24px;
+    padding: 14px 24px;
+    font-size: 1.08rem;
+    border-radius: 12px;
   }
 }
