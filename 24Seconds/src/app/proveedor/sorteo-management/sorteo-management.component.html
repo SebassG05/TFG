@@ -1,6 +1,6 @@
 <div class="sorteo-management-bg">
   <canvas class="gestion-sorteos-bg-canvas" id="gestion-sorteos-bg-canvas"></canvas>
-  <div class="sorteo-management-table-container large">
+  <div class="sorteo-management-table-container large" *ngIf="!isMobile; else responsiveList">
     <h2 class="gestion-title">Gestión de sorteos</h2>
     <table class="sorteo-table" *ngIf="sorteos.length > 0; else sinSorteos">
       <thead>
@@ -46,4 +46,34 @@
     </ng-template>
     <button class="close-table-btn" (click)="router.navigate(['/proveedor'])">Cerrar</button>
   </div>
+  <ng-template #responsiveList>
+    <div class="sorteo-management-table-container">
+      <h2 class="gestion-title">Gestión de sorteos</h2>
+      <div class="sorteos-list-responsive">
+        <div *ngFor="let sorteo of sorteosPaginados; let i = index" class="sorteo-item-responsive">
+          <div class="sorteo-main-row" (click)="expandedIndex === i ? expandedIndex = -1 : expandedIndex = i">
+            <span class="sorteo-titulo">{{ sorteo.title }}</span>
+            <span class="expand-icon">{{ expandedIndex === i ? '▲' : '▼' }}</span>
+          </div>
+          <div class="sorteo-details-responsive" *ngIf="expandedIndex === i">
+            <div class="sorteo-details-fields">
+              <div><b>Fecha sorteo:</b> {{ sorteo.expirationDate | date:'yyyy-MM-dd' }}</div>
+              <div><b>Fin inscripción:</b> {{ sorteo.expirationDate | date:'yyyy-MM-dd' }}</div>
+              <div><b>Coste HoopCoins:</b> {{ sorteo.hoopCoinsCost }}</div>
+            </div>
+            <button class="action-btn delete" (click)="eliminarSorteo(sorteo._id)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="totalPaginas > 1" class="paginacion-sorteos">
+        <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+        <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+        <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+      </div>
+      <ng-template [ngIf]="sorteos.length === 0">
+        <div style="color:#fff; margin:2rem 0;">No tienes sorteos creados.</div>
+      </ng-template>
+      <button class="close-table-btn" (click)="router.navigate(['/proveedor'])">Cerrar</button>
+    </div>
+  </ng-template>
 </div>
