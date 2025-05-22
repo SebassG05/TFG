@@ -15,6 +15,8 @@ export class EventManagementComponent implements OnInit, AfterViewInit {
   show = true;
   paginaActual = 1;
   eventosPorPagina = 5;
+  isMobile = false;
+  expandedIndex = -1;
 
   constructor(public router: Router) {}
 
@@ -35,6 +37,8 @@ export class EventManagementComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
+    this.checkIsMobile();
+    window.addEventListener('resize', this.checkIsMobile.bind(this));
     const token = localStorage.getItem('token');
     if (!token) return;
     const res = await fetch('http://localhost:4001/api/events/mis-eventos', {
@@ -47,6 +51,10 @@ export class EventManagementComponent implements OnInit, AfterViewInit {
       this.eventos = [];
     }
     this.paginaActual = 1;
+  }
+
+  checkIsMobile() {
+    this.isMobile = window.innerWidth <= 700;
   }
 
   async eliminarEvento(id: string) {

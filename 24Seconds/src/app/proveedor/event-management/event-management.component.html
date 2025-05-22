@@ -1,6 +1,6 @@
 <div class="event-management-bg">
   <canvas class="gestion-eventos-bg-canvas" id="gestion-eventos-bg-canvas"></canvas>
-  <div class="event-management-table-container large">
+  <div class="event-management-table-container large" *ngIf="!isMobile; else responsiveList">
     <h2 class="gestion-title">Gestión de eventos</h2>
     <table class="event-table" *ngIf="eventos.length > 0; else sinEventos">
       <thead>
@@ -51,4 +51,35 @@
     </ng-template>
     <button class="close-table-btn" (click)="router.navigate(['/proveedor'])">Cerrar</button>
   </div>
+  <ng-template #responsiveList>
+    <div class="event-management-table-container">
+      <h2 class="gestion-title">Gestión de eventos</h2>
+      <div class="event-list-responsive">
+        <div *ngFor="let evento of eventosPaginados; let i = index" class="evento-item-responsive">
+          <div class="evento-main-row" (click)="expandedIndex === i ? expandedIndex = -1 : expandedIndex = i">
+            <span class="evento-nombre">{{ evento.name }}</span>
+            <span class="expand-icon">{{ expandedIndex === i ? '▲' : '▼' }}</span>
+          </div>
+          <div class="evento-details-responsive" *ngIf="expandedIndex === i">
+            <div class="evento-details-fields">
+              <div><b>Fecha evento:</b> {{ evento.eventDate | date:'yyyy-MM-dd' }}</div>
+              <div><b>Inicio inscripción:</b> {{ evento.registrationDates?.start | date:'yyyy-MM-dd' }}</div>
+              <div><b>Fin inscripción:</b> {{ evento.registrationDates?.end | date:'yyyy-MM-dd' }}</div>
+              <div><b>Ubicación:</b> {{ evento.location }}</div>
+            </div>
+            <button class="action-btn delete" (click)="eliminarEvento(evento._id)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="totalPaginas > 1" class="paginacion-eventos">
+        <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+        <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+        <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+      </div>
+      <ng-template [ngIf]="eventos.length === 0">
+        <div style="color:#fff; margin:2rem 0;">No tienes eventos creados.</div>
+      </ng-template>
+      <button class="close-table-btn" (click)="router.navigate(['/proveedor'])">Cerrar</button>
+    </div>
+  </ng-template>
 </div>
