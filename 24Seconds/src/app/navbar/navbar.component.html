@@ -1,31 +1,42 @@
-<nav class="navbar" [class.menu-open]="menuOpen">
-  <div class="navbar__toggle" [class.open]="menuOpen" (click)="menuOpen = !menuOpen">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div class="navbar__logo">
-    <img src="assets/logo.png" alt="Logo" />
-  </div>
-  <form class="navbar__search" [class.mobile-open]="searchMobileOpen" (submit)="onSearch(); $event.preventDefault()">
-    <input type="text" [(ngModel)]="searchTerm" name="search" placeholder="Buscar..." />
-    <button type="submit" aria-label="Buscar">
-      <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5" stroke-width="2" stroke-linecap="round"/></svg>
+<!--
+  Navbar exclusivo 24Seconds: premium, responsive, coherente, SVGs custom, animaciones, gradientes, sombra, tipografía Montserrat
+-->
+<nav class="navbar24">
+  <div class="navbar24__container">
+    <!-- Menú hamburguesa móvil -->
+    <button class="navbar24__burger" aria-label="Abrir menú" (click)="menuOpen = !menuOpen" [attr.aria-expanded]="menuOpen">
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
     </button>
-    <button type="button" class="close-search" *ngIf="searchMobileOpen" (click)="searchMobileOpen = false" aria-label="Cerrar búsqueda">&times;</button>
-  </form>
-  <div class="navbar__actions">
-    <button class="navbar__icon-btn navbar__search-btn" type="button" aria-label="Buscar" (click)="searchMobileOpen = !searchMobileOpen">
-      <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-    <button class="navbar__icon-btn" aria-label="Usuario">
-      <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke-width="2"/></svg>
+    <!-- Logo central imagen PNG + tipografía -->
+    <a class="navbar24__logo" href="/">
+      <span class="logo-img">
+        <img src="assets/logo.png" alt="24Seconds Logo" height="48" />
+      </span>
+      <span class="logo-text">24Seconds</span>
+    </a>
+    <!-- Enlaces principales -->
+    <ul class="navbar24__links" [class.open]="menuOpen">
+      <li><a routerLink="/" routerLinkActive="active">Inicio</a></li>
+      <li><a routerLink="/eventos" routerLinkActive="active">Eventos</a></li>
+      <li><a routerLink="/productos" routerLinkActive="active">Productos</a></li>
+      <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
+    </ul>
+    <!-- Botón usuario (login/avatar) -->
+    <button class="navbar24__user" aria-label="Usuario" (click)="onUserClick()">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="14" cy="10" r="5" stroke="#ffb700" stroke-width="2" fill="url(#usergrad)"/>
+        <ellipse cx="14" cy="21" rx="8" ry="4" fill="#23272f" stroke="#ffb700" stroke-width="2"/>
+        <defs>
+          <linearGradient id="usergrad" x1="9" y1="5" x2="19" y2="15" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#fffbe6"/>
+            <stop offset="1" stop-color="#bfa14a"/>
+          </linearGradient>
+        </defs>
+      </svg>
     </button>
   </div>
-  <ul class="navbar__links" [class.active]="menuOpen" style="justify-content: center; width: 100%; text-align: center;">
-    <li><a href="#home">Inicio</a></li>
-    <li><a href="#shop">Tienda</a></li>
-    <li><a href="#exclusive">Exclusivos</a></li>
-    <li><a href="#contact">Contacto</a></li>
-  </ul>
+  <!-- Overlay móvil -->
+  <div class="navbar24__overlay" *ngIf="menuOpen" (click)="menuOpen = false"></div>
 </nav>
