@@ -1,0 +1,17 @@
+.historia-page {
+  max-width: 700px;
+  margin: 3rem auto;
+  background: #18181c;
+  color: #fffbe6;
+  border-radius: 2rem;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px 0 #ff3b3b22, 0 1.5px 8px 0 #0008;
+}
+.historia-page h1 {
+  color: #ff3b3b;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.3rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+}
+

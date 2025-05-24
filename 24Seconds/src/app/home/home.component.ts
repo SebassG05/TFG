@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CarouselComponent } from '../carousel/carousel.component';
 import { Router } from '@angular/router';
+import { HistoriaCardComponent } from '../historia-card/historia-card.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CarouselComponent]
+  imports: [CarouselComponent, HistoriaCardComponent] // Añade HistoriaCardComponent aquí
 })
 export class HomeComponent {
   constructor(private router: Router) {}

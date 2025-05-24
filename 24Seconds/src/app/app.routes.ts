@@ -23,5 +23,6 @@ export const routes: Routes = [
   { path: 'proveedor/gestion-sorteo', loadChildren: () => import('./proveedor/sorteo-management/sorteo-management.routes').then(m => m.default) },
   { path: 'reset/:token', loadComponent: () => import('./reset-password.component').then(m => m.ResetPasswordComponent) },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'historia', loadComponent: () => import('./historia/historia.component').then(m => m.HistoriaComponent) },
 
 ];
