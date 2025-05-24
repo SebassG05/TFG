@@ -25,6 +25,7 @@ export class CarouselComponent {
     'assets/carrusel3.png',
     'assets/carrusel4.png',
     'assets/carrusel5.png',
+    ...(this.isMobile() ? [] : ['assets/carrusel6.png'])
   ];
   current = 0;
   interval: any;
@@ -47,5 +48,8 @@ export class CarouselComponent {
   }
   goTo(i: number) {
     this.current = i;
+  }
+  isMobile(): boolean {
+    return window.innerWidth <= 700;
   }
 }
