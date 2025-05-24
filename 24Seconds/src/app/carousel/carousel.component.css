@@ -82,3 +82,174 @@
     max-height: 320px;
   }
 }
+
+/* Responsive styles for tablets */
+@media (max-width: 1024px) {
+  .carousel-container {
+    height: 38vh;
+    min-height: 200px;
+    max-height: 400px;
+  }
+  .carousel-slide img {
+    height: 38vh;
+    min-height: 200px;
+    max-height: 400px;
+  }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+  .carousel-container {
+    height: 28vh;
+    min-height: 120px;
+    max-height: 220px;
+  }
+  .carousel-slide img {
+    height: 28vh;
+    min-height: 120px;
+    max-height: 220px;
+  }
+  .carousel-arrow {
+    font-size: 1.5rem;
+    padding: 0.2rem 0.6rem;
+  }
+}
+
+/* Responsive styles for iPhone 14 Pro (432px), Pixel 7 Pro (480px), iPad Pro 11 (581px) */
+@media (max-width: 600px) {
+  .carousel-container {
+    height: 22vh;
+    min-height: 100px;
+    max-height: 160px;
+  }
+  .carousel-slide img {
+    height: 22vh;
+    min-height: 100px;
+    max-height: 160px;
+  }
+  .carousel-arrow {
+    font-size: 1.2rem;
+    padding: 0.1rem 0.4rem;
+  }
+}
+
+/* Mejoras específicas para móviles pequeños (iPhone 14 Pro, Pixel 7 Pro, etc.) */
+@media (max-width: 500px) {
+  .carousel-container {
+    height: 32vh;
+    min-height: 140px;
+    max-height: 220px;
+    background: transparent;
+    margin-top: -55px;
+    position: relative;
+    top: 0;
+  }
+  .carousel-slide {
+    background: transparent;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+  }
+  .carousel-slide img {
+    height: 32vh;
+    min-height: 140px;
+    max-height: 220px;
+    object-fit: contain;
+    background: transparent;
+    display: block;
+    margin: 0 auto;
+  }
+  .carousel-dots {
+    position: absolute;
+    bottom: unset;
+    top: 150px;
+    left: 50%;
+    z-index: 100;
+    transform: translateX(-50%);
+    gap: 0.4rem;
+  }
+  .carousel-dots span {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Ajuste para tablets pequeñas como iPad Pro 11 vertical */
+@media (min-width: 501px) and (max-width: 700px) {
+  .carousel-container {
+    height: 36vh;
+    min-height: 160px;
+    max-height: 260px;
+    background: transparent;
+    margin-top: -55px;
+    position: relative;
+    top: 0;
+  }
+  .carousel-slide {
+    background: transparent;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+  }
+  .carousel-slide img {
+    height: 36vh;
+    min-height: 160px;
+    max-height: 260px;
+    object-fit: contain;
+    background: transparent;
+    display: block;
+    margin: 0 auto;
+  }
+  .carousel-dots {
+    position: absolute;
+    bottom: unset;
+    top: 180px;
+    left: 50%;
+    z-index: 100;
+    transform: translateX(-50%);
+    gap: 0.6rem;
+  }
+  .carousel-dots span {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 700px) {
+  .carousel-container {
+    height: 28vh;
+    min-height: 120px;
+    max-height: 220px;
+  }
+  .carousel-slide img {
+    height: 28vh;
+    min-height: 120px;
+    max-height: 220px;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+  .carousel-container {
+    height: 34vh;
+    min-height: 160px;
+    max-height: 300px;
+  }
+  .carousel-slide img {
+    height: 34vh;
+    min-height: 160px;
+    max-height: 300px;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .carousel-container {
+    height: 38vh;
+    min-height: 200px;
+    max-height: 400px;
+  }
+  .carousel-slide img {
+    height: 38vh;
+    min-height: 200px;
+    max-height: 400px;
+  }
+}
