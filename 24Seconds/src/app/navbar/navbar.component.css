@@ -84,11 +84,16 @@
   position: relative;
   box-shadow: 0 2px 8px #ff3b3b11;
 }
-.navbar24__links li a.active,
-.navbar24__links li a:hover {
+.navbar24__links li a.active {
   background: linear-gradient(90deg, #ff3b3b 0%, #ff1a1a 100%);
   color: #fffbe6;
   box-shadow: 0 4px 16px #ff3b3b44;
+}
+
+.navbar24__links li a:hover:not(.active) {
+  color: #ff3b3b;
+  box-shadow: 0 2px 8px #ff3b3b22;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
 }
 
 .navbar24__user {
