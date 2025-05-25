@@ -112,3 +112,46 @@
   transform: translateY(-2px) scale(1.04);
 }
 
+/* SOLO para iPhone 14 Pro, Pixel 7 Pro, iPad Pro 11 vertical */
+@media (width: 432px), (width: 480px), (width: 581px) {
+  .historia-section-1,
+  .historia-section-2 {
+    flex-direction: column !important;
+    align-items: stretch;
+    margin-left: 0 !important;
+    gap: 0.5rem;
+  }
+  .historia-section-1 > img,
+  .historia-section-2 > img,
+  .historia-img,
+  .historia-img.izquierda,
+  .historia-img.derecha {
+    width: 90vw !important;
+    max-width: 350px !important;
+    margin: 0 auto 1rem auto !important;
+    display: block !important;
+  }
+  .historia-section-1 > .fundacion-text,
+  .historia-section-2 > .fundacion-text {
+    order: 1;
+    max-width: 95vw !important;
+    margin: 0 auto 1.5rem auto !important;
+    padding: 1.2rem 1rem !important;
+    min-height: unset !important;
+  }
+  .fundacion-text h2 {
+    font-size: 1.3rem !important;
+    margin-bottom: 0.7rem !important;
+  }
+  .fundacion-text p {
+    font-size: 1rem !important;
+  }
+  .historia-memorial-btn {
+    font-size: 1rem !important;
+    padding: 0.7rem 1.5rem !important;
+  }
+  .historia-memorial-btn-container {
+    margin: 1.2rem 0 1rem 0 !important;
+  }
+}
+
