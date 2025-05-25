@@ -1,0 +1,22 @@
+<div class="eventos-card">
+  <div class="eventos-info">
+    <h2>No es solo un juego, es una forma de vida.</h2>
+    <p>
+      Descubre nuestros eventos de baloncesto, donde la pasión y la diversión se unen en la cancha. ¡Desliza para ver más!
+    </p>
+    <button class="inscribete-btn">INSCRÍBETE</button>
+  </div>
+  <div
+    #slider
+    class="eventos-slider"
+    (mousedown)="onMouseDown($event)"
+    (mouseleave)="onMouseLeave()"
+    (mouseup)="onMouseUp()"
+    (mousemove)="onMouseMove($event)"
+    (touchstart)="onMouseDown($event)"
+    (touchend)="onMouseUp()"
+    (touchmove)="onMouseMove($event)"
+  >
+    <img *ngFor="let img of images" [src]="img" alt="Evento" class="slider-img" draggable="false" />
+  </div>
+</div>
