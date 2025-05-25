@@ -1,0 +1,37 @@
+.votation-toprated-container {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px #ad055c22;
+  max-width: 420px;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+.votation-toprated-container h2 {
+  color: #ad055c;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 1.2rem;
+}
+.votation-toprated-container p {
+  color: #23272f;
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+}
+.volver-btn {
+  background: linear-gradient(90deg, #ff3b3b 0%, #ad055c 100%);
+  color: #fff;
+  border: none;
+  border-radius: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 0.8rem 2.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 18px #ad055c44;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.15s;
+}
+.volver-btn:hover {
+  background: linear-gradient(90deg, #ad055c 0%, #ff3b3b 100%);
+  color: #fff;
+  transform: scale(1.04);
+}

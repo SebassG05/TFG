@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-top-zapatillas',
   standalone: true,
   templateUrl: './top-zapatillas.component.html',
   styleUrls: ['./top-zapatillas.component.css'],
-  imports: [NgFor, NgIf]
+  imports: [NgFor, NgIf, RouterModule]
 })
 export class TopZapatillasComponent {
   zapatillas: any[] = [];

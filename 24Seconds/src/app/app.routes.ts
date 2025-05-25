@@ -5,6 +5,7 @@ import { CrearSorteoComponent } from './proveedor/crear-sorteo.component';
 import { AdminProductosComponent } from './admin/admin-productos/admin-productos.component';
 import { AdminEventosComponent } from './admin/admin-eventos/admin-eventos.component';
 import { AdminSorteosComponent } from './admin/admin-sorteos/admin-sorteos.component';
+import { VotationTopratedComponent } from './votation-toprated/votation-toprated.component';
 
 export const routes: Routes = [
   { path: 'home', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) },
@@ -24,5 +25,6 @@ export const routes: Routes = [
   { path: 'reset/:token', loadComponent: () => import('./reset-password.component').then(m => m.ResetPasswordComponent) },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'historia', loadComponent: () => import('./historia/historia.component').then(m => m.HistoriaComponent) },
+  { path: 'votation-toprated', component: VotationTopratedComponent },
 
 ];

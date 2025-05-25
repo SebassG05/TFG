@@ -3,16 +3,17 @@ import AOS from 'aos';
 import { CrearProductoComponent } from './crear-producto.component';
 import { CrearSorteoComponent } from './crear-sorteo.component';
 import { NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { CommonModule } from '@angular/common';
+import { VotationTopratedComponent } from '../votation-toprated/votation-toprated.component';
 
 @Component({
   selector: 'app-proveedor',
   standalone: true,
   templateUrl: './proveedor.component.html',
   styleUrls: ['./proveedor.component.css'],
-  imports: [NgIf, CrearProductoComponent, ProductManagementComponent, CommonModule],
+  imports: [NgIf, CrearProductoComponent, ProductManagementComponent, CommonModule, RouterModule],
 })
 export class ProveedorComponent implements AfterViewInit, OnInit {
   mostrarCrearProducto = false;
