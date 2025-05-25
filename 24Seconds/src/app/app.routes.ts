@@ -26,5 +26,6 @@ export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'historia', loadComponent: () => import('./historia/historia.component').then(m => m.HistoriaComponent) },
   { path: 'votation-toprated', component: VotationTopratedComponent },
+  { path: 'perfil', loadComponent: () => import('./perfil/perfil.component').then(m => m.PerfilComponent) },
 
 ];

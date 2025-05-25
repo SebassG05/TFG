@@ -13,8 +13,7 @@ export class NavbarComponent {
   menuOpen = false;
 
   onUserClick() {
-    // Aquí puedes abrir modal de login, perfil, etc.
-    // Por defecto, solo cierra el menú móvil si está abierto
     this.menuOpen = false;
+    window.location.href = '/perfil';
   }
 }

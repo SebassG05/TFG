@@ -1,0 +1,191 @@
+/* Fondo decorativo tipo hero */
+.perfil-hero-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 60% 20%, #ffb70033 0%, #23272f 60%),
+              linear-gradient(120deg, #23272f 60%, #1a1c22 100%);
+  z-index: 0;
+}
+
+.perfil-main-card {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background: #181a20f2;
+  color: #fff;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px #000a;
+  padding: 48px 40px 40px 40px;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 600px;
+  width: 95vw;
+  max-width: 700px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Sub-cajas para secciones */
+.perfil-section-card {
+  background: #23272f;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #0004;
+  padding: 24px 20px 18px 20px;
+  margin-bottom: 28px;
+  border: 1.5px solid #ffb700;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.perfil-title {
+  color: #ffb700;
+  font-size: 2.4rem;
+  margin-bottom: 32px;
+  text-align: center;
+  letter-spacing: 1px;
+  word-break: break-word;
+}
+
+.perfil-section {
+  margin-bottom: 0; /* El margen lo da la card */
+}
+
+.perfil-section-card h2 {
+  color: #ffb700;
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+  margin-top: 0;
+  letter-spacing: 0.5px;
+}
+
+.perfil-datos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 32px;
+  margin-bottom: 8px;
+  min-width: 0;
+}
+
+.perfil-label {
+  color: #ffb700;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.perfil-value {
+  color: #fff;
+  font-weight: 400;
+}
+
+.perfil-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.perfil-list-item {
+  background: #181a20;
+  border-radius: 8px;
+  border-left: 4px solid #ffb700;
+  padding: 12px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px #0003;
+  font-size: 1.05em;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  word-break: break-word;
+}
+
+.perfil-list-title {
+  font-weight: 600;
+  color: #fffbe6;
+  word-break: break-word;
+}
+
+.perfil-list-date {
+  color: #ffb700;
+  margin-left: 16px;
+  word-break: break-word;
+}
+
+.perfil-list-total {
+  color: #e74c3c;
+  margin-left: 16px;
+  word-break: break-word;
+}
+
+.perfil-empty {
+  color: #bfa14a;
+  font-style: italic;
+  margin-left: 8px;
+}
+
+.perfil-loading, .perfil-error {
+  text-align: center;
+  font-size: 1.2em;
+  margin: 32px 0;
+}
+
+/* Responsive tablets */
+@media (max-width: 900px) {
+  .perfil-main-card {
+    padding: 32px 12px 28px 12px;
+    min-height: 350px;
+  }
+  .perfil-section-card {
+    padding: 18px 8px 14px 8px;
+  }
+  .perfil-title {
+    font-size: 2rem;
+  }
+  .perfil-section-card h2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Responsive móviles */
+@media (max-width: 600px) {
+  .perfil-main-card {
+    padding: 16px 2vw 16px 2vw;
+
+    min-height: unset;
+    border-radius: 14px;
+  }
+  .perfil-section-card {
+    padding: 10px 2vw 10px 2vw;
+    margin-bottom: 16px;
+    border-radius: 10px;
+  }
+  .perfil-title {
+    font-size: 1.4rem;
+    margin-bottom: 18px;
+  }
+  .perfil-section-card h2 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  .perfil-datos-grid {
+    grid-template-columns: 1fr;
+    gap: 8px 0;
+  }
+  .perfil-list-item {
+    font-size: 0.97em;
+    padding: 10px 8px;
+    border-radius: 6px;
+  }
+}
+
+/* Mejorar scroll y evitar desbordes */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.perfil-main-card {
+  overflow-x: auto;
+}

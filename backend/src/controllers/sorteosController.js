@@ -81,6 +81,11 @@ export const inscribirUsuario = async (req, res) => {
 
         // Descontar HoopCoins y guardar inscripción
         user.hoopCoins -= sorteo.hoopCoinsCost || 0;
+        // Añadir sorteo a registeredRaffles si no está
+        if (!user.registeredRaffles) user.registeredRaffles = [];
+        if (!user.registeredRaffles.includes(sorteo._id)) {
+            user.registeredRaffles.push(sorteo._id);
+        }
         await user.save();
 
         sorteo.participants.push(userId);
