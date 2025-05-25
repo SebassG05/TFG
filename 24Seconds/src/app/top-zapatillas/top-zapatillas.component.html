@@ -1,0 +1,35 @@
+<div class="top-zapatillas-container">
+  <h3 class="top-zapatillas-title">TOP RATED</h3>
+  <div class="top-zapatillas-list">
+    <div class="zapatilla-card" *ngFor="let z of zapatillas; let i = index">
+      <div class="zapatilla-img-wrapper">
+        <img
+          *ngIf="z.images && z.images.length > 0"
+          [src]="z.images[mainImageIndexes[i] || 0]"
+          alt="Imagen zapatilla"
+          class="zapatilla-img"
+        />
+      </div>
+      <div class="zapatilla-info">
+        <div class="zapatilla-nombre">{{ z.name }}</div>
+        <div class="zapatilla-thumbnails" *ngIf="z.images && z.images.length > 1">
+          <img
+            *ngFor="let img of z.images; let imgIdx = index"
+            [src]="img"
+            alt="Miniatura zapatilla"
+            class="zapatilla-thumbnail"
+            [class.selected]="mainImageIndexes[i] === imgIdx"
+            (click)="setMainImage(i, imgIdx)"
+            style="cursor:pointer"
+          />
+        </div>
+        <div class="zapatilla-precio-row">
+          <div class="zapatilla-precio">{{ z.price }} €</div>
+        </div>
+        <div class="zapatilla-cart-btn-wrapper">
+          <button class="zapatilla-cart-btn">Añadir al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
