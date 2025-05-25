@@ -1,17 +1,114 @@
-.historia-page {
-  max-width: 700px;
-  margin: 3rem auto;
-  background: #18181c;
-  color: #fffbe6;
-  border-radius: 2rem;
-  padding: 2.5rem;
-  box-shadow: 0 8px 32px 0 #ff3b3b22, 0 1.5px 8px 0 #0008;
+.titulo-historia{
+  color: #ad055c;
+  font-size: 4.5rem; /* Más grande */
+  font-weight: 900; /* Muy grueso */
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  line-height: 1;
 }
-.historia-page h1 {
-  color: #ff3b3b;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 2.3rem;
-  font-weight: 900;
-  margin-bottom: 1.5rem;
+
+.historia-img {
+  width: 25%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px #ff3b3b22;
+  margin-bottom: 2rem;
+  margin-left: 130px;
+}
+
+.historia-section-1 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  margin-left: 10%;
+}
+
+.historia-img.izquierda {
+  margin-left: 5%;
+  margin-right: 0;
+  /* Ajusta el margen si es necesario */
+}
+
+.fundacion-text {
+  flex: 1;
+  max-width: 50%;
+  background: rgba(20, 20, 25, 0.85);
+  border-radius: 1rem;
+  padding: 2rem 2.5rem;
+  margin-left: 2rem;
+  color: #fff;
+  border-bottom: #ad055c 5px solid;
+  box-shadow: 0 4px 16px #00000022;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 230px;
+  margin-bottom: 20px;
+  /* Ajusta min-height según la altura de la imagen si es necesario */
+}
+
+.fundacion-text h2 {
+  text-align: left;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.fundacion-text p {
+  text-align: justify;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.historia-section-2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem; /* antes 2rem */
+  margin-left: 14%;
+}
+
+.historia-img.derecha {
+  margin-left: 2rem;
+  margin-right: 5%;
+  max-width: 500px;
+  max-height: 400px;
+}
+
+.historia-text izquierda{
+  margin-left: 30px;
+
+}
+
+.historia-memorial-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2.5rem 0 1.5rem 0;
+}
+
+.historia-memorial-btn {
+  background: linear-gradient(90deg, #ad055c 60%, #ff3b3b 100%);
+  color: #fff;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 0.9rem 2.5rem;
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 4px 16px #ad055c44;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  letter-spacing: 1px;
+}
+
+.historia-memorial-btn:hover {
+  background: linear-gradient(90deg, #ff3b3b 0%, #ad055c 100%);
+  transform: translateY(-2px) scale(1.04);
 }
 
