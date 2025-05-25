@@ -1,0 +1,107 @@
+.zapa-ideal-card {
+  width: 90vw;
+  max-width: 900px;
+  background: #23272f;
+  border-radius: 18px;
+  box-shadow: 0 2px 18px 0 rgba(0,0,0,0.18);
+  padding: 2.5rem 2rem;
+  margin: 2.5rem auto 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem; /* más junto */
+  font-family: 'Roboto', 'Permanent Marker', cursive, sans-serif;
+}
+
+.zapa-ideal-info {
+  flex: 1;
+  padding-left: 0;
+}
+
+.zapa-ideal-info h1 {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 3.5rem; /* más grande */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+}
+
+.zapa-ideal-basket {
+  color: #ff2fa0;
+  font-weight: 900;
+}
+
+.zapa-ideal-info p {
+  color: #e0e0e0;
+  font-size: 1.18rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.zapa-ideal-btn {
+  margin-top: 2.2rem;
+  padding: 0.85rem 2.5rem;
+  background: linear-gradient(90deg, #ff2fa0 0%, #ff3a44 100%);
+  color: #fff;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.15s;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.zapa-ideal-btn:hover {
+  background: linear-gradient(90deg, #ff3a44 0%, #ff2fa0 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+}
+
+.zapa-ideal-img-container {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.zapa-ideal-img {
+  width: 260px;
+  max-width: 44vw;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  animation: floatZapa 2.8s ease-in-out infinite;
+}
+
+@keyframes floatZapa {
+  0% { transform: translateY(0px) rotate(-10deg);}
+  50% { transform: translateY(-18px) rotate(-13deg);}
+  100% { transform: translateY(0px) rotate(-10deg);}
+}
+
+@media (max-width: 900px) {
+  .zapa-ideal-card {
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.5rem 0.5rem;
+    max-width: 98vw;
+  }
+  .zapa-ideal-info {
+    text-align: center;
+  }
+  .zapa-ideal-info h1 {
+    font-size: 2.2rem;
+  }
+  .zapa-ideal-img {
+    width: 60vw;
+    max-width: 260px;
+    height: auto;
+  }
+}

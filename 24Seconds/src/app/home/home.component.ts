@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { HistoriaCardComponent } from '../historia-card/historia-card.component';
 import { TopZapatillasComponent } from '../top-zapatillas/top-zapatillas.component';
 import { EventosComponent } from '../eventos/eventos.component';
+import { ZapaIdealComponent } from '../zapa-ideal/zapa.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent]
+  imports: [CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, ZapaIdealComponent]
 })
 export class HomeComponent {
   constructor(private router: Router) {}
