@@ -5,13 +5,14 @@ import { HistoriaCardComponent } from '../historia-card/historia-card.component'
 import { TopZapatillasComponent } from '../top-zapatillas/top-zapatillas.component';
 import { EventosComponent } from '../eventos/eventos.component';
 import { ZapaIdealComponent } from '../zapa-ideal/zapa.component';
+import { SorteoComponent } from '../sorteo/sorteo.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, ZapaIdealComponent]
+  imports: [CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, ZapaIdealComponent, SorteoComponent]
 })
 export class HomeComponent {
   constructor(private router: Router) {}

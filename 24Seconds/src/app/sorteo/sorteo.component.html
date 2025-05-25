@@ -1,0 +1,12 @@
+<div class="sorteo-card">
+  <div class="sorteo-info">
+    <h2>SORTEOS</h2>
+    <p>
+      Participa en nuestros sorteos exclusivos y gana premios increíbles relacionados con el baloncesto. ¡No te lo pierdas!
+    </p>
+    <button class="sorteo-btn">¡PARTICIPAR!</button>
+  </div>
+  <div class="sorteo-img-container">
+    <img *ngFor="let img of sorteoImg" [src]="img" alt="Sorteo" class="sorteo-img" />
+  </div>
+</div>
