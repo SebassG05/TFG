@@ -7,13 +7,14 @@ import { EventosComponent } from '../eventos/eventos.component';
 import { ZapaIdealComponent } from '../zapa-ideal/zapa.component';
 import { SorteoComponent } from '../sorteo/sorteo.component';
 import { FooterComponent } from '../footer/footer.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, ZapaIdealComponent, SorteoComponent, FooterComponent]
+  imports: [NgIf, CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, ZapaIdealComponent, SorteoComponent, FooterComponent]
 })
 export class HomeComponent {
   constructor(private router: Router) {}
@@ -32,5 +33,9 @@ export class HomeComponent {
         window.dispatchEvent(new CustomEvent('mostrar-login-modal'));
       });
     });
+  }
+
+  get isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
   }
 }
