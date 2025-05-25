@@ -6,13 +6,14 @@ import { TopZapatillasComponent } from '../top-zapatillas/top-zapatillas.compone
 import { EventosComponent } from '../eventos/eventos.component';
 import { ZapaIdealComponent } from '../zapa-ideal/zapa.component';
 import { SorteoComponent } from '../sorteo/sorteo.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, ZapaIdealComponent, SorteoComponent]
+  imports: [CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, ZapaIdealComponent, SorteoComponent, FooterComponent]
 })
 export class HomeComponent {
   constructor(private router: Router) {}
