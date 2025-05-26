@@ -19,6 +19,7 @@ import { AdminMobileNavbarComponent } from './admin-mobile-navbar/admin-mobile-n
           <li><a routerLink="/admin/pedidos">Productos en Tienda</a></li>
           <li><a routerLink="/admin/eventos">Eventos Tienda</a></li>
           <li><a routerLink="/admin/sorteos">Sorteos Tienda</a></li>
+          <li><a routerLink="/admin/sugerencias">Gestión de Sugerencias</a></li>
         </ul>
       </aside>
       <main class="admin-content">
@@ -49,7 +50,13 @@ import { AdminMobileNavbarComponent } from './admin-mobile-navbar/admin-mobile-n
             <p>Consulta y elimina sorteos de la tienda.</p>
             <a routerLink="/admin/sorteos" class="btn">Ver Sorteos</a>
           </div>
+          <div class="widget">
+            <h3>Gestión de Sugerencias</h3>
+            <p>Revisa, marca como realizadas o rechaza las sugerencias de los usuarios.</p>
+            <a routerLink="/admin/sugerencias" class="btn">Ver Sugerencias</a>
+          </div>
         </section>
+        <router-outlet></router-outlet>
       </main>
     </div>
     <button class="exit-btn" (click)="logout()" title="Salir">

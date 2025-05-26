@@ -15,6 +15,7 @@ export const routes: Routes = [
   { path: 'admin/pedidos', component: AdminProductosComponent },
   { path: 'admin/eventos', component: AdminEventosComponent },
   { path: 'admin/sorteos', component: AdminSorteosComponent },
+  { path: 'admin/sugerencias', loadComponent: () => import('./admin/admin-sugerencias.component').then(m => m.AdminSugerenciasComponent) },
   { path: 'proveedor', loadComponent: () => import('./proveedor/proveedor.component').then(m => m.ProveedorComponent) },
   { path: 'proveedor/crear-producto', loadComponent: () => import('./proveedor/crear-producto.component').then(m => m.CrearProductoComponent) },
   { path: 'proveedor/crear-evento', loadComponent: () => import('./proveedor/crear-evento.component').then(m => m.CrearEventoComponent) },
@@ -29,5 +30,6 @@ export const routes: Routes = [
   { path: 'perfil', loadComponent: () => import('./perfil/perfil.component').then(m => m.PerfilComponent) },
   { path: 'eventos/inscripcion', loadChildren: () => import('./eventos/listado-eventos/listado-eventos.routes').then(m => m.default) },
   { path: 'inscripcion-sorteos', loadComponent: () => import('./sorteo/listado-sorteo/listado-sorteo.component').then(m => m.ListadoSorteoComponent) },
+  { path: 'contacto', loadComponent: () => import('./contacto/contacto.component').then(m => m.ContactoComponent) },
 ];
 

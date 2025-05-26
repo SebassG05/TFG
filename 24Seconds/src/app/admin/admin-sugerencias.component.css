@@ -1,0 +1,107 @@
+/* Estilos para la gestión de sugerencias admin */
+.admin-sugerencias-bg {
+  position: fixed;
+  inset: 0;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 30, 0.98);
+  z-index: 9999;
+  overflow: hidden;
+}
+.admin-sugerencias-table-container {
+  position: relative;
+  z-index: 2;
+  background: #23272f;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 #ff3b8d33, 0 1.5px 8px 0 #0008;
+  padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  max-width: 1100px;
+  min-width: 350px;
+  width: 90vw;
+}
+.sugerencias-title {
+  color: #ff3b8d;
+  font-size: 2.1rem;
+  font-weight: 900;
+  margin-bottom: 2.2rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.sugerencias-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+  background: none;
+}
+.sugerencias-table th, .sugerencias-table td {
+  padding: 1rem 1.2rem;
+  text-align: left;
+  font-size: 1.08rem;
+  background: #181a20;
+  border-radius: 0.7rem;
+  color: #fff;
+}
+.sugerencias-table th {
+  background: #ff3b8d22;
+  font-weight: 700;
+  color: #ffb700;
+  border-bottom: 2px solid #ff3b8d;
+}
+.sugerencias-table tr {
+  transition: background 0.18s;
+}
+.sugerencias-table tbody tr:hover {
+  background: #ff3b8d11;
+}
+.sugerencias-table button {
+  background: linear-gradient(90deg, #ff3b8d 0%, #ffb700 100%);
+  color: #23272f;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  box-shadow: 0 2px 8px #ff3b8d22;
+}
+.sugerencias-table button:last-child {
+  margin-right: 0;
+}
+.estado-pendiente {
+  color: #ffb700;
+  font-weight: 700;
+}
+.estado-realizada {
+  color: #22c55e;
+  font-weight: 700;
+}
+.estado-rechazada {
+  color: #e53935;
+  font-weight: 700;
+}
+.sugerencias-empty {
+  color: #bfa14a;
+  font-style: italic;
+  text-align: center;
+  margin: 2.5rem 0 0 0;
+  font-size: 1.2rem;
+}
+@media (max-width: 700px) {
+  .admin-sugerencias-table-container {
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    max-width: 98vw;
+  }
+  .sugerencias-title {
+    font-size: 1.2rem;
+    margin-bottom: 1.1rem;
+  }
+  .sugerencias-table th, .sugerencias-table td {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.95rem;
+  }
+}

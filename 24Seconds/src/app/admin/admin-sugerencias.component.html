@@ -1,0 +1,37 @@
+<div class="admin-sugerencias-bg">
+  <div class="admin-sugerencias-table-container">
+    <h2 class="sugerencias-title">Gestión de Sugerencias</h2>
+    <table class="sugerencias-table" *ngIf="sugerencias.length > 0; else sinSugerencias">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Email</th>
+          <th>Sugerencia</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of sugerencias">
+          <td>{{ s.fecha | date:'short' }}</td>
+          <td>{{ s.email || '-' }}</td>
+          <td>{{ s.mensaje }}</td>
+          <td>
+            <span [ngClass]="{
+              'estado-pendiente': s.estado === 'pendiente',
+              'estado-realizada': s.estado === 'realizada',
+              'estado-rechazada': s.estado === 'rechazada'
+            }">{{ s.estado }}</span>
+          </td>
+          <td>
+            <button *ngIf="s.estado === 'pendiente'" (click)="cambiarEstado(s._id, 'realizada')">Marcar realizada</button>
+            <button *ngIf="s.estado === 'pendiente'" (click)="cambiarEstado(s._id, 'rechazada')">Rechazar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #sinSugerencias>
+      <div class="sugerencias-empty">No hay sugerencias registradas.</div>
+    </ng-template>
+  </div>
+</div>

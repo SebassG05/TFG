@@ -1,0 +1,28 @@
+<div class="contacto-container">
+  <div class="contacto-info">
+    <h2>Contacto</h2>
+    <p><b>Dirección:</b> Avda. de la Constitución, 41004 Sevilla</p>
+    <p><b>Teléfono:</b> 954 123 456</p>
+    <p><b>Email:</b> info&#64;24seconds.com</p>
+    <p><b>Horario:</b> Lunes a Viernes, 10:00 - 20:00</p>
+  </div>
+  <div class="contacto-mapa">
+    <iframe
+      src="https://www.google.com/maps?q=Avda.+de+la+Constituci%C3%B3n,+Sevilla&z=17&output=embed"
+      width="100%" height="350" style="border:0; border-radius: 16px; min-width: 250px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+<!-- Formulario de sugerencias -->
+<div class="sugerencia-form-container">
+  <form class="sugerencia-form" (ngSubmit)="enviarSugerencia()" #form="ngForm">
+    <h3>¿Tienes una sugerencia?</h3>
+    <label for="email">Tu email (opcional):</label>
+    <input id="email" name="email" type="email" [(ngModel)]="email" placeholder="ejemplo@email.com"/>
+    <label for="sugerencia">Sugerencia:</label>
+    <textarea id="sugerencia" name="sugerencia" [(ngModel)]="sugerencia" required rows="3" placeholder="Escribe aquí tu sugerencia..."></textarea>
+    <button type="submit" [disabled]="!sugerencia || enviado">Enviar</button>
+    <div class="sugerencia-exito" *ngIf="enviado">¡Gracias por tu sugerencia!</div>
+    <div class="sugerencia-error" *ngIf="error">{{ error }}</div>
+  </form>
+</div>
