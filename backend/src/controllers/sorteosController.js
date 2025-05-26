@@ -184,3 +184,13 @@ export const deleteSorteo = async (req, res) => {
         res.status(500).json({ error: 'Error al eliminar el sorteo', details: error.message });
     }
 };
+
+// Obtener todos los sorteos (público)
+export const getAllSorteosPublic = async (req, res) => {
+    try {
+        const sorteos = await Sorteo.find({}).populate('providerId', 'username email empresa');
+        res.status(200).json(sorteos);
+    } catch (error) {
+        res.status(500).json({ error: 'Error al obtener los sorteos', details: error.message });
+    }
+};

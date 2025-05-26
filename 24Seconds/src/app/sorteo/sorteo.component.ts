@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -8,6 +9,14 @@ import { NgFor } from '@angular/common';
   styleUrls: ['./sorteo.component.css'],
   imports: [NgFor]
 })
-export class SorteoComponent {
+export class SorteoComponent implements OnInit {
   sorteoImg: string[] = ['assets/sorteo1.png', 'assets/sorteo2.png']; // Asegúrate de que los archivos existen en assets
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {}
+
+  irAInscripcion() {
+    this.router.navigate(['/inscripcion-sorteos']);
+  }
 }
