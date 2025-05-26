@@ -1,0 +1,51 @@
+<!-- Listado de eventos de inscripción -->
+<div class="listado-eventos-container">
+  <ng-container *ngIf="cargando; else eventosContent">
+    <p style="color:white;text-align:center;padding:2rem;">Cargando eventos...</p>
+  </ng-container>
+  <ng-template #eventosContent>
+    <ng-container *ngIf="eventos.length > 0; else noEventos">
+      <h2 class="eventos-title-centered">Eventos Disponibles</h2>
+      <div class="eventos-grid">
+        <ng-container *ngFor="let evento of eventosDisponibles">
+          <div class="evento-card disponible">
+            <img [src]="evento.img || 'assets/evento1.png'" alt="Imagen evento" class="evento-img" />
+            <div class="evento-info">
+              <h3>{{ evento.name }}</h3>
+              <p><b>Registro:</b> {{ evento.registrationDates?.start | date:'mediumDate' }} - {{ evento.registrationDates?.end | date:'mediumDate' }}</p>
+              <p><b>Fecha del torneo:</b> {{ evento.eventDate | date:'mediumDate' }}</p>
+              <p><b>Ubicación:</b> {{ evento.location }}</p>
+              <p><b>¿Tiene gradas?</b> {{ evento.hasStands ? 'Sí' : 'No' }}</p>
+              <p><b>Descripción:</b> {{ evento.description }}</p>
+              <button class="inscribirse-btn"
+                      [disabled]="isInscrito(evento)"
+                      (click)="inscribirse(evento)">
+                {{ isInscrito(evento) ? 'Inscrito' : 'Inscribirse' }}
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <h2 class="eventos-title-centered bloqueados-title">Eventos Finalizados o No Disponibles</h2>
+      <div class="eventos-grid">
+        <ng-container *ngFor="let evento of eventosBloqueados">
+          <div class="evento-card bloqueado">
+            <img [src]="evento.img || 'assets/evento1.png'" alt="Imagen evento" class="evento-img" />
+            <div class="evento-info">
+              <h3>{{ evento.name }}</h3>
+              <p><b>Registro:</b> {{ evento.registrationDates?.start | date:'mediumDate' }} - {{ evento.registrationDates?.end | date:'mediumDate' }}</p>
+              <p><b>Fecha del torneo:</b> {{ evento.eventDate | date:'mediumDate' }}</p>
+              <p><b>Ubicación:</b> {{ evento.location }}</p>
+              <p><b>¿Tiene gradas?</b> {{ evento.hasStands ? 'Sí' : 'No' }}</p>
+              <p><b>Descripción:</b> {{ evento.description }}</p>
+              <button class="inscribirse-btn" disabled>Inscripción cerrada</button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-template #noEventos>
+      <p style="color:white;text-align:center;padding:2rem;">No hay eventos disponibles</p>
+    </ng-template>
+  </ng-template>
+</div>

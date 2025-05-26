@@ -27,5 +27,6 @@ export const routes: Routes = [
   { path: 'historia', loadComponent: () => import('./historia/historia.component').then(m => m.HistoriaComponent) },
   { path: 'votation-toprated', component: VotationTopratedComponent },
   { path: 'perfil', loadComponent: () => import('./perfil/perfil.component').then(m => m.PerfilComponent) },
+  { path: 'eventos/inscripcion', loadChildren: () => import('./eventos/listado-eventos/listado-eventos.routes').then(m => m.default) },
 
 ];

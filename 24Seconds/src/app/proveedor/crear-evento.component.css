@@ -96,6 +96,15 @@ body, html {
   display: block;
   margin-bottom: 1rem;
   text-align: left;
+  color: #181818; /* negro */
+}
+
+/* Placeholders en negro */
+.crear-evento-container input[type="text"]::placeholder,
+.crear-evento-container input[type="date"]::placeholder,
+.crear-evento-container textarea::placeholder {
+  color: #181818; /* negro */
+  opacity: 1;
 }
 
 .crear-evento-container input[type="text"],

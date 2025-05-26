@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-eventos',
@@ -22,6 +23,8 @@ export class EventosComponent {
   private startX = 0;
   private scrollLeft = 0;
   private isDown = false;
+
+  constructor(private router: Router) {}
 
   onMouseDown(e: MouseEvent | TouchEvent) {
     this.isDown = true;
@@ -48,5 +51,9 @@ export class EventosComponent {
   getX(e: MouseEvent | TouchEvent): number {
     if (e instanceof MouseEvent) return e.pageX;
     return e.touches[0].pageX;
+  }
+
+  irAInscripcion() {
+    this.router.navigate(['/eventos/inscripcion']);
   }
 }
