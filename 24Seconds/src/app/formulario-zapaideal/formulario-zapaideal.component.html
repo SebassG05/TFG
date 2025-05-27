@@ -19,9 +19,18 @@
   </div>
   <div *ngIf="showResult" class="zapaideal-resultado">
     <h2>¡Tu zapatilla ideal es!</h2>
-    <div class="zapaideal-tarjeta-resultado">
-      <!-- Aquí irá la tarjeta de la zapatilla ideal -->
-      <p>{{ zapatillaIdeal || 'Ejemplo de Zapatilla Ideal' }}</p>
+    <div class="zapaideal-tarjeta-resultado" *ngIf="zapatillaIdeal; else sinZapatilla">
+      <div class="zapatilla-card" style="background:#181818; border-radius:1.5rem; box-shadow:0 4px 16px #ff3b3b22; padding:2rem; max-width:320px; margin:auto; display:flex; flex-direction:column; align-items:center;">
+        <img *ngIf="zapatillaIdeal.images && zapatillaIdeal.images.length > 0" [src]="zapatillaIdeal.images[0]" alt="Imagen zapatilla" style="width:220px; height:220px; object-fit:cover; border-radius:1rem; border:3.5px solid #ff3b3b; margin-bottom:1.4rem; background:#fff;">
+        <div class="zapatilla-info" style="color:#fff; text-align:center;">
+          <div class="zapatilla-nombre" style="font-weight:900; font-size:1.5rem; margin-bottom:0.7rem;">{{ zapatillaIdeal.name }}</div>
+          <div class="zapatilla-marca" style="font-size:1.1rem; margin-bottom:0.5rem;">Marca: {{ zapatillaIdeal.brand }}</div>
+          <div class="zapatilla-precio" style="color:#ff3b3b; font-weight:900; font-size:1.3rem;">{{ zapatillaIdeal.price }} €</div>
+        </div>
+      </div>
     </div>
+    <ng-template #sinZapatilla>
+      <p>No se encontró una zapatilla ideal para tus preferencias.</p>
+    </ng-template>
   </div>
 </div>

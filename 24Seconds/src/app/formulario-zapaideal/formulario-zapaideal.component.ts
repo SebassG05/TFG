@@ -18,7 +18,7 @@ export class FormularioZapaidealComponent {
   ];
   respuestas: string[] = [];
   showResult = false;
-  zapatillaIdeal: string | null = null;
+  zapatillaIdeal: any = null;
   preguntaActual = 0;
 
   seleccionarOpcion(opcion: string) {
@@ -33,8 +33,33 @@ export class FormularioZapaidealComponent {
     }
   }
 
-  finalizarTest() {
+  async finalizarTest() {
+    // Obtener todas las zapatillas
+    const res = await fetch('http://localhost:4001/api/products/search');
+    let zapatillas = [];
+    if (res.ok) {
+      zapatillas = await res.json();
+    }
+    // Llamar a la IA real en el backend
+    const iaRes = await fetch('http://localhost:4001/api/ia/recomendar-zapatilla', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ respuestas: this.respuestas, zapatillas })
+    });
+    let recomendada = null;
+    if (iaRes.ok) {
+      recomendada = await iaRes.json(); // Se espera que devuelva el objeto zapatilla
+    }
+    this.zapatillaIdeal = recomendada;
     this.showResult = true;
+  }
+
+  matchPrecio(precio: number, rango: string): boolean {
+    if (rango === '<50€') return precio < 50;
+    if (rango === '50-100€') return precio >= 50 && precio <= 100;
+    if (rango === '100-150€') return precio > 100 && precio <= 150;
+    if (rango === '>150€') return precio > 150;
+    return true;
   }
 
   onSubmit() {

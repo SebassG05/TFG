@@ -8,6 +8,7 @@ import proveedorStatusRoutes from './proveedorStatusRoutes.js';
 import adminRoutes from './adminRoutes.js';
 import sorteosRoutes from './sorteos.js';
 import sugerenciaRoutes from './sugerenciaRoutes.js';
+import iaRoutes from './iaRoutes.js';
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.use('/payments', paymentRoutes);
 router.use('/admin', adminRoutes);
 router.use('/sorteos', sorteosRoutes);
 router.use('/sugerencias', sugerenciaRoutes);
+router.use('/ia', iaRoutes);
 
 export default router;
