@@ -223,3 +223,69 @@
   color: #fff;
   transform: scale(1.04);
 }
+
+@media (max-width: 1024px) and (min-width: 701px) {
+  .top-zapatillas-list {
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+  .zapatilla-card {
+    min-width: 45vw;
+    max-width: 48vw;
+    margin-bottom: 2rem;
+    padding: 1.5rem 1rem;
+  }
+  .zapatilla-img {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 700px) {
+  .top-zapatillas-title {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+  }
+  .top-zapatillas-list {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1.2rem;
+    align-items: center;
+  }
+  .zapatilla-card {
+    min-width: 90vw;
+    max-width: 95vw;
+    padding: 1rem 0.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .zapatilla-img {
+    width: 90vw;
+    max-width: 320px;
+    height: 180px;
+    margin-bottom: 1rem;
+  }
+  .zapatilla-nombre {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .zapatilla-precio {
+    font-size: 1.1rem;
+  }
+  .zapatilla-thumbnail {
+    width: 38px;
+    height: 38px;
+  }
+  .votation-btn-wrapper {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding: 0 0.5rem;
+  }
+  .votation-btn {
+    width: 95vw;
+    max-width: 100%;
+    font-size: 1rem;
+    padding: 0.9rem 0;
+    border-radius: 1rem;
+  }
+}

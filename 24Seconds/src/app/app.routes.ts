@@ -6,6 +6,7 @@ import { AdminProductosComponent } from './admin/admin-productos/admin-productos
 import { AdminEventosComponent } from './admin/admin-eventos/admin-eventos.component';
 import { AdminSorteosComponent } from './admin/admin-sorteos/admin-sorteos.component';
 import { VotationTopratedComponent } from './votation-toprated/votation-toprated.component';
+import { FormularioZapaidealComponent } from './formulario-zapaideal/formulario-zapaideal.component';
 
 export const routes: Routes = [
   { path: 'home', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) },
@@ -31,5 +32,6 @@ export const routes: Routes = [
   { path: 'eventos/inscripcion', loadChildren: () => import('./eventos/listado-eventos/listado-eventos.routes').then(m => m.default) },
   { path: 'inscripcion-sorteos', loadComponent: () => import('./sorteo/listado-sorteo/listado-sorteo.component').then(m => m.ListadoSorteoComponent) },
   { path: 'contacto', loadComponent: () => import('./contacto/contacto.component').then(m => m.ContactoComponent) },
+  { path: 'zapasideales', loadComponent: () => import('./formulario-zapaideal/formulario-zapaideal.component').then(m => m.FormularioZapaidealComponent) },
 ];
 

@@ -1,0 +1,27 @@
+<div class="formulario-zapaideal-container">
+  <h2>Responde unas preguntas para encontrar tu zapatilla ideal</h2>
+  <div *ngIf="!showResult">
+    <div class="zapaideal-progress-bar">
+      <div class="zapaideal-progress" [style.width]="((preguntaActual+1)/preguntas.length*100)+'%'" ></div>
+    </div>
+    <h1 class="zapaideal-title">{{ preguntas[preguntaActual].texto }}</h1>
+    <p class="zapaideal-sub">Selecciona una opción</p>
+    <div class="zapaideal-opciones">
+      <button *ngFor="let opcion of preguntas[preguntaActual].opciones"
+              [class.selected]="respuestas[preguntaActual] === opcion"
+              (click)="seleccionarOpcion(opcion)"
+              class="zapaideal-opcion-btn">
+        {{ opcion }}
+      </button>
+    </div>
+    <button *ngIf="preguntaActual < preguntas.length - 1" class="zapaideal-siguiente-btn" (click)="siguientePregunta()" [disabled]="!respuestas[preguntaActual]">SIGUIENTE</button>
+    <button *ngIf="preguntaActual === preguntas.length - 1" class="zapaideal-siguiente-btn" (click)="finalizarTest()" [disabled]="!respuestas[preguntaActual]">FINALIZAR</button>
+  </div>
+  <div *ngIf="showResult" class="zapaideal-resultado">
+    <h2>¡Tu zapatilla ideal es!</h2>
+    <div class="zapaideal-tarjeta-resultado">
+      <!-- Aquí irá la tarjeta de la zapatilla ideal -->
+      <p>{{ zapatillaIdeal || 'Ejemplo de Zapatilla Ideal' }}</p>
+    </div>
+  </div>
+</div>

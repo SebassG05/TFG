@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-zapa-ideal',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './zapa.component.html',
   styleUrls: ['./zapa.component.css']
 })
-export class ZapaIdealComponent {}
+export class ZapaIdealComponent {
+  constructor(private router: Router) {}
+
+  irAFormularioZapaIdeal() {
+    this.router.navigate(['/zapasideales']);
+  }
+}
