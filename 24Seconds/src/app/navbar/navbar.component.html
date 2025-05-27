@@ -36,7 +36,40 @@
         </defs>
       </svg>
     </button>
+    <!-- Icono carrito -->
+    <button class="navbar24__cart" aria-label="Carrito" (click)="openCart()">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="4" y="8" width="20" height="12" rx="3" fill="#23272f" stroke="#ffb700" stroke-width="2"/>
+        <circle cx="10" cy="22" r="2" fill="#ffb700"/>
+        <circle cx="18" cy="22" r="2" fill="#ffb700"/>
+        <path d="M7 8V6a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v2" stroke="#ffb700" stroke-width="2" fill="none"/>
+      </svg>
+      <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
+    </button>
   </div>
   <!-- Overlay móvil -->
   <div class="navbar24__overlay" *ngIf="menuOpen" (click)="menuOpen = false"></div>
+  <!-- Modal carrito -->
+  <div class="cart-modal" *ngIf="cartOpen">
+    <div class="cart-modal-content">
+      <button class="close-cart" (click)="closeCart()">✕</button>
+      <h3>Tu carrito</h3>
+      <div *ngIf="cart && cart.items && cart.items.length > 0; else emptyCart">
+        <ul>
+          <li *ngFor="let item of cart.items">
+            <img *ngIf="item.productId.images && item.productId.images.length > 0" [src]="item.productId.images[0]" alt="img" style="width:38px;height:38px;object-fit:cover;border-radius:0.5rem;margin-right:0.7rem;box-shadow:0 2px 8px #ffb70033;vertical-align:middle;">
+            <span>{{ item.productId.name || 'Producto' }}</span>
+            <span>x{{ item.quantity }}</span>
+            <span>{{ item.price | currency:'EUR' }}</span>
+            <button class="remove-cart-item" (click)="removeItem(item.productId._id || item.productId)">Eliminar</button>
+          </li>
+        </ul>
+        <div class="cart-total">Total: {{ cart.totalPrice | currency:'EUR' }}</div>
+      </div>
+      <ng-template #emptyCart>
+        <div style="margin:2rem 0; color:#fff;">El carrito está vacío.</div>
+      </ng-template>
+    </div>
+    <div class="cart-modal-backdrop" (click)="closeCart()"></div>
+  </div>
 </nav>

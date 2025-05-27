@@ -1,20 +1,23 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, inject } from '@angular/core';
 import { NgIf, NgFor, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CartService } from '../../cart.service';
 
 @Component({
   selector: 'app-product-management',
   templateUrl: './product-management.component.html',
   styleUrls: ['./product-management.component.css'],
   standalone: true,
-  imports: [NgIf, NgFor, CurrencyPipe, FormsModule]
+  imports: [NgIf, NgFor, CurrencyPipe, FormsModule],
+  providers: [CartService]
 })
 export class ProductManagementComponent implements OnInit, AfterViewInit {
   productos: any[] = [];
   show = true;
   paginaActual = 1;
   productosPorPagina = 5;
+  private cartService = inject(CartService);
 
   constructor(public router: Router) {}
 
@@ -192,5 +195,15 @@ export class ProductManagementComponent implements OnInit, AfterViewInit {
         images: producto.images
       })
     });
+  }
+
+  async addToCart(productId: string) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Debes iniciar sesión para añadir productos al carrito');
+      return;
+    }
+    await this.cartService.addToCart(productId, 1, token);
+    alert('Producto añadido al carrito');
   }
 }

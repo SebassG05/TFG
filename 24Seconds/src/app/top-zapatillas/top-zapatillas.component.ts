@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-top-zapatillas',
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
 export class TopZapatillasComponent {
   zapatillas: any[] = [];
   mainImageIndexes: number[] = [];
+  private cartService = inject(CartService);
 
   async ngOnInit() {
     // Llama a la API para obtener las más votadas, pero si no hay votos, muestra las 4 primeras
@@ -39,5 +41,20 @@ export class TopZapatillasComponent {
 
   setMainImage(zapatillaIdx: number, imgIdx: number) {
     this.mainImageIndexes[zapatillaIdx] = imgIdx;
+  }
+
+  async addToCart(productId: string) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Debes iniciar sesión para añadir productos al carrito');
+      return;
+    }
+    try {
+      await this.cartService.addToCart(productId, 1, token);
+      this.cartService.notifyCartUpdated();
+      alert('Producto añadido al carrito');
+    } catch (e) {
+      alert('Error al añadir al carrito');
+    }
   }
 }

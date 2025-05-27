@@ -27,7 +27,7 @@
           <div class="zapatilla-precio">{{ z.price }} €</div>
         </div>
         <div class="zapatilla-cart-btn-wrapper">
-          <button class="zapatilla-cart-btn">Añadir al carrito</button>
+          <button class="zapatilla-cart-btn" (click)="addToCart(z._id)">Añadir al carrito</button>
         </div>
       </div>
     </div>
