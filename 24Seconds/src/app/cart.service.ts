@@ -42,6 +42,15 @@ export class CartService {
     return await res.json();
   }
 
+  async checkoutCart(token: string) {
+    const res = await fetch('http://localhost:4001/api/payments/create', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}` },
+      body: JSON.stringify({})
+    });
+    return await res.json();
+  }
+
   notifyCartUpdated() {
     this.cartUpdated$.next();
   }

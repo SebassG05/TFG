@@ -65,6 +65,7 @@
           </li>
         </ul>
         <div class="cart-total">Total: {{ cart.totalPrice | currency:'EUR' }}</div>
+        <button class="confirm-purchase-btn" (click)="confirmarCompra()">Confirmar compra</button>
       </div>
       <ng-template #emptyCart>
         <div style="margin:2rem 0; color:#fff;">El carrito está vacío.</div>

@@ -65,4 +65,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
     await this.cartService.removeFromCart(productId, token);
     await this.loadCart();
   }
+
+  async confirmarCompra() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    try {
+      const res = await this.cartService.checkoutCart(token);
+      if (res && res.sessionUrl) {
+        window.location.href = res.sessionUrl;
+      } else {
+        alert(res.message || 'Error al iniciar el pago');
+      }
+    } catch (e) {
+      alert('Error al conectar con la pasarela de pago');
+    }
+  }
 }

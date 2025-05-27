@@ -1,67 +1,51 @@
 import { createPaymentIntent } from '../services/paymentService.js';
 import Stripe from 'stripe';
-import Product from '../models/productModel.js'; // Asegúrate de que este modelo exista
+import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
+import Cart from '../models/cartModel.js';
 import { calculateHoopCoins } from '../utils/hoopCoins.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const handlePayment = async (req, res) => {
-    const { productId } = req.body;
-
-    if (!productId) {
-        return res.status(400).json({ message: 'Product ID is required' });
-    }
-
+    const userId = req.user._id;
     try {
-        // Busca el producto en la base de datos
-        const product = await Product.findById(productId);
-
-        if (!product) {
-            return res.status(404).json({ message: 'Product not found' });
+        // Obtener el carrito del usuario
+        const cart = await Cart.findOne({ userId }).populate('items.productId');
+        if (!cart || !cart.items.length) {
+            return res.status(400).json({ message: 'El carrito está vacío.' });
         }
 
-        if (!product.price || product.price <= 0) {
-            return res.status(400).json({ message: 'Invalid product price' });
-        }
+        // Construir los line_items para Stripe
+        const line_items = cart.items.map(item => ({
+            price_data: {
+                currency: 'eur',
+                product_data: {
+                    name: item.productId.name,
+                },
+                unit_amount: Math.round(item.productId.price * 100),
+            },
+            quantity: item.quantity,
+        }));
 
-        // Crea el PaymentIntent con el precio del producto
-        const paymentIntent = await createPaymentIntent(Math.round(product.price * 100));
-
-        // Crea una sesión de Stripe Checkout
+        // Crea la sesión de Stripe Checkout
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            line_items: [
-                {
-                    price_data: {
-                        currency: 'usd',
-                        product_data: {
-                            name: product.name,
-                        },
-                        unit_amount: Math.round(product.price * 100),
-                    },
-                    quantity: 1,
-                },
-            ],
+            line_items,
             mode: 'payment',
             success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${process.env.FRONTEND_URL}/cancel`,
+            customer_email: req.user.email,
         });
 
-        // Sumar HoopCoins al usuario
-        const userId = req.user._id;
-        const coins = calculateHoopCoins(product.price);
+        // Sumar HoopCoins al usuario (por el total del carrito)
+        const coins = calculateHoopCoins(cart.totalPrice);
         await User.findByIdAndUpdate(userId, { $inc: { hoopCoins: coins } });
 
         res.status(200).json({
-            clientSecret: paymentIntent.client_secret,
             sessionId: session.id,
             sessionUrl: session.url,
-            product: {
-                id: product._id,
-                name: product.name,
-                price: product.price,
-            },
+            total: cart.totalPrice,
             hoopCoinsEarned: coins
         });
     } catch (error) {

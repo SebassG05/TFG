@@ -287,6 +287,33 @@
   color: #ff3b3b;
 }
 
+/* Botón Confirmar compra */
+.confirm-purchase-btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  background: linear-gradient(90deg, #ff3b3b 0%, #ad055c 100%);
+  color: #fffbe6;
+  border: none;
+  border-radius: 1.2rem;
+  font-size: 1.18rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  padding: 1rem 0;
+  cursor: pointer;
+  box-shadow: 0 4px 18px #ad055c44;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.15s;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+}
+.confirm-purchase-btn:hover {
+  background: linear-gradient(90deg, #ad055c 0%, #ff3b3b 100%);
+  color: #fff;
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px #ff3b3b55;
+}
+
 @keyframes fadeInDown {
   0% { transform: translateY(-32px) scale(0.98); opacity: 0; }
   100% { transform: translateY(0) scale(1); opacity: 1; }
