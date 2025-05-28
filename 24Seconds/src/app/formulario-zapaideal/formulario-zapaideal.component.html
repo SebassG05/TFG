@@ -1,5 +1,4 @@
 <div class="formulario-zapaideal-container">
-  <h2>Responde unas preguntas para encontrar tu zapatilla ideal</h2>
   <div *ngIf="!showResult">
     <div class="zapaideal-progress-bar">
       <div class="zapaideal-progress" [style.width]="((preguntaActual+1)/preguntas.length*100)+'%'" ></div>
@@ -18,14 +17,38 @@
     <button *ngIf="preguntaActual === preguntas.length - 1" class="zapaideal-siguiente-btn" (click)="finalizarTest()" [disabled]="!respuestas[preguntaActual]">FINALIZAR</button>
   </div>
   <div *ngIf="showResult" class="zapaideal-resultado">
-    <h2>¡Tu zapatilla ideal es!</h2>
+    <div class="zapaideal-confetti-animation" id="confetti-canvas"></div>
+    <h2 class="zapaideal-resultado-title">¡Tu zapatilla ideal es!</h2>
     <div class="zapaideal-tarjeta-resultado" *ngIf="zapatillaIdeal; else sinZapatilla">
-      <div class="zapatilla-card" style="background:#181818; border-radius:1.5rem; box-shadow:0 4px 16px #ff3b3b22; padding:2rem; max-width:320px; margin:auto; display:flex; flex-direction:column; align-items:center;">
-        <img *ngIf="zapatillaIdeal.images && zapatillaIdeal.images.length > 0" [src]="zapatillaIdeal.images[0]" alt="Imagen zapatilla" style="width:220px; height:220px; object-fit:cover; border-radius:1rem; border:3.5px solid #ff3b3b; margin-bottom:1.4rem; background:#fff;">
+      <div class="zapatilla-card zapaideal-card-resultado"
+           (mouseenter)="hoverResultado = true"
+           (mouseleave)="hoverResultado = false">
+        <div class="zapatilla-img-wrapper">
+          <img
+            *ngIf="zapatillaIdeal.images && zapatillaIdeal.images.length > 0"
+            [src]="zapatillaIdeal.images[mainImageIndex || 0]"
+            alt="Imagen zapatilla"
+            class="zapatilla-img"
+          />
+        </div>
+        <div class="zapatilla-thumbnails" *ngIf="zapatillaIdeal.images && zapatillaIdeal.images.length > 1 && hoverResultado">
+          <img
+            *ngFor="let img of zapatillaIdeal.images; let imgIdx = index"
+            [src]="img"
+            alt="Miniatura zapatilla"
+            class="zapatilla-thumbnail"
+            [class.selected]="mainImageIndex === imgIdx"
+            (click)="setMainImage(imgIdx)"
+            style="cursor:pointer"
+          />
+        </div>
         <div class="zapatilla-info" style="color:#fff; text-align:center;">
-          <div class="zapatilla-nombre" style="font-weight:900; font-size:1.5rem; margin-bottom:0.7rem;">{{ zapatillaIdeal.name }}</div>
-          <div class="zapatilla-marca" style="font-size:1.1rem; margin-bottom:0.5rem;">Marca: {{ zapatillaIdeal.brand }}</div>
-          <div class="zapatilla-precio" style="color:#ff3b3b; font-weight:900; font-size:1.3rem;">{{ zapatillaIdeal.price }} €</div>
+          <div class="zapatilla-nombre">{{ zapatillaIdeal.name }}</div>
+          <div class="zapatilla-marca">Marca: {{ zapatillaIdeal.brand }}</div>
+          <div class="zapatilla-precio">{{ zapatillaIdeal.price }} €</div>
+        </div>
+        <div class="zapatilla-cart-btn-wrapper" *ngIf="hoverResultado">
+          <button class="zapatilla-cart-btn" (click)="addToCart(zapatillaIdeal._id)">Añadir al carrito</button>
         </div>
       </div>
     </div>
