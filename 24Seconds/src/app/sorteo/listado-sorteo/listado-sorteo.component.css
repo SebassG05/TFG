@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  justify-content: flex-start;
+  justify-content: center; /* Centrado */
 }
 .sorteo-card-listado {
   display: flex;
@@ -13,9 +13,9 @@
   border-radius: 16px;
   box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
   margin-bottom: 1.5rem;
-  min-width: 420px;
-  max-width: 600px;
-  width: 48%;
+  min-width: 520px;
+  max-width: 370px;
+  width: 31%; /* 3 en 3 en desktop */
   min-height: 180px;
   overflow: hidden;
   border: 2px solid #ff0d9a;
@@ -100,16 +100,24 @@
   font-size: 1.3rem;
   margin-bottom: 1.2rem;
   font-weight: 700;
+  text-align: center;
 }
 .cargando {
   color: #fff;
   font-size: 1.2rem;
   margin: 2rem 0;
 }
+@media (max-width: 1200px) {
+  .sorteo-card-listado {
+    width: 45%; /* 2 en 2 en pantallas medianas */
+    max-width: 420px;
+  }
+}
 @media (max-width: 900px) {
   .sorteos-grid {
     flex-direction: column;
     gap: 1.2rem;
+    align-items: center;
   }
   .sorteo-card-listado {
     min-width: 0;
