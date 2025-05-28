@@ -74,7 +74,7 @@ export const deleteProduct = async (req, res) => {
 };
 
 export const searchProducts = async (req, res) => {
-    const { name, brand, color, category } = req.query;
+    const { name, brand, color, category, priceMin, priceMax } = req.query;
 
     try {
         const query = {};
@@ -83,8 +83,12 @@ export const searchProducts = async (req, res) => {
         if (brand) query.brand = { $regex: brand, $options: 'i' };
         if (color) query.color = { $regex: color, $options: 'i' };
         if (category) query.category = { $regex: category, $options: 'i' };
+        if (priceMin || priceMax) {
+            query.price = {};
+            if (priceMin) query.price.$gte = Number(priceMin);
+            if (priceMax) query.price.$lte = Number(priceMax);
+        }
 
-        
         const products = await Product.find(query).populate('proveedor', 'username empresa email');
         res.status(200).json(products);
     } catch (error) {

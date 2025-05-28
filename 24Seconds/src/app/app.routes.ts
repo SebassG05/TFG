@@ -33,5 +33,6 @@ export const routes: Routes = [
   { path: 'inscripcion-sorteos', loadComponent: () => import('./sorteo/listado-sorteo/listado-sorteo.component').then(m => m.ListadoSorteoComponent) },
   { path: 'contacto', loadComponent: () => import('./contacto/contacto.component').then(m => m.ContactoComponent) },
   { path: 'zapasideales', loadComponent: () => import('./formulario-zapaideal/formulario-zapaideal.component').then(m => m.FormularioZapaidealComponent) },
+  { path: 'productos', loadComponent: () => import('./productos/productos.component').then(m => m.ProductosComponent) },
 ];
 

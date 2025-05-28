@@ -1,0 +1,43 @@
+<div class="productos-bg">
+  <h2 class="productos-title">Todos los productos</h2>
+  <form class="filtros-form" (ngSubmit)="filtrar()">
+    <input type="text" placeholder="Nombre" [(ngModel)]="filtros.nombre" name="nombre" />
+    <input type="text" placeholder="Marca" [(ngModel)]="filtros.marca" name="marca" />
+    <input type="text" placeholder="Categoría" [(ngModel)]="filtros.categoria" name="categoria" />
+    <input type="number" placeholder="Precio mínimo" [(ngModel)]="filtros.precioMin" name="precioMin" min="0" />
+    <input type="number" placeholder="Precio máximo" [(ngModel)]="filtros.precioMax" name="precioMax" min="0" />
+    <button type="submit">Filtrar</button>
+    <button type="button" (click)="limpiarFiltros()">Limpiar</button>
+  </form>
+  <div *ngIf="cargando" class="cargando">Cargando productos...</div>
+  <div class="productos-list">
+    <ng-container *ngIf="productos.length > 0; else sinProductos">
+      <div class="producto-card" *ngFor="let p of productos; let i = index">
+        <div class="producto-img-wrapper">
+          <img *ngIf="p.images && p.images.length > 0" [src]="p.images[mainImageIndexes[i] || 0]" alt="Imagen producto" class="producto-img" />
+        </div>
+        <div class="producto-info">
+          <div class="producto-nombre">{{ p.name }}</div>
+          <div class="producto-marca">Marca: {{ p.brand }}</div>
+          <div class="producto-categoria">Categoría: {{ p.category }}</div>
+          <div class="producto-precio">{{ p.price }} €</div>
+          <div class="producto-thumbnails" *ngIf="p.images && p.images.length > 1">
+            <img *ngFor="let img of p.images; let imgIdx = index"
+                 [src]="img"
+                 alt="Miniatura producto"
+                 class="producto-thumbnail"
+                 [class.selected]="mainImageIndexes[i] === imgIdx"
+                 (click)="setMainImage(i, imgIdx)"
+                 style="cursor:pointer" />
+          </div>
+          <div class="producto-cart-btn-wrapper">
+            <button class="producto-cart-btn" (click)="addToCart(p._id)">Añadir al carrito</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #sinProductos>
+      <div class="sin-productos">No hay productos que coincidan con los filtros.</div>
+    </ng-template>
+  </div>
+</div>
