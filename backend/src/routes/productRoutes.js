@@ -1,5 +1,5 @@
 import express from 'express';
-import { createProduct, updateProduct, deleteProduct, searchProducts, voteProduct, getTopProducts, getProductosProveedor } from '../controllers/productController.js';
+import { createProduct, updateProduct, deleteProduct, searchProducts, voteProduct, getTopProducts, getProductosProveedor, getVotosProductos } from '../controllers/productController.js';
 import validateSchema from '../middlewares/validateSchema.js';
 import isProveedor from '../middlewares/isProveedor.js';
 import upload from '../middlewares/uploadImage.js';
@@ -270,5 +270,23 @@ router.get('/top', getTopProducts);
  *                   example: "Products not found"
  */
 router.get('/mis-productos', isProveedor, getProductosProveedor);
+
+/**
+ * @swagger
+ * /products/votos:
+ *   get:
+ *     summary: Get votes for all products
+ *     tags: [Products]
+ *     responses:
+ *       200:
+ *         description: Votes retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Vote'
+ */
+router.get('/votos', getVotosProductos);
 
 export default router;

@@ -58,3 +58,5 @@ export class TopZapatillasComponent {
     }
   }
 }
+
+// Aquí podrías importar el nuevo componente si lo quieres usar en rutas hijas o lazy loading

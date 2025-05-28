@@ -84,7 +84,7 @@ export const searchProducts = async (req, res) => {
         if (color) query.color = { $regex: color, $options: 'i' };
         if (category) query.category = { $regex: category, $options: 'i' };
 
-        // POBLAR proveedor para que el frontend tenga el nombre
+        
         const products = await Product.find(query).populate('proveedor', 'username empresa email');
         res.status(200).json(products);
     } catch (error) {
@@ -125,5 +125,19 @@ export const getProductosProveedor = async (req, res) => {
         res.status(200).json(productos);
     } catch (error) {
         res.status(500).json({ message: error.message });
+    }
+};
+
+export const getVotosProductos = async (req, res) => {
+    try {
+        const products = await Product.find();
+        // Devuelve un objeto { [id]: votos }
+        const votos = {};
+        products.forEach(p => {
+            votos[p._id] = p.votes || 0;
+        });
+        res.status(200).json(votos);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 };
