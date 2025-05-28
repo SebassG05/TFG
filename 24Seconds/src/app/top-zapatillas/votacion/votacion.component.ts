@@ -80,6 +80,7 @@ export class VotacionComponent implements OnInit {
   renderChart() {
     if (this.chart) this.chart.destroy();
     const ctx = (document.getElementById('votacionChart') as HTMLCanvasElement).getContext('2d');
+    const isSmall = window.innerWidth <= 820;
     this.chart = new Chart(ctx!, {
       type: 'bar',
       data: {
@@ -89,6 +90,17 @@ export class VotacionComponent implements OnInit {
           data: this.zapatillas.map(z => this.votos[z._id] || 0),
           backgroundColor: 'rgba(255, 99, 132, 0.5)'
         }]
+      },
+      options: {
+        plugins: {
+          legend: { display: true }
+        },
+        scales: {
+          x: {
+            display: !isSmall,
+            ticks: { display: !isSmall }
+          }
+        }
       }
     });
   }

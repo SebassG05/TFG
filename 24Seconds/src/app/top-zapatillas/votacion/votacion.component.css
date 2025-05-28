@@ -82,6 +82,9 @@ body, html {
   max-width: 1200px;
   box-shadow: 0 8px 32px #ad055c33;
 }
+.grafica-container h3 {
+  text-align: center;
+}
 button[disabled] {
   background: #888 !important;
   cursor: not-allowed;
@@ -112,5 +115,26 @@ button:hover:not([disabled]) {
   .votacion-img {
     width: 70px;
     height: 70px;
+  }
+}
+@media (max-width: 450px) {
+  .votacion-table {
+    font-size: 0.85rem;
+  }
+  .votacion-table th, .votacion-table td {
+    padding: 0.3rem 0.2rem;
+  }
+  .votacion-img {
+    width: 38px;
+    height: 38px;
+  }
+  .votacion-table-wrapper {
+    padding: 0.2rem;
+  }
+  .votacion-title {
+    font-size: 1.1rem;
+  }
+  .grafica-container h3 {
+    font-size: 1rem;
   }
 }
