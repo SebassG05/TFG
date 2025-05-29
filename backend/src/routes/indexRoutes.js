@@ -9,6 +9,7 @@ import adminRoutes from './adminRoutes.js';
 import sorteosRoutes from './sorteos.js';
 import sugerenciaRoutes from './sugerenciaRoutes.js';
 import iaRoutes from './iaRoutes.js';
+import userRoutes from './userRoutes.js';
 
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.use('/admin', adminRoutes);
 router.use('/sorteos', sorteosRoutes);
 router.use('/sugerencias', sugerenciaRoutes);
 router.use('/ia', iaRoutes);
+router.use('/user', userRoutes);
 
 export default router;

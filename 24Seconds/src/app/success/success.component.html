@@ -1,0 +1,14 @@
+<div class="success-bg-animated">
+      <div class="circle" style="left:10vw;top:12vh;width:180px;height:180px;"></div>
+      <div class="circle circle2"></div>
+      <div class="circle circle3"></div>
+    </div>
+    <div class="success-container">
+      <h1>¡Pago realizado con éxito!</h1>
+      <p>Gracias por tu compra. Recibirás un correo con los detalles.</p>
+      <div *ngIf="hoopCoins > 0" class="hoopcoins-earned">
+        <span class="hoopcoins-icon">🏀</span>
+        <span class="hoopcoins-amount">+{{ hoopCoins }} HoopCoins</span>
+      </div>
+      <a routerLink="/home" class="btn" (click)="goHome()">Volver al inicio</a>
+    </div>

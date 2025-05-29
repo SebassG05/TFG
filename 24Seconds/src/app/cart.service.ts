@@ -48,7 +48,11 @@ export class CartService {
       headers: { 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({})
     });
-    return await res.json();
+    const data = await res.json();
+    if (data && data.total) {
+      localStorage.setItem('lastOrderTotal', data.total.toString());
+    }
+    return data;
   }
 
   notifyCartUpdated() {

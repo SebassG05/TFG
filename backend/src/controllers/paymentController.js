@@ -38,15 +38,11 @@ export const handlePayment = async (req, res) => {
             customer_email: req.user.email,
         });
 
-        // Sumar HoopCoins al usuario (por el total del carrito)
-        const coins = calculateHoopCoins(cart.totalPrice);
-        await User.findByIdAndUpdate(userId, { $inc: { hoopCoins: coins } });
-
         res.status(200).json({
             sessionId: session.id,
             sessionUrl: session.url,
             total: cart.totalPrice,
-            hoopCoinsEarned: coins
+            hoopCoinsEarned: calculateHoopCoins(cart.totalPrice)
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
