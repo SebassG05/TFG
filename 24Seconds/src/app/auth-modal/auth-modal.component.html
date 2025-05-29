@@ -6,7 +6,7 @@
       <div class="auth-modal__left-text">“CADA JUGADA CUENTA,<br> CADA PASO IMPORTA”</div>
     </div>
     <div class="auth-modal__right">
-      <button class="auth-modal__close" (click)="close()" aria-label="Cerrar">&times;</button>
+      <button *ngIf="!disableClose" class="auth-modal__close" (click)="close()" aria-label="Cerrar">&times;</button>
       <ng-container *ngIf="!waitingApproval; else waitingBox">
         <div class="auth-modal__tabs">
           <button [class.active]="activeTab === 'login'" (click)="switchTab('login')">¿YA TIENES TU CUENTA?</button>

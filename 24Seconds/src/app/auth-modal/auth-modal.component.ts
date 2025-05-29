@@ -26,6 +26,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
   proveedorApprovalStatus: 'pending' | 'approved' | 'rejected' | null = null;
   proveedorId: string | null = null;
   isProveedor = false;
+  disableClose = false;
   private approvalInterval: any;
 
   constructor(private router: Router) {}
@@ -45,6 +46,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
   }
 
   close() {
+    if (this.disableClose) return;
     this.show = false;
   }
 
@@ -59,10 +61,11 @@ export class AuthModalComponent implements OnInit, OnDestroy {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Error al iniciar sesión');
       localStorage.setItem('token', data.token); // Guardar el token para autenticación
+      this.disableClose = false; // Permitir cerrar el modal tras login
+      this.show = false; // Cerrar modal siempre tras login
       if (data.role === 'admin') this.router.navigate(['/admin']);
       else if (data.role === 'proveedor') this.router.navigate(['/proveedor']);
       else this.router.navigate(['/home']);
-      this.close();
     } catch (err: any) {
       alert(err.message);
     }

@@ -34,6 +34,10 @@ export class AppComponent implements AfterViewInit {
       this.authModal.username = '';
       this.authModal.confirmPassword = '';
       this.authModal.proveedorData = '';
+      // Deshabilitar la cruz si es ruta admin/proveedor y no hay token
+      const isAdminOrProv = this.isAdminOrProveedorRoute();
+      const token = localStorage.getItem('token');
+      this.authModal.disableClose = isAdminOrProv && !token;
     }
   }
 
@@ -46,6 +50,10 @@ export class AppComponent implements AfterViewInit {
       if (this.authModal) {
         this.authModal.show = false;
       }
+    }
+    // Si está en admin/proveedor y no hay token, forzar modal sin cruz
+    if (this.isAdminOrProveedorRoute() && !localStorage.getItem('token')) {
+      setTimeout(() => this.mostrarLoginModal(), 0);
     }
   }
 }
