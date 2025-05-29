@@ -95,6 +95,17 @@
   box-shadow: 0 2px 8px #ff3b3b22;
   transition: background 0.18s, color 0.18s, box-shadow 0.18s;
 }
+.navbar24__links li a:hover,
+.navbar24__links li a:focus {
+  cursor: pointer;
+}
+
+/* Solo para el enlace de Eventos */
+.navbar24__links li a[routerlinkactive][ng-reflect-router-link="/home"],
+.navbar24__links li a[routerlinkactive][ng-reflect-router-link="/eventos"],
+.navbar24__links li a[routerlinkactive][ng-reflect-router-link="/eventos/inscripcion"] {
+  cursor: pointer !important;
+}
 
 .navbar24__user {
   background: none;

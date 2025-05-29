@@ -18,8 +18,8 @@
     </a>
     <!-- Enlaces principales -->
     <ul class="navbar24__links" [class.open]="menuOpen">
-      <li><a routerLink="/" routerLinkActive="active">Inicio</a></li>
-      <li><a routerLink="/eventos" routerLinkActive="active">Eventos</a></li>
+      <li><a routerLink="/home" routerLinkActive="active" #inicioLink="routerLinkActive" [class.active]="inicioLink.isActive && !eventosLink.isActive">Inicio</a></li>
+      <li><a routerLink="/eventos/inscripcion" routerLinkActive="active" #eventosLink="routerLinkActive">Eventos</a></li>
       <li><a routerLink="/productos" routerLinkActive="active">Productos</a></li>
       <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
     </ul>

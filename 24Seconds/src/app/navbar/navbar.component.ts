@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgIf, NgFor, CurrencyPipe } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CartService } from '../cart.service';
 import { Subscription } from 'rxjs';
 
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   cart: any = null;
   private cartSub: Subscription | undefined;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit() {
     this.loadCart();
@@ -79,5 +79,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
     } catch (e) {
       alert('Error al conectar con la pasarela de pago');
     }
+  }
+
+  scrollToEventos(event: Event) {
+    event.preventDefault();
+    this.menuOpen = false;
+    this.router.navigate(['/home']).then(() => {
+      setTimeout(() => {
+        const el = document.querySelector('app-eventos');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 200);
+    });
+  }
+
+  goToEventosInscripcion(event: Event) {
+    event.preventDefault();
+    window.location.href = 'http://localhost:4200/eventos/inscripcion';
+  }
+
+  isEventosActive(): boolean {
+    return window.location.pathname === '/eventos/inscripcion';
   }
 }
