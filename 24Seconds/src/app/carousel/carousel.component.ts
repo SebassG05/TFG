@@ -9,7 +9,7 @@ import { NgFor } from '@angular/common';
     <div class="carousel-container">
       <button class="carousel-arrow left" (click)="prev()">&#10094;</button>
       <div class="carousel-slide">
-        <img [src]="images[current]" alt="Imagen carrusel" />
+        <img [src]="images[current]" alt="Imagen carrusel" (click)="goToProductos()" style="cursor:pointer;" />
       </div>
       <button class="carousel-arrow right" (click)="next()">&#10095;</button>
       <div class="carousel-dots">
@@ -48,6 +48,9 @@ export class CarouselComponent {
   }
   goTo(i: number) {
     this.current = i;
+  }
+  goToProductos() {
+    window.location.href = 'http://localhost:4200/productos';
   }
   isMobile(): boolean {
     return window.innerWidth <= 700;
