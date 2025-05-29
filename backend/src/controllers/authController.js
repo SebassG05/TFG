@@ -148,7 +148,7 @@ export const forgotPassword = async (req, res) => {
         await user.save();
 
         // Enviar correo con el enlace
-        const resetUrl = `http://tuapp.com/reset/${token}`;
+        const resetUrl = `${process.env.FRONTEND_URL}/reset/${token}`;
         const html = `
             <h2>Solicitud de Restablecimiento de Contraseña</h2>
             <p>Haz clic en el enlace para restablecer tu contraseña:</p>

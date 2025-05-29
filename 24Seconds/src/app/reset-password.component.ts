@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
       </div>
     </div>
   `,
-  styleUrls: ['./auth-modal/auth-modal.component.css'],
+  styleUrls: ['./auth-modal/auth-modal.component.css', './reset-password.component.css'],
   imports: [FormsModule]
 })
 export class ResetPasswordComponent {

@@ -41,5 +41,11 @@ export class AppComponent implements AfterViewInit {
     window.addEventListener('mostrar-login-modal', () => {
       this.mostrarLoginModal();
     });
+    // OCULTAR LOGIN EN RESET
+    if (window.location.pathname.startsWith('/reset')) {
+      if (this.authModal) {
+        this.authModal.show = false;
+      }
+    }
   }
 }
