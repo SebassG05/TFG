@@ -5,76 +5,78 @@
   <div *ngIf="loading" class="perfil-loading">Cargando...</div>
   <div *ngIf="error" class="perfil-error">Error: {{ error }}</div>
   <div *ngIf="user && !loading">
-    <section class="perfil-section">
-      <div class="perfil-section-card">
-        <h2>Datos personales</h2>
-        <div class="perfil-datos-grid">
-          <div>
-            <span class="perfil-label">Usuario:</span>
-            <span class="perfil-value">{{ user.username }}</span>
-          </div>
-          <div>
-            <span class="perfil-label">Email:</span>
-            <span class="perfil-value">{{ user.email }}</span>
-          </div>
-          <div>
-            <span class="perfil-label">HoopCoins:</span>
-            <span class="perfil-value">{{ user.hoopCoins }}</span>
-          </div>
-          <div>
-            <span class="perfil-label">Rol:</span>
-            <span class="perfil-value">{{ user.role }}</span>
-          </div>
-          <div>
-            <span class="perfil-label">Fecha de registro:</span>
-            <span class="perfil-value">{{ user.createdAt | date:'fullDate' }} {{ user.createdAt | date:'shortTime' }}</span>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="perfil-section">
-      <div class="perfil-section-card">
-        <h2>Eventos inscritos</h2>
-        <div *ngIf="user.registeredEvents?.length; else noEventos">
-          <div class="perfil-list">
-            <div *ngFor="let ev of user.registeredEvents" class="perfil-list-item">
-              <span class="perfil-list-title">{{ ev.name }}</span>
-              <span class="perfil-list-date">{{ ev.eventDate | date:'fullDate' }}</span>
+    <div class="perfil-sections-grid">
+      <section class="perfil-section">
+        <div class="perfil-section-card">
+          <h2>Datos personales</h2>
+          <div class="perfil-datos-grid">
+            <div>
+              <span class="perfil-label">Usuario:</span>
+              <span class="perfil-value">{{ user.username }}</span>
+            </div>
+            <div>
+              <span class="perfil-label">Email:</span>
+              <span class="perfil-value">{{ user.email }}</span>
+            </div>
+            <div>
+              <span class="perfil-label">HoopCoins:</span>
+              <span class="perfil-value">{{ user.hoopCoins }}</span>
+            </div>
+            <div>
+              <span class="perfil-label">Rol:</span>
+              <span class="perfil-value">{{ user.role }}</span>
+            </div>
+            <div>
+              <span class="perfil-label">Fecha de registro:</span>
+              <span class="perfil-value">{{ user.createdAt | date:'fullDate' }} {{ user.createdAt | date:'shortTime' }}</span>
             </div>
           </div>
         </div>
-        <ng-template #noEventos><div class="perfil-empty">No estás inscrito en ningún evento.</div></ng-template>
-      </div>
-    </section>
-    <section class="perfil-section">
-      <div class="perfil-section-card">
-        <h2>Sorteos apuntados</h2>
-        <div *ngIf="user.registeredRaffles?.length; else noSorteos">
-          <div class="perfil-list">
-            <div *ngFor="let s of user.registeredRaffles" class="perfil-list-item">
-              <span class="perfil-list-title">{{ s.title }}</span>
-              <span class="perfil-list-date">Expira: {{ s.expirationDate | date:'fullDate' }}</span>
+      </section>
+      <section class="perfil-section">
+        <div class="perfil-section-card">
+          <h2>Eventos inscritos</h2>
+          <div *ngIf="user.registeredEvents?.length; else noEventos">
+            <div class="perfil-list">
+              <div *ngFor="let ev of user.registeredEvents" class="perfil-list-item">
+                <span class="perfil-list-title">{{ ev.name }}</span>
+                <span class="perfil-list-date">{{ ev.eventDate | date:'fullDate' }}</span>
+              </div>
             </div>
           </div>
+          <ng-template #noEventos><div class="perfil-empty">No estás inscrito en ningún evento.</div></ng-template>
         </div>
-        <ng-template #noSorteos><div class="perfil-empty">No te has apuntado a ningún sorteo.</div></ng-template>
-      </div>
-    </section>
-    <section class="perfil-section">
-      <div class="perfil-section-card">
-        <h2>Últimas compras</h2>
-        <div *ngIf="user.purchaseHistory?.length; else noCompras">
-          <div class="perfil-list">
-            <div *ngFor="let c of user.purchaseHistory" class="perfil-list-item">
-              <span class="perfil-list-title">Pedido #{{ c._id }}</span>
-              <span class="perfil-list-date">{{ c.createdAt | date:'fullDate' }} - {{ c.status }}</span>
-              <span class="perfil-list-total">Total: <b>{{ c.totalPrice }}€</b></span>
+      </section>
+      <section class="perfil-section">
+        <div class="perfil-section-card">
+          <h2>Sorteos apuntados</h2>
+          <div *ngIf="user.registeredRaffles?.length; else noSorteos">
+            <div class="perfil-list">
+              <div *ngFor="let s of user.registeredRaffles" class="perfil-list-item">
+                <span class="perfil-list-title">{{ s.title }}</span>
+                <span class="perfil-list-date">Expira: {{ s.expirationDate | date:'fullDate' }}</span>
+              </div>
             </div>
           </div>
+          <ng-template #noSorteos><div class="perfil-empty">No te has apuntado a ningún sorteo.</div></ng-template>
         </div>
-        <ng-template #noCompras><div class="perfil-empty">No tienes compras registradas.</div></ng-template>
-      </div>
-    </section>
+      </section>
+      <section class="perfil-section">
+        <div class="perfil-section-card">
+          <h2>Últimas compras</h2>
+          <div *ngIf="user.purchaseHistory?.length; else noCompras">
+            <div class="perfil-list">
+              <div *ngFor="let c of user.purchaseHistory" class="perfil-list-item">
+                <span class="perfil-list-title">Pedido #{{ c._id }}</span>
+                <span class="perfil-list-date">{{ c.createdAt | date:'fullDate' }} - {{ c.status }}</span>
+                <span class="perfil-list-total">Total: <b>{{ c.totalPrice }}€</b></span>
+              </div>
+            </div>
+          </div>
+          <ng-template #noCompras><div class="perfil-empty">No tienes compras registradas.</div></ng-template>
+        </div>
+      </section>
+    </div>
   </div>
 </div>
 ```
