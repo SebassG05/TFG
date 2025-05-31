@@ -1,8 +1,9 @@
 // Componente de listado y filtrado de productos
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NotificacionService } from '../notificacion.service';
 
 @Component({
   selector: 'app-productos',
@@ -22,6 +23,8 @@ export class ProductosComponent {
   };
   cargando = false;
   mainImageIndexes: number[] = [];
+
+  private notiSrv = inject(NotificacionService);
 
   async ngOnInit() {
     await this.cargarProductos();
@@ -59,7 +62,7 @@ export class ProductosComponent {
   async addToCart(productId: string) {
     const token = localStorage.getItem('token');
     if (!token) {
-      alert('Debes iniciar sesión para añadir productos al carrito');
+      this.notiSrv.mostrar({ mensaje: 'Debes iniciar sesión para añadir productos al carrito', tipo: 'warning' });
       return;
     }
     try {
@@ -72,12 +75,12 @@ export class ProductosComponent {
         body: JSON.stringify({ productId, quantity: 1 })
       });
       if (res.ok) {
-        alert('Producto añadido al carrito');
+        this.notiSrv.mostrar({ mensaje: 'Producto añadido al carrito', tipo: 'success' });
       } else {
-        alert('Error al añadir al carrito');
+        this.notiSrv.mostrar({ mensaje: 'Error al añadir al carrito', tipo: 'error' });
       }
     } catch (e) {
-      alert('Error al añadir al carrito');
+      this.notiSrv.mostrar({ mensaje: 'Error al añadir al carrito', tipo: 'error' });
     }
   }
 }

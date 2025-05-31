@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
+import { NotificacionService } from '../../notificacion.service';
 
 @Component({
   selector: 'app-listado-sorteo',
@@ -13,6 +14,7 @@ export class ListadoSorteoComponent implements OnInit {
   sorteosNoDisponibles: any[] = [];
   cargando = true;
   inscripciones: { [sorteoId: string]: boolean } = {};
+  private notiSrv = inject(NotificacionService);
 
   async ngOnInit() {
     this.cargando = true;
@@ -48,11 +50,11 @@ export class ListadoSorteoComponent implements OnInit {
   async inscribirse(sorteo: any) {
     const token = localStorage.getItem('token');
     if (!token) {
-      alert('Debes iniciar sesión para inscribirte.');
+      this.notiSrv.mostrar({ mensaje: 'Debes iniciar sesión para inscribirte.', tipo: 'warning' });
       return;
     }
     if (this.inscripciones[sorteo._id]) {
-      alert('Ya estás inscrito a este sorteo');
+      this.notiSrv.mostrar({ mensaje: 'Ya estás inscrito a este sorteo', tipo: 'info' });
       return;
     }
     try {
@@ -64,13 +66,13 @@ export class ListadoSorteoComponent implements OnInit {
       if (!res.ok) throw new Error(data.error || data.message || 'Error al inscribirse');
       this.inscripciones[sorteo._id] = true;
       sorteo.inscrito = true;
-      alert('Inscripción exitosa. ¡Suerte!');
+      this.notiSrv.mostrar({ mensaje: 'Inscripción exitosa. ¡Suerte!', tipo: 'success' });
     } catch (err: any) {
       if (err.message && err.message.toLowerCase().includes('ya estás inscrito')) {
         this.inscripciones[sorteo._id] = true;
         sorteo.inscrito = true;
       }
-      alert(err.message || 'Error al inscribirse');
+      this.notiSrv.mostrar({ mensaje: err.message || 'Error al inscribirse', tipo: 'error' });
     }
   }
 

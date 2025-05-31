@@ -3,6 +3,7 @@ import { NgIf, NgFor, CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CartService } from '../../cart.service';
+import { NotificacionService } from '../../notificacion.service';
 
 @Component({
   selector: 'app-product-management',
@@ -18,6 +19,7 @@ export class ProductManagementComponent implements OnInit, AfterViewInit {
   paginaActual = 1;
   productosPorPagina = 5;
   private cartService = inject(CartService);
+  private notiSrv = inject(NotificacionService);
 
   constructor(public router: Router) {}
 
@@ -117,8 +119,9 @@ export class ProductManagementComponent implements OnInit, AfterViewInit {
     });
     if (res.ok) {
       this.productos = this.productos.filter(p => p._id !== id);
+      this.notiSrv.mostrar({ mensaje: 'Producto eliminado correctamente', tipo: 'success' });
     } else {
-      alert('Error al eliminar el producto');
+      this.notiSrv.mostrar({ mensaje: 'Error al eliminar el producto', tipo: 'error' });
     }
   }
 
@@ -200,10 +203,10 @@ export class ProductManagementComponent implements OnInit, AfterViewInit {
   async addToCart(productId: string) {
     const token = localStorage.getItem('token');
     if (!token) {
-      alert('Debes iniciar sesión para añadir productos al carrito');
+      this.notiSrv.mostrar({ mensaje: 'Debes iniciar sesión para añadir productos al carrito', tipo: 'warning' });
       return;
     }
     await this.cartService.addToCart(productId, 1, token);
-    alert('Producto añadido al carrito');
+    this.notiSrv.mostrar({ mensaje: 'Producto añadido al carrito', tipo: 'success' });
   }
 }

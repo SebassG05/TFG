@@ -3,14 +3,14 @@ import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthModalComponent } from './auth-modal/auth-modal.component';
-import { CarouselComponent } from './carousel/carousel.component';
 import { NgIf } from '@angular/common';
+import { NotificacionToastComponent } from './notificacion-toast.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  imports: [FormsModule, NavbarComponent, AuthModalComponent, RouterOutlet, NgIf]
+  styleUrls: ['./app.component.css'],
+  imports: [FormsModule, NavbarComponent, AuthModalComponent, RouterOutlet, NgIf, NotificacionToastComponent]
 })
 export class AppComponent implements AfterViewInit {
   title = '24Seconds';

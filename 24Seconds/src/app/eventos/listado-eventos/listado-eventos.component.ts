@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NotificacionService } from '../../notificacion.service';
 
 @Component({
   selector: 'app-listado-eventos',
@@ -13,6 +14,8 @@ export class ListadoEventosComponent implements OnInit {
   cargando = true;
   error = '';
   inscripciones: { [eventId: string]: boolean } = {};
+
+  private notiSrv = inject(NotificacionService);
 
   async ngOnInit() {
     try {
@@ -65,11 +68,11 @@ export class ListadoEventosComponent implements OnInit {
   async inscribirse(evento: any) {
     const token = localStorage.getItem('token');
     if (!token) {
-      alert('Debes iniciar sesión para inscribirte.');
+      this.notiSrv.mostrar({ mensaje: 'Debes iniciar sesión para inscribirte.', tipo: 'warning' });
       return;
     }
     if (this.inscripciones[evento._id]) {
-      alert('Ya estás inscrito a este evento');
+      this.notiSrv.mostrar({ mensaje: 'Ya estás inscrito a este evento', tipo: 'info' });
       return;
     }
     try {
@@ -80,15 +83,14 @@ export class ListadoEventosComponent implements OnInit {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Error al inscribirse');
       this.inscripciones[evento._id] = true;
-      // Forzar actualización de la vista
       evento.inscrito = true;
-      alert('Inscripción exitosa. Puedes ver el evento en tu perfil.');
+      this.notiSrv.mostrar({ mensaje: 'Inscripción exitosa. Puedes ver el evento en tu perfil.', tipo: 'success' });
     } catch (err: any) {
       if (err.message && err.message.toLowerCase().includes('ya estás inscrito')) {
         this.inscripciones[evento._id] = true;
         evento.inscrito = true;
       }
-      alert(err.message || 'Error al inscribirse');
+      this.notiSrv.mostrar({ mensaje: err.message || 'Error al inscribirse', tipo: 'error' });
     }
   }
 
