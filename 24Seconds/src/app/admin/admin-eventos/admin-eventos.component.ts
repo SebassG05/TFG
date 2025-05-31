@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { NotificacionService } from '../../notificacion.service';
 
 @Component({
   selector: 'app-admin-eventos',
@@ -14,6 +15,8 @@ export class AdminEventosComponent implements OnInit {
   eventosPorPagina: number = 5;
   isMobile = false;
   expandedIndex: number | null = null;
+
+  constructor(private notificacionService: NotificacionService) {}
 
   get eventosPaginados() {
     const start = (this.paginaActual - 1) * this.eventosPorPagina;
@@ -99,16 +102,25 @@ export class AdminEventosComponent implements OnInit {
   }
 
   async eliminarEvento(id: string) {
-    if (!confirm('¿Seguro que quieres eliminar este evento?')) return;
-    const token = localStorage.getItem('token');
-    const res = await fetch(`http://localhost:4001/api/events/delete/${id}`, {
-      method: 'DELETE',
-      headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+    this.notificacionService.mostrar({
+      mensaje: '¿Seguro que quieres eliminar este evento?',
+      tipo: 'confirm',
+      accion: {
+        texto: 'Eliminar',
+        callback: async () => {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`http://localhost:4001/api/events/delete/${id}`, {
+            method: 'DELETE',
+            headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+          });
+          if (res.ok) {
+            this.eventos = this.eventos.filter(e => e._id !== id);
+            this.notificacionService.mostrar({ mensaje: 'Evento eliminado correctamente', tipo: 'success' });
+          } else {
+            this.notificacionService.mostrar({ mensaje: 'Error al eliminar el evento', tipo: 'error' });
+          }
+        }
+      }
     });
-    if (res.ok) {
-      this.eventos = this.eventos.filter(e => e._id !== id);
-    } else {
-      alert('Error al eliminar el evento');
-    }
   }
 }

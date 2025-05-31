@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { NotificacionService } from '../notificacion.service';
 
 @Component({
   selector: 'app-admin-usuarios',
@@ -71,6 +72,8 @@ export class AdminUsuariosComponent implements OnInit, AfterViewInit {
   tamanoPagina: number = 6;
   isMobile = false;
   expandedIndex: number | null = null;
+
+  constructor(private notificacionService: NotificacionService) {}
 
   get totalPaginas(): number {
     return Math.ceil(this.usuarios.length / this.tamanoPagina);
@@ -161,17 +164,26 @@ export class AdminUsuariosComponent implements OnInit, AfterViewInit {
   }
 
   async eliminarUsuario(id: string) {
-    if (!confirm('¿Seguro que quieres eliminar esta cuenta?')) return;
-    const token = localStorage.getItem('token');
-    const res = await fetch(`http://localhost:4001/api/admin/usuarios/${id}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
+    this.notificacionService.mostrar({
+      mensaje: '¿Seguro que quieres eliminar esta cuenta?',
+      tipo: 'confirm',
+      accion: {
+        texto: 'Eliminar',
+        callback: async () => {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`http://localhost:4001/api/admin/usuarios/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (res.ok) {
+            this.usuarios = this.usuarios.filter(u => u._id !== id);
+            this.notificacionService.mostrar({ mensaje: 'Usuario eliminado correctamente', tipo: 'success' });
+          } else {
+            this.notificacionService.mostrar({ mensaje: 'Error al eliminar el usuario', tipo: 'error' });
+          }
+        }
+      }
     });
-    if (res.ok) {
-      this.usuarios = this.usuarios.filter(u => u._id !== id);
-    } else {
-      alert('Error al eliminar el usuario');
-    }
   }
 
   toggleExpand(idx: number) {

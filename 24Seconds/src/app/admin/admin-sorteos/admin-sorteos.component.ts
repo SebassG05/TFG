@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { NotificacionService } from '../../notificacion.service';
 
 @Component({
   selector: 'app-admin-sorteos',
@@ -15,6 +16,8 @@ export class AdminSorteosComponent implements OnInit {
   totalPaginas = 1;
   isMobile = false;
   expandedIndex: number | null = null;
+
+  constructor(private notificacionService: NotificacionService) {}
 
   async ngOnInit() {
     this.isMobile = window.innerWidth <= 700;
@@ -93,19 +96,28 @@ export class AdminSorteosComponent implements OnInit {
   }
 
   async eliminarSorteo(id: string) {
-    if (!confirm('¿Seguro que quieres eliminar este sorteo?')) return;
-    const token = localStorage.getItem('token');
-    const res = await fetch(`http://localhost:4001/api/sorteos/${id}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
+    this.notificacionService.mostrar({
+      mensaje: '¿Seguro que quieres eliminar este sorteo?',
+      tipo: 'confirm',
+      accion: {
+        texto: 'Eliminar',
+        callback: async () => {
+          const token = localStorage.getItem('token');
+          const res = await fetch(`http://localhost:4001/api/sorteos/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (res.ok) {
+            this.sorteos = this.sorteos.filter(s => s._id !== id);
+            this.totalPaginas = Math.max(1, Math.ceil(this.sorteos.length / this.sorteosPorPagina));
+            if (this.paginaActual > this.totalPaginas) this.paginaActual = this.totalPaginas;
+            this.notificacionService.mostrar({ mensaje: 'Sorteo eliminado correctamente', tipo: 'success' });
+          } else {
+            this.notificacionService.mostrar({ mensaje: 'Error al eliminar el sorteo', tipo: 'error' });
+          }
+        }
+      }
     });
-    if (res.ok) {
-      this.sorteos = this.sorteos.filter(s => s._id !== id);
-      this.totalPaginas = Math.max(1, Math.ceil(this.sorteos.length / this.sorteosPorPagina));
-      if (this.paginaActual > this.totalPaginas) this.paginaActual = this.totalPaginas;
-    } else {
-      alert('Error al eliminar el sorteo');
-    }
   }
 
   toggleExpand(idx: number) {

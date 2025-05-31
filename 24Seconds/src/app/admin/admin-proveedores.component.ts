@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
+import { NotificacionService } from '../notificacion.service';
 
 @Component({
   selector: 'app-admin-proveedores',
@@ -44,6 +45,8 @@ import { NgFor, NgIf } from '@angular/common';
 export class AdminProveedoresComponent implements OnInit, AfterViewInit {
   proveedores: any[] = [];
 
+  constructor(private notificacionService: NotificacionService) {}
+
   ngOnInit() {
     const token = localStorage.getItem('token');
     fetch('http://localhost:4001/api/auth/proveedores-pendientes', {
@@ -52,7 +55,7 @@ export class AdminProveedoresComponent implements OnInit, AfterViewInit {
       .then(async res => {
         if (!res.ok) {
           const error = await res.json();
-          alert(error.message || 'Error al cargar proveedores');
+          this.notificacionService.mostrar({ mensaje: error.message || 'Error al cargar proveedores', tipo: 'error' });
           return [];
         }
         return res.json();
