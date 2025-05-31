@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { AdminMobileNavbarComponent } from './admin-mobile-navbar/admin-mobile-navbar.component';
+import { NotificacionService } from '../notificacion.service';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-admin',
@@ -62,12 +64,11 @@ import { AdminMobileNavbarComponent } from './admin-mobile-navbar/admin-mobile-n
     <button class="exit-btn" (click)="logout()" title="Salir">
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#23272f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
     </button>
-    <div *ngIf="mensajeLogout" class="logout-toast">{{ mensajeLogout }}</div>
   `,
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  mensajeLogout: string | null = null;
+  private notificacionService = inject(NotificacionService);
 
   constructor(private router: Router) {}
 
@@ -84,9 +85,8 @@ export class AdminComponent {
       }
     })
     .then(() => {
-      this.mensajeLogout = 'Sesión cerrada correctamente.';
+      this.notificacionService.mostrar({ mensaje: 'Sesión cerrada correctamente.', tipo: 'success' });
       setTimeout(() => {
-        this.mensajeLogout = null;
         localStorage.removeItem('token');
         this.router.navigate(['/home']).then(() => {
           window.dispatchEvent(new CustomEvent('mostrar-login-modal'));
@@ -94,9 +94,8 @@ export class AdminComponent {
       }, 1800);
     })
     .catch(() => {
-      this.mensajeLogout = 'Sesión cerrada.';
+      this.notificacionService.mostrar({ mensaje: 'Sesión cerrada.', tipo: 'info' });
       setTimeout(() => {
-        this.mensajeLogout = null;
         localStorage.removeItem('token');
         this.router.navigate(['/home']);
       }, 1800);

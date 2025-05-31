@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, inject } from '@angular/core';
 import AOS from 'aos';
 import { CrearProductoComponent } from './crear-producto.component';
 import { CrearSorteoComponent } from './crear-sorteo.component';
@@ -7,6 +7,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { CommonModule } from '@angular/common';
 import { VotationTopratedComponent } from '../votation-toprated/votation-toprated.component';
+import { NotificacionService } from '../notificacion.service';
 
 @Component({
   selector: 'app-proveedor',
@@ -17,10 +18,10 @@ import { VotationTopratedComponent } from '../votation-toprated/votation-toprate
 })
 export class ProveedorComponent implements AfterViewInit, OnInit {
   mostrarCrearProducto = false;
-  mensajeLogout: string | null = null;
   showProductManagement = false;
   productosProveedor: any[] = [];
   empresa: string | null = null;
+  private notificacionService = inject(NotificacionService);
 
   constructor(private router: Router) {}
 
@@ -77,20 +78,17 @@ export class ProveedorComponent implements AfterViewInit, OnInit {
       }
     })
     .then(() => {
-      this.mensajeLogout = 'Sesión cerrada correctamente.';
+      this.notificacionService.mostrar({ mensaje: 'Sesión cerrada correctamente.', tipo: 'success' });
       setTimeout(() => {
-        this.mensajeLogout = null;
         localStorage.removeItem('token');
         this.router.navigate(['/home']).then(() => {
-          // Usa un evento global para mostrar el login modal tras logout
           window.dispatchEvent(new CustomEvent('mostrar-login-modal'));
         });
       }, 1800);
     })
     .catch(() => {
-      this.mensajeLogout = 'Sesión cerrada correctamente.';
+      this.notificacionService.mostrar({ mensaje: 'Sesión cerrada.', tipo: 'info' });
       setTimeout(() => {
-        this.mensajeLogout = null;
         localStorage.removeItem('token');
         this.router.navigate(['/home']).then(() => {
           window.dispatchEvent(new CustomEvent('mostrar-login-modal'));

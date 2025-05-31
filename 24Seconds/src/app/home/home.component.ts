@@ -8,6 +8,8 @@ import { ZapaIdealComponent } from '../zapa-ideal/zapa.component';
 import { SorteoComponent } from '../sorteo/sorteo.component';
 import { FooterComponent } from '../footer/footer.component';
 import { NgIf } from '@angular/common';
+import { NotificacionService } from '../notificacion.service';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +19,8 @@ import { NgIf } from '@angular/common';
   imports: [NgIf, CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, ZapaIdealComponent, SorteoComponent, FooterComponent]
 })
 export class HomeComponent {
+  private notificacionService = inject(NotificacionService);
+
   constructor(private router: Router) {}
 
   logout() {
@@ -28,10 +32,13 @@ export class HomeComponent {
       }
     })
     .then(() => {
-      localStorage.removeItem('token');
-      this.router.navigate(['/home']).then(() => {
-        window.dispatchEvent(new CustomEvent('mostrar-login-modal'));
-      });
+      this.notificacionService.mostrar({ mensaje: 'Sesión cerrada correctamente.', tipo: 'success' });
+      setTimeout(() => {
+        localStorage.removeItem('token');
+        this.router.navigate(['/home']).then(() => {
+          window.dispatchEvent(new CustomEvent('mostrar-login-modal'));
+        });
+      }, 1800);
     });
   }
 

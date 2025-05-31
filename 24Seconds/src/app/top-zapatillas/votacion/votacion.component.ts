@@ -3,6 +3,7 @@ import { Chart, registerables } from 'chart.js';
 import { CommonModule } from '@angular/common';
 import { ZapatillaService } from '../../zapatilla.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NotificacionService } from '../../notificacion.service';
 
 @Component({
   selector: 'app-votacion',
@@ -18,6 +19,7 @@ export class VotacionComponent implements OnInit {
   chart: any;
   userId: string | null = null;
   private zapatillaService = inject(ZapatillaService);
+  private notificacionService = inject(NotificacionService);
 
   constructor() {
     Chart.register(...registerables);
@@ -58,13 +60,19 @@ export class VotacionComponent implements OnInit {
   }
 
   votar(zapaId: string) {
-    if (this.hasVotedToday) return;
+    if (this.hasVotedToday) {
+      this.notificacionService.mostrar({ mensaje: 'Ya has votado hoy. ¡Vuelve mañana!', tipo: 'info' });
+      return;
+    }
     this.zapatillaService.votar(zapaId).subscribe(() => {
       this.hasVotedToday = true;
       this.getVotos();
       if (this.userId) {
         localStorage.setItem('votoHoy_' + this.userId, new Date().toDateString());
       }
+      this.notificacionService.mostrar({ mensaje: '¡Voto registrado! Gracias por participar.', tipo: 'success' });
+    }, err => {
+      this.notificacionService.mostrar({ mensaje: 'Error al registrar el voto', tipo: 'error' });
     });
   }
 
