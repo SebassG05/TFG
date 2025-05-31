@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 import Cart from '../models/cartModel.js';
+import Order from '../models/orderModel.js';
 import { calculateHoopCoins } from '../utils/hoopCoins.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -37,6 +38,23 @@ export const handlePayment = async (req, res) => {
             cancel_url: `${process.env.FRONTEND_URL}/cancel`,
             customer_email: req.user.email,
         });
+
+        // Crear la orden en la base de datos
+        const order = new Order({
+            userId,
+            products: cart.items.map(item => ({
+                productId: item.productId._id,
+                quantity: item.quantity,
+                price: item.productId.price
+            })),
+            totalPrice: cart.totalPrice,
+            status: 'pagado',
+            createdAt: new Date()
+        });
+        await order.save();
+
+        // Añadir la orden al historial de compras del usuario
+        await User.findByIdAndUpdate(userId, { $push: { purchaseHistory: order._id } });
 
         res.status(200).json({
             sessionId: session.id,

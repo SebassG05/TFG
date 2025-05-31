@@ -27,4 +27,10 @@ export class PerfilComponent implements OnInit {
     }
     this.loading = false;
   }
+
+  get lastPurchase() {
+    if (!this.user?.purchaseHistory?.length) return null;
+    // Ordenar por fecha descendente y tomar la más reciente
+    return [...this.user.purchaseHistory].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
+  }
 }

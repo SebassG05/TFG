@@ -64,12 +64,12 @@
       <section class="perfil-section">
         <div class="perfil-section-card">
           <h2>Últimas compras</h2>
-          <div *ngIf="user.purchaseHistory?.length; else noCompras">
+          <div *ngIf="lastPurchase; else noCompras">
             <div class="perfil-list">
-              <div *ngFor="let c of user.purchaseHistory" class="perfil-list-item">
-                <span class="perfil-list-title">Pedido #{{ c._id }}</span>
-                <span class="perfil-list-date">{{ c.createdAt | date:'fullDate' }} - {{ c.status }}</span>
-                <span class="perfil-list-total">Total: <b>{{ c.totalPrice }}€</b></span>
+              <div class="perfil-list-item">
+                <span class="perfil-list-title">Pedido #{{ lastPurchase._id }}</span>
+                <span class="perfil-list-date">{{ lastPurchase.createdAt | date:'fullDate' }} - {{ lastPurchase.status }}</span>
+                <span class="perfil-list-total">Total: <b>{{ lastPurchase.totalPrice }}€</b></span>
               </div>
             </div>
           </div>
