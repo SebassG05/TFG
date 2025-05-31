@@ -1,4 +1,5 @@
 <div class="admin-sugerencias-bg">
+  <canvas class="gestion-bg-canvas" id="gestion-bg-canvas"></canvas>
   <div class="admin-sugerencias-table-container">
     <h2 class="sugerencias-title">Gestión de Sugerencias</h2>
     <table class="sugerencias-table" *ngIf="sugerencias.length > 0; else sinSugerencias">
@@ -12,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let s of sugerencias">
+        <tr *ngFor="let s of sugerenciasPaginadas">
           <td>{{ s.fecha | date:'short' }}</td>
           <td>{{ s.email || '-' }}</td>
           <td>{{ s.mensaje }}</td>
@@ -30,6 +31,11 @@
         </tr>
       </tbody>
     </table>
+    <div *ngIf="totalPaginas > 1" class="usuarios-paginacion">
+      <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+      <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+      <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+    </div>
     <ng-template #sinSugerencias>
       <div class="sugerencias-empty">No hay sugerencias registradas.</div>
     </ng-template>
