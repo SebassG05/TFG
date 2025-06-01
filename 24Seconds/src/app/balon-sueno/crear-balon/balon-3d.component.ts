@@ -1,5 +1,5 @@
 // Componente para mostrar el balón 3D girando y cambiar su color
-import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 // @ts-ignore
 import * as THREE from 'three';
 // @ts-ignore
@@ -7,6 +7,8 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 // @ts-ignore
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../cart.service';
+import { NotificacionService } from '../../notificacion.service';
 
 @Component({
   selector: 'app-balon-3d',
@@ -23,6 +25,8 @@ export class Balon3dComponent implements OnInit, OnDestroy {
   private camera!: THREE.PerspectiveCamera;
   private animationId: any;
   private balonMesh: THREE.Mesh | null = null;
+  private cartService = inject(CartService);
+  private notiSrv = inject(NotificacionService);
 
   constructor(private ngZone: NgZone) {}
 
@@ -105,6 +109,33 @@ export class Balon3dComponent implements OnInit, OnDestroy {
     if (this.balonMesh) {
       const mat = this.balonMesh.material as THREE.MeshStandardMaterial;
       mat.color.set(this.color);
+    }
+  }
+
+  async onAddToCart() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.notiSrv.mostrar({ mensaje: 'Debes iniciar sesión para añadir productos al carrito', tipo: 'warning' });
+      return;
+    }
+    try {
+      // 1. Crear producto personalizado
+      const res = await fetch('http://localhost:4001/api/products/custom-ball', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ color: this.color })
+      });
+      if (!res.ok) throw new Error('No se pudo crear el balón personalizado');
+      const producto = await res.json();
+      // 2. Añadir al carrito
+      await this.cartService.addToCart(producto._id, 1, token);
+      this.cartService.notifyCartUpdated();
+      this.notiSrv.mostrar({ mensaje: 'Balón personalizado añadido al carrito', tipo: 'success' });
+    } catch (e) {
+      this.notiSrv.mostrar({ mensaje: 'Error al añadir al carrito', tipo: 'error' });
     }
   }
 }

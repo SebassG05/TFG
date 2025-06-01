@@ -6,6 +6,7 @@ import upload from '../middlewares/uploadImage.js';
 import createProductSchema from '../schemas/createProductSchema.js';
 import updateProductSchema from '../schemas/updateProductSchema.js';
 import voteProductSchema from '../schemas/voteProductSchema.js';
+import isAuthenticated from '../middlewares/isAuthenticated.js';
 
 const router = express.Router();
 
@@ -288,5 +289,56 @@ router.get('/mis-productos', isProveedor, getProductosProveedor);
  *                 $ref: '#/components/schemas/Vote'
  */
 router.get('/votos', getVotosProductos);
+
+/**
+ * @swagger
+ * /products/custom-ball:
+ *   post:
+ *     summary: Create a custom basketball product for a user
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               color:
+ *                 type: string
+ *                 example: '#ff8000'
+ *               name:
+ *                 type: string
+ *                 example: 'Balón personalizado'
+ *     responses:
+ *       201:
+ *         description: Custom product created successfully
+ *       400:
+ *         description: Invalid input
+ */
+router.post('/custom-ball', isAuthenticated, async (req, res) => {
+  try {
+    const { color } = req.body;
+    const user = req.user;
+    // Crea el producto personalizado con los datos mínimos
+    const product = new (await import('../models/productModel.js')).default({
+      name: 'Balón personalizado',
+      brand: 'Personalizado',
+      sizeMin: 7, // estándar
+      sizeMax: 7,
+      color: color || '#ff8000',
+      price: 40,
+      stock: 1,
+      category: 'balon',
+      images: [],
+      proveedor: user._id
+    });
+    const saved = await product.save();
+    res.status(201).json(saved);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 export default router;
