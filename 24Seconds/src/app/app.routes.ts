@@ -35,5 +35,6 @@ export const routes: Routes = [
   { path: 'zapasideales', loadComponent: () => import('./formulario-zapaideal/formulario-zapaideal.component').then(m => m.FormularioZapaidealComponent) },
   { path: 'productos', loadComponent: () => import('./productos/productos.component').then(m => m.ProductosComponent) },
   { path: 'success', loadComponent: () => import('./success/success.component').then(m => m.SuccessComponent) },
+  { path: 'creacionbalon', loadComponent: () => import('./balon-sueno/crear-balon/crear.component').then(m => m.CrearComponent) },
 ];
 

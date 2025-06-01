@@ -1,0 +1,52 @@
+@import '../../home/home.component.css';
+
+.crear-container {
+  /* ...tus estilos aquí... */
+}
+
+/* Fondo de home reutilizado */
+.home-bg-exclusive {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(ellipse at 60% 20%, rgba(255, 230, 180, 0.13) 0%, rgba(255,255,255,0.01) 60%),
+              linear-gradient(120deg, rgba(34,34,44,0.98) 0%, rgba(44,44,54,0.98) 100%);
+  box-shadow: 0 0 120px 0 rgba(255, 215, 0, 0.08), 0 0 0 100vw #fff0;
+  transition: opacity 0.7s;
+}
+
+.home-bg-exclusive::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, rgba(255, 215, 0, 0.03) 0 2px, transparent 2px 24px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+:host {
+  position: relative;
+  z-index: 0;
+  display: block;
+}
+
+.crear-balon-fullscreen {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.titulo-balon {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #167ad8;
+  margin-top: 32px;
+  margin-bottom: 18px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 16px #000, 0 0 8px #ffd70055;
+}

@@ -1,0 +1,7 @@
+<div class="balon3d-wrapper" [style.--balon-aura]="color">
+  <canvas #canvas3d></canvas>
+  <div class="color-picker">
+    <label for="color">Color:</label>
+    <input id="color" type="color" [(ngModel)]="color" (input)="onColorChange($event)" />
+  </div>
+</div>

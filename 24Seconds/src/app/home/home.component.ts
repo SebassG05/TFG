@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HistoriaCardComponent } from '../historia-card/historia-card.component';
 import { TopZapatillasComponent } from '../top-zapatillas/top-zapatillas.component';
 import { EventosComponent } from '../eventos/eventos.component';
+import { BalonSuenoComponent } from '../balon-sueno/balon-sueno.component';
 import { ZapaIdealComponent } from '../zapa-ideal/zapa.component';
 import { SorteoComponent } from '../sorteo/sorteo.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -16,7 +17,7 @@ import { inject } from '@angular/core';
   standalone: true,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  imports: [NgIf, CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, ZapaIdealComponent, SorteoComponent, FooterComponent]
+  imports: [NgIf, CarouselComponent, HistoriaCardComponent, TopZapatillasComponent, EventosComponent, BalonSuenoComponent, ZapaIdealComponent, SorteoComponent, FooterComponent]
 })
 export class HomeComponent {
   private notificacionService = inject(NotificacionService);
