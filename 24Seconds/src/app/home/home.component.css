@@ -110,3 +110,67 @@
   top: -32px;
   pointer-events: none;
 }
+
+/* Responsive para iPhone 14 Pro (393px) */
+@media (max-width: 400px) {
+  .categorias-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 1.2rem 0;
+  }
+  .categoria-card {
+    width: 90vw;
+    margin-right: 0;
+  }
+  .categoria-card img {
+    height: 120px;
+  }
+  .categoria-label {
+    font-size: 0.95rem;
+    top: -18px;
+  }
+}
+
+/* Responsive para Pixel 7 Pro (412px) */
+@media (min-width: 460px) and (max-width: 480px) {
+  .categorias-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .categoria-card {
+    width: 92vw;
+    margin-right: 0;
+  }
+  .categoria-card img {
+    height: 140px;
+  }
+  .categoria-label {
+    font-size: 1rem;
+    top: -22px;
+  }
+}
+
+/* Responsive para iPad Pro 11 (834px) */
+@media (min-width: 580px) and (max-width: 900px) {
+  .categorias-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 2.5rem 0;
+  }
+  .categoria-card {
+    width: 220px;
+    margin-right: 0;
+  }
+  .categoria-card img {
+    height: 180px;
+  }
+  .categoria-label {
+    font-size: 1.05rem;
+    top: -26px;
+  }
+}
