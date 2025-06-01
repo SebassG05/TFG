@@ -16,7 +16,8 @@ export class EventosComponent {
     'assets/evento3.png',
     'assets/evento4.png',
     'assets/evento5.png',
-    // ...agrega más rutas de imágenes si lo deseas
+    'assets/evento6.png',
+    'assets/evento7.png',
   ];
   currentIndex = 0;
   @ViewChild('slider', { static: true }) sliderRef!: ElementRef<HTMLDivElement>;
