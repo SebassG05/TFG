@@ -33,4 +33,12 @@ export class PerfilComponent implements OnInit {
     // Ordenar por fecha descendente y tomar la más reciente
     return [...this.user.purchaseHistory].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())[0];
   }
+
+  get lastPurchases() {
+    if (!this.user?.purchaseHistory?.length) return [];
+    // Ordenar por fecha descendente y tomar las dos más recientes
+    return [...this.user.purchaseHistory]
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 2);
+  }
 }
