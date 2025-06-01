@@ -1,13 +1,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-eventos',
   standalone: true,
   templateUrl: './eventos.component.html',
   styleUrls: ['./eventos.component.css'],
-  imports: [NgFor]
+  imports: [NgFor, FooterComponent]
 })
 export class EventosComponent {
   images = [

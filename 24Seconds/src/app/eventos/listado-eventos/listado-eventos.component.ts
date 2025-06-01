@@ -1,13 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificacionService } from '../../notificacion.service';
+import { FooterComponent } from '../../footer/footer.component';
 
 @Component({
   selector: 'app-listado-eventos',
   templateUrl: './listado-eventos.component.html',
   styleUrls: ['./listado-eventos.component.css'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, FooterComponent]
 })
 export class ListadoEventosComponent implements OnInit {
   eventos: any[] = [];
