@@ -88,8 +88,8 @@ input[type="color"] {
   }
 
   canvas{
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
     background: transparent;
     border-radius: 50%;
     box-shadow: 0 0 60px 20px var(--balon-aura, gold), 0 0 0 8px rgba(255,255,255,0.1);
