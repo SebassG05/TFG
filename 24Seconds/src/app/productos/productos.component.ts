@@ -2,7 +2,7 @@
 import { Component, inject } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { NotificacionService } from '../notificacion.service';
 import { FooterComponent } from "../footer/footer.component";
 
@@ -27,9 +27,19 @@ export class ProductosComponent {
 
   private notiSrv = inject(NotificacionService);
 
+  constructor(private route: ActivatedRoute) {}
+
   async ngOnInit() {
-    await this.cargarProductos();
-    this.mainImageIndexes = this.productos.map(() => 0);
+    // Leer query param de categoría y aplicar filtro si existe
+    this.route.queryParams.subscribe(async params => {
+      if (params['categoria']) {
+        this.filtros.categoria = params['categoria'];
+        await this.cargarProductos(true);
+      } else {
+        await this.cargarProductos();
+      }
+      this.mainImageIndexes = this.productos.map(() => 0);
+    });
   }
 
   async cargarProductos(filtrar = false) {

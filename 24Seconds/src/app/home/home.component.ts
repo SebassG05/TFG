@@ -46,4 +46,17 @@ export class HomeComponent {
   get isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
+
+  irACategoria(categoria: string) {
+    // Mapeo de nombres amigables a los valores de filtro
+    const map: Record<string, string> = {
+      zapatillas: 'shoe',
+      camisetas: 'camiseta',
+      Balones: 'balon',
+      Calentadores: 'calentador',
+      Mochilas: 'mochila'
+    };
+    const filtroCategoria = map[categoria] || categoria;
+    this.router.navigate(['/productos'], { queryParams: { categoria: filtroCategoria } });
+  }
 }

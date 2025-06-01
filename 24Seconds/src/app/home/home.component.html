@@ -11,6 +11,30 @@
 </button>
 <app-eventos id="eventos-section"></app-eventos>
 <app-balon-sueno></app-balon-sueno>
+
+<div class="categorias-row">
+  <div class="categoria-card" (click)="irACategoria('zapatillas')">
+    <img src="assets/categoria1.png" alt="Zapatillas de baloncesto" />
+    <div class="categoria-label">Zapatillas</div>
+  </div>
+  <div class="categoria-card" (click)="irACategoria('camisetas')">
+    <img src="assets/categoria2.png" alt="Camisetas" />
+    <div class="categoria-label">Camisetas</div>
+  </div>
+  <div class="categoria-card" (click)="irACategoria('Balones')">
+    <img src="assets/categoria6.png" alt="Balones" />
+    <div class="categoria-label">Balones</div>
+  </div>
+  <div class="categoria-card" (click)="irACategoria('Calentadores')">
+    <img src="assets/categoria4.png" alt="Calentadores" />
+    <div class="categoria-label">Calentadores</div>
+  </div>
+  <div class="categoria-card" (click)="irACategoria('Calentadores')">
+    <img src="assets/categoria5.png" alt="Mochilas" />
+    <div class="categoria-label">Mochilas</div>
+  </div>
+</div>
+
 <app-zapa-ideal></app-zapa-ideal>
 <app-sorteo></app-sorteo>
 <app-footer></app-footer>
