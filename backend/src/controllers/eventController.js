@@ -52,10 +52,17 @@ export const registerForEvent = async (req, res) => {
             return res.status(400).json({ message: 'You are already registered for this event' });
         }
 
+        // Validar HoopCoins suficientes
+        if ((user.hoopCoins || 0) < 100) {
+            return res.status(400).json({ message: 'No tienes suficientes HoopCoins para inscribirte en este evento' });
+        }
+
+        // Descontar HoopCoins
+        user.hoopCoins -= 100;
         user.registeredEvents.push(eventId);
         await user.save();
 
-        res.status(200).json({ message: 'Successfully registered for the event' });
+        res.status(200).json({ message: 'Successfully registered for the event', hoopCoinsRestantes: user.hoopCoins });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

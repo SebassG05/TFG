@@ -30,7 +30,8 @@ export const register = async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            role
+            role,
+            hoopCoins: 150 // Otorga 150 hoopCoins por ser la primera vez
         });
         const savedUser = await newUser.save();
         res.status(201).json({ message: 'User registered successfully', role });
