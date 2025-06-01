@@ -1,0 +1,291 @@
+@import '../admin-usuarios.estetica.css';
+@import '../admin-sorteos-responsive.css';
+
+.inscripciones-switch {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
+}
+.inscripciones-switch button {
+  background: linear-gradient(90deg, #ff3b3b 0%, #ff1a1a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.7rem 2.2rem;
+  font-weight: 700;
+  font-size: 1.13rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px 0 rgba(255,60,0,0.13);
+}
+.inscripciones-switch button.active {
+  background: #fff;
+  color: #ff3b3b;
+  box-shadow: 0 2px 8px #ff3b3b22;
+}
+
+.usuarios-admin-table-container {
+  position: relative;
+  z-index: 2;
+  background: #181818;
+  color: #fff;
+  border-radius: 2.5rem;
+  box-shadow: 0 12px 48px 0 rgba(0,0,0,0.28);
+  padding: 3.5rem 3.5rem 2.5rem 3.5rem;
+  min-width: 900px;
+  max-width: 98vw;
+  min-height: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Centrado absoluto en pantalla */
+  position: absolute;
+  top: 20%;
+  margin-left: 100px;
+  transform: translate(-50%, -50%);
+}
+
+/* iPhone 14 Pro */
+@media (max-width: 400px) {
+  .usuarios-admin-table-container {
+    min-width: 98vw;
+    padding: 0.5rem 0.1rem 0.5rem 0.1rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 32px 0 #ff3b3b33, 0 1.5px 8px 0 #0008;
+    max-width: 99vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .usuarios-table {
+    min-width: 220px;
+    font-size: 0.7rem;
+  }
+  .usuarios-title {
+    font-size: 1.1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+}
+
+/* Pixel 7 Pro */
+@media (min-width: 460px) and (max-width: 480px) {
+  .usuarios-admin-table-container {
+    min-width: 97vw;
+    padding: 0.7rem 0.2rem 0.7rem 0.2rem;
+    border-radius: 1.2rem;
+    max-width: 99vw;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    transform: translate(-50%, -50%);
+  }
+  .usuarios-table {
+    min-width: 260px;
+    font-size: 0.8rem;
+  }
+  .usuarios-title {
+    font-size: 1.2rem;
+    margin-top: 1.3rem;
+    margin-bottom: 1.3rem;
+  }
+}
+
+/* iPad Pro 11 */
+@media (min-width: 580px) and (max-width: 900px) {
+  .usuarios-admin-table-container {
+    min-width: 90vw;
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    border-radius: 1.7rem;
+    max-width: 97vw;
+    position: absolute;
+    top: 13%;
+    left: 13%;
+    transform: translate(-50%, -50%);
+  }
+  .usuarios-table {
+    min-width: 400px;
+    font-size: 1rem;
+  }
+  .usuarios-title {
+    font-size: 1.5rem;
+    margin-top: 1.7rem;
+    margin-bottom: 1.7rem;
+  }
+}
+
+.inscripciones-list-responsive {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2.2rem;
+}
+.inscripcion-item-responsive {
+  background: linear-gradient(120deg, #23272f 70%, #181818 100%);
+  border-radius: 1.1rem;
+  box-shadow: 0 2px 16px 0 #ff3b3b22, 0 1.5px 8px 0 #0006;
+  padding: 0.7rem 0.6rem 0.4rem 0.6rem;
+  font-size: 1.01rem;
+  color: #fff;
+  border: 1.5px solid #ff3b3b33;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 360px;
+  transition: box-shadow 0.18s, background 0.18s, border 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.inscripcion-main-row {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.04rem;
+  color: #ff3b3b;
+  border-bottom: 1.5px solid #ff3b3b33;
+  padding-bottom: 0.22rem;
+  margin-bottom: 0.22rem;
+  transition: color 0.18s;
+  background: none;
+  overflow-wrap: break-word;
+  white-space: normal;
+  gap: 0.6rem;
+  min-height: 44px;
+  border-radius: 0.5rem 0.5rem 0 0;
+  user-select: none;
+}
+.inscripcion-main-row:hover {
+  color: #fff;
+  background: linear-gradient(90deg, #ff3b3b22 0%, #23272f00 100%);
+}
+.inscripcion-titulo, .expand-icon {
+  text-align: left !important;
+}
+.expand-icon {
+  font-size: 1.04rem;
+  margin-left: 0.22rem;
+}
+.inscripcion-details-responsive {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.13rem;
+  animation: fadeInDown 0.3s;
+  background: rgba(24,24,28,0.22);
+  border-radius: 0.7rem;
+  margin-top: 0.18rem;
+  box-shadow: 0 1px 8px #ff3b3b11;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+  font-size: 0.98rem;
+  color: #fff;
+  width: 100%;
+}
+.inscripcion-details-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.08rem;
+}
+.inscripcion-details-fields div b {
+  color: #ff3b3b;
+  font-weight: 800;
+  margin-right: 0.2rem;
+  font-size: 1.01em;
+}
+
+/* Responsive ajustes para móviles y tablets */
+@media (max-width: 700px) {
+  .usuarios-admin-table-container {
+    background: rgba(24, 24, 28, 0.7);
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 32px 0 #ff3b3b33, 0 1.5px 8px 0 #0008;
+    padding: 1.1rem 0.2rem 1.5rem 0.2rem;
+    max-width: 430px;
+    min-width: unset;
+    margin: 2.5rem auto 0 auto;
+    width: 98vw;
+    backdrop-filter: blur(6px) saturate(1.2);
+    border: 1.5px solid #ff3b3b33;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .inscripcion-item-responsive {
+    max-width: 360px;
+    width: 100%;
+    font-size: 1.01rem;
+    padding: 0.4rem 0.1rem 0.2rem 0.1rem;
+  }
+  .inscripcion-main-row {
+    font-size: 0.98rem;
+    min-height: 28px;
+    padding-bottom: 0.08rem;
+  }
+  .expand-icon {
+    font-size: 1rem;
+    margin-left: 0.4rem;
+  }
+  .inscripcion-details-responsive {
+    font-size: 0.92rem;
+    border-radius: 0.5rem;
+    padding: 0.3rem 0 0.1rem 0;
+  }
+  .inscripcion-details-responsive div {
+    font-size: 0.92rem;
+    padding: 0.08rem 0.1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .usuarios-admin-table-container {
+    min-width: 90vw;
+    padding: 0.5rem 0.1rem 0.5rem 0.1rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 32px 0 #ff3b3b33, 0 1.5px 8px 0 #0008;
+    max-width: 9vw;
+    position: absolute;
+    left: 4%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (max-width: 500px) {
+  .inscripcion-item-responsive {
+    max-width: 340px;
+    width: 92vw;
+  }
+}
+@media (max-width: 580px) and (min-width: 401px) {
+  .inscripcion-item-responsive {
+    max-width: 350px;
+    width: 94vw;
+  }
+}
+
+@media (min-width: 701px)  and (min-width: 901px){
+  .inscripciones-list-responsive {
+    max-width: 600px;
+    margin: 0 auto 2.2rem auto;
+  }
+  .usuarios-admin-table-container {
+    left: 18%;
+  }
+  .inscripcion-item-responsive {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}

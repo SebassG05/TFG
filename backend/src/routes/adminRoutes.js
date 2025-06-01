@@ -28,4 +28,40 @@ router.delete('/usuarios/:id', isAdmin, async (req, res) => {
   }
 });
 
+// Obtener inscripciones a eventos (admin)
+router.get('/inscripciones/eventos', isAdmin, async (req, res) => {
+  try {
+    // Buscar todos los usuarios con eventos inscritos y poblar los eventos
+    const usuarios = await User.find({ registeredEvents: { $exists: true, $not: { $size: 0 } } })
+      .populate('registeredEvents', 'name');
+    // Formato: [{ usuario, evento }]
+    const resultado = [];
+    usuarios.forEach(u => {
+      u.registeredEvents.forEach(ev => {
+        resultado.push({ usuario: u.username, email: u.email, evento: ev.name, eventoId: ev._id });
+      });
+    });
+    res.json(resultado);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Obtener inscripciones a sorteos (admin)
+router.get('/inscripciones/sorteos', isAdmin, async (req, res) => {
+  try {
+    const usuarios = await User.find({ registeredRaffles: { $exists: true, $not: { $size: 0 } } })
+      .populate('registeredRaffles', 'title');
+    const resultado = [];
+    usuarios.forEach(u => {
+      u.registeredRaffles.forEach(s => {
+        resultado.push({ usuario: u.username, email: u.email, sorteo: s.title, sorteoId: s._id });
+      });
+    });
+    res.json(resultado);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 export default router;

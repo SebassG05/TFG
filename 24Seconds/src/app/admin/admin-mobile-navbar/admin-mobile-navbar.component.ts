@@ -17,6 +17,7 @@ export class AdminMobileNavbarComponent {
     { label: 'Productos en Tienda', link: '/admin/pedidos' },
     { label: 'Eventos Tienda', link: '/admin/eventos' },
     { label: 'Sorteos Tienda', link: '/admin/sorteos' },
+    { label: 'Listado de Inscripciones', link: '/admin/inscripciones' },
   ];
 
   toggleMenu() {

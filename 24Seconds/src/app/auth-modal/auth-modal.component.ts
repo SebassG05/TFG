@@ -61,6 +61,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Error al iniciar sesión');
       localStorage.setItem('token', data.token); // Guardar el token para autenticación
+      localStorage.setItem('user', JSON.stringify({ role: data.role })); // Guardar el rol para el guard
       this.disableClose = false; // Permitir cerrar el modal tras login
       this.show = false; // Cerrar modal siempre tras login
       if (data.role === 'admin') this.router.navigate(['/admin']);

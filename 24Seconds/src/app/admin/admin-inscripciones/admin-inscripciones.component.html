@@ -1,0 +1,63 @@
+<div class="admin-eventos-bg">
+  <canvas class="fondo-animado-admin"></canvas>
+  <div class="usuarios-admin-table-container">
+    <h2 class="usuarios-title">Listado de Inscripciones</h2>
+    <div class="inscripciones-switch">
+      <button [class.active]="vista === 'eventos'" (click)="cambiarVista('eventos')">Eventos</button>
+      <button [class.active]="vista === 'sorteos'" (click)="cambiarVista('sorteos')">Sorteos</button>
+    </div>
+    <div *ngIf="cargando" class="usuarios-empty">Cargando inscripciones...</div>
+
+    <!-- Lista expandible de inscripciones a eventos -->
+    <div *ngIf="!cargando && vista === 'eventos'">
+      <div *ngIf="inscripcionesEventosPaginadas.length > 0; else sinEventos" class="inscripciones-list-responsive">
+        <div *ngFor="let insc of inscripcionesEventosPaginadas; let i = index" class="inscripcion-item-responsive">
+          <div class="inscripcion-main-row" (click)="toggleExpand(i)">
+            <span class="inscripcion-titulo">{{ insc.usuario }} - {{ insc.evento }}</span>
+            <span class="expand-icon">{{ expandedIndex === i ? '\u25B2' : '\u25BC' }}</span>
+          </div>
+          <div class="inscripcion-details-responsive" *ngIf="expandedIndex === i">
+            <div class="inscripcion-details-fields">
+              <div><b>Email:</b> {{ insc.email }}</div>
+              <!-- Aquí puedes agregar más detalles si los hay -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="totalPaginasEventos > 1" class="usuarios-paginacion">
+        <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+        <span>Página {{paginaActual}} de {{totalPaginasEventos}}</span>
+        <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginasEventos">Siguiente</button>
+      </div>
+      <ng-template #sinEventos>
+        <div class="usuarios-empty">No hay inscripciones a eventos.</div>
+      </ng-template>
+    </div>
+
+    <!-- Lista expandible de inscripciones a sorteos -->
+    <div *ngIf="!cargando && vista === 'sorteos'">
+      <div *ngIf="inscripcionesSorteosPaginadas.length > 0; else sinSorteos" class="inscripciones-list-responsive">
+        <div *ngFor="let insc of inscripcionesSorteosPaginadas; let i = index" class="inscripcion-item-responsive">
+          <div class="inscripcion-main-row" (click)="toggleExpand(i)">
+            <span class="inscripcion-titulo">{{ insc.usuario }} - {{ insc.sorteo }}</span>
+            <span class="expand-icon">{{ expandedIndex === i ? '\u25B2' : '\u25BC' }}</span>
+          </div>
+          <div class="inscripcion-details-responsive" *ngIf="expandedIndex === i">
+            <div class="inscripcion-details-fields">
+              <div><b>Email:</b> {{ insc.email }}</div>
+              <!-- Aquí puedes agregar más detalles si los hay -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="totalPaginasSorteos > 1" class="usuarios-paginacion">
+        <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+        <span>Página {{paginaActual}} de {{totalPaginasSorteos}}</span>
+        <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginasSorteos">Siguiente</button>
+      </div>
+      <ng-template #sinSorteos>
+        <div class="usuarios-empty">No hay inscripciones a sorteos.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

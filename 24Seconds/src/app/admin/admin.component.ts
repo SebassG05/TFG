@@ -22,6 +22,7 @@ import { inject } from '@angular/core';
           <li><a routerLink="/admin/eventos">Eventos Tienda</a></li>
           <li><a routerLink="/admin/sorteos">Sorteos Tienda</a></li>
           <li><a routerLink="/admin/sugerencias">Gestión de Sugerencias</a></li>
+          <li><a routerLink="/admin/inscripciones">Listado de Inscripciones</a></li>
         </ul>
       </aside>
       <main class="admin-content">
