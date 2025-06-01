@@ -17,6 +17,8 @@ export class ZapatillaService {
   }
 
   votar(zapaId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/vote`, { productId: zapaId });
+    const token = localStorage.getItem('token');
+    const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
+    return this.http.post(`${this.apiUrl}/vote`, { productId: zapaId }, { headers });
   }
 }

@@ -50,7 +50,8 @@ export class VotacionComponent implements OnInit {
 
   getZapatillas() {
     this.zapatillaService.getAll().subscribe((data: any[]) => {
-      this.zapatillas = data;
+      // Filtrar solo productos con category === 'shoe'
+      this.zapatillas = data.filter((p: any) => p.category && p.category.toLowerCase() === 'shoe');
       this.getVotos();
     });
   }
@@ -67,15 +68,34 @@ export class VotacionComponent implements OnInit {
       this.notificacionService.mostrar({ mensaje: 'Ya has votado hoy. ¡Vuelve mañana!', tipo: 'info' });
       return;
     }
-    this.zapatillaService.votar(zapaId).subscribe(() => {
-      this.hasVotedToday = true;
-      this.getVotos();
-      if (this.userId) {
-        localStorage.setItem('votoHoy_' + this.userId, new Date().toDateString());
+    // Validar que el id es un string válido de MongoDB (24 caracteres hexadecimales)
+    if (!zapaId || typeof zapaId !== 'string' || !/^[a-fA-F0-9]{24}$/.test(zapaId)) {
+      this.notificacionService.mostrar({ mensaje: 'ID de producto inválido', tipo: 'error' });
+      return;
+    }
+    // Asegurarse de que el usuario está autenticado
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.notificacionService.mostrar({ mensaje: 'Debes iniciar sesión para votar', tipo: 'error' });
+      return;
+    }
+    this.zapatillaService.votar(zapaId).subscribe({
+      next: () => {
+        this.hasVotedToday = true;
+        this.getVotos();
+        if (this.userId) {
+          localStorage.setItem('votoHoy_' + this.userId, new Date().toDateString());
+        }
+        this.notificacionService.mostrar({ mensaje: '¡Voto registrado! Gracias por participar.', tipo: 'success' });
+      },
+      error: err => {
+        let msg = 'Error al registrar el voto';
+        if (err && err.error && err.error.message) {
+          msg += ': ' + err.error.message;
+        }
+        this.notificacionService.mostrar({ mensaje: msg, tipo: 'error' });
+        console.error('Error al votar:', err);
       }
-      this.notificacionService.mostrar({ mensaje: '¡Voto registrado! Gracias por participar.', tipo: 'success' });
-    }, err => {
-      this.notificacionService.mostrar({ mensaje: 'Error al registrar el voto', tipo: 'error' });
     });
   }
 

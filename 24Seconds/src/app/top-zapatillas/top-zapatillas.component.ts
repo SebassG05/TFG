@@ -16,18 +16,20 @@ export class TopZapatillasComponent {
   private cartService = inject(CartService);
 
   async ngOnInit() {
-    // Llama a la API para obtener las más votadas, pero si no hay votos, muestra las 4 primeras
+    // Llama a la API para obtener las más votadas, pero si no hay votos, muestra las 4 primeras SOLO de zapatillas
     try {
       const res = await fetch('http://localhost:4001/api/products/top');
       if (res.ok) {
-        const data = await res.json();
-        // Si hay menos de 4, pide todos los productos y muestra los primeros 4
+        let data = await res.json();
+        // Filtrar solo zapatillas (por category === 'shoe')
+        data = data.filter((p: any) => p.category && p.category.toLowerCase() === 'shoe');
         if (data.length >= 4) {
           this.zapatillas = data.slice(0, 4);
         } else {
           const resAll = await fetch('http://localhost:4001/api/products/search');
           if (resAll.ok) {
-            const all = await resAll.json();
+            let all = await resAll.json();
+            all = all.filter((p: any) => p.category && p.category.toLowerCase() === 'shoe');
             this.zapatillas = all.slice(0, 4);
           }
         }

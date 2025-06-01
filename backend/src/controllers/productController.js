@@ -104,14 +104,15 @@ export const voteProduct = async (req, res) => {
     const { productId } = req.body;
 
     try {
-        const product = await Product.findById(productId);
+        // Solo actualiza el campo votes, sin requerir validación de otros campos
+        const product = await Product.findByIdAndUpdate(
+            productId,
+            { $inc: { votes: 1 } },
+            { new: true }
+        );
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
-
-        product.votes += 1;
-        await product.save();
-
         res.status(200).json({ message: 'Vote added successfully', product });
     } catch (error) {
         res.status(400).json({ message: error.message });
