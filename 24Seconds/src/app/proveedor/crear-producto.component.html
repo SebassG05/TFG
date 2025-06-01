@@ -14,8 +14,12 @@
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>Talla</label>
-        <input type="number" [(ngModel)]="producto.size" name="size" required />
+        <label>Talla mínima</label>
+        <input type="number" [(ngModel)]="producto.sizeMin" name="sizeMin" required min="1" placeholder="Ej: 40" />
+      </div>
+      <div class="form-group">
+        <label>Talla máxima</label>
+        <input type="number" [(ngModel)]="producto.sizeMax" name="sizeMax" required min="1" placeholder="Ej: 44" />
       </div>
       <div class="form-group">
         <label>Color</label>

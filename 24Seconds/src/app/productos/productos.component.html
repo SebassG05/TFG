@@ -30,6 +30,14 @@
                  (click)="setMainImage(i, imgIdx)"
                  style="cursor:pointer" />
           </div>
+          <div class="producto-tallas" *ngIf="p.sizeMin && p.sizeMax">
+            <span *ngFor="let talla of [].constructor(p.sizeMax - p.sizeMin + 1); let t = index"
+                  class="producto-talla-cuadro"
+                  [class.selected]="p.tallaSeleccionada === (p.sizeMin + t)"
+                  (click)="p.tallaSeleccionada = p.sizeMin + t">
+              {{ p.sizeMin + t }}
+            </span>
+          </div>
           <div class="producto-cart-btn-wrapper">
             <button class="producto-cart-btn" (click)="addToCart(p._id)">Añadir al carrito</button>
           </div>

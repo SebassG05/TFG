@@ -2,16 +2,20 @@ import Product from '../models/productModel.js';
 
 export const createProduct = async (req, res) => {
     // Convierte los campos numéricos a number si vienen como string (por FormData)
-    let { name, brand, size, color, price, stock, category } = req.body;
+    const { name, brand, sizeMin, sizeMax, color, price, stock, category } = req.body;
     // Si algún campo falta, responde con error claro
-    if (!name || !brand || !size || !color || !price || !stock || !category) {
+    if (!name || !brand || !sizeMin || !sizeMax || !color || !price || !stock || !category) {
         return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
     }
-    size = Number(size);
-    price = Number(price);
-    stock = Number(stock);
-    if (isNaN(size) || isNaN(price) || isNaN(stock)) {
-        return res.status(400).json({ message: 'Talla, precio y stock deben ser números válidos.' });
+    let nSizeMin = Number(sizeMin);
+    let nSizeMax = Number(sizeMax);
+    let nPrice = Number(price);
+    let nStock = Number(stock);
+    if (isNaN(nSizeMin) || isNaN(nSizeMax) || isNaN(nPrice) || isNaN(nStock)) {
+        return res.status(400).json({ message: 'Tallas, precio y stock deben ser números válidos.' });
+    }
+    if (nSizeMin > nSizeMax) {
+        return res.status(400).json({ message: 'La talla mínima no puede ser mayor que la máxima.' });
     }
     let images = req.body.images || [];
     if (req.files && Array.isArray(req.files)) {
@@ -21,10 +25,11 @@ export const createProduct = async (req, res) => {
         const newProduct = new Product({
             name: name,
             brand: brand,
-            size: size,
+            sizeMin: nSizeMin,
+            sizeMax: nSizeMax,
             color: color,
-            price: price,
-            stock: stock,
+            price: nPrice,
+            stock: nStock,
             category: category,
             images: images,
             proveedor: req.user._id // Asocia el producto al proveedor autenticado
@@ -37,13 +42,12 @@ export const createProduct = async (req, res) => {
 };
 
 export const updateProduct = async (req, res) => {
-    const { id } = req.params;
-    const { name, brand, size, color, price, stock, category } = req.body;
+    const { id } = req.params;    const { name, brand, sizeMin, sizeMax, color, price, stock, category } = req.body;
 
     try {
         const updatedProduct = await Product.findByIdAndUpdate(
             id,
-            { name, brand, size, color, price, stock, category },
+            { name, brand, sizeMin, sizeMax, color, price, stock, category },
             { new: true, runValidators: true }
         );
 

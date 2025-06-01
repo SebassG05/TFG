@@ -44,6 +44,7 @@
   flex-direction: column;
   gap: 0.3rem;
   flex: 1;
+  min-width: 0;
 }
 .form-group label {
   font-weight: 600;
@@ -214,6 +215,9 @@ button[type="submit"]:hover {
   .form-row {
     flex-direction: column;
     gap: 0.5rem;
+  }
+  .form-group {
+    min-width: unset;
   }
   .img-preview-multi {
     gap: 0.6rem;

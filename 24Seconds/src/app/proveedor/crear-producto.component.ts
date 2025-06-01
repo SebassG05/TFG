@@ -13,7 +13,8 @@ export class CrearProductoComponent implements AfterViewInit {
   producto = {
     name: '',
     brand: '',
-    size: null,
+    sizeMin: null,
+    sizeMax: null,
     color: '',
     price: null,
     stock: null,
@@ -124,13 +125,13 @@ export class CrearProductoComponent implements AfterViewInit {
     for (const key in this.producto) {
       if (key !== 'images') {
         let value = (this.producto as any)[key];
-        if (['size', 'price', 'stock'].includes(key)) {
-          if (value === null || value === '' || isNaN(value)) {
+        if (["sizeMin", "sizeMax", "price", "stock"].includes(key)) {
+          if (value === null || value === '' || isNaN(Number(value))) {
             this.errorMsg = 'Completa todos los campos numéricos';
             this.loading = false;
             return;
           }
-          value = value.toString(); // <-- fuerza string
+          value = Number(value).toString(); // fuerza string y previene NaN
         }
         formData.append(key, value);
       }
@@ -152,7 +153,7 @@ export class CrearProductoComponent implements AfterViewInit {
       const data = await res.json();
       if (res.ok) {
         this.successMsg = 'Producto creado correctamente';
-        this.producto = { name: '', brand: '', size: null, color: '', price: null, stock: null, category: '', images: [] };
+        this.producto = { name: '', brand: '', sizeMin: null, sizeMax: null, color: '', price: null, stock: null, category: '', images: [] };
         this.mainImageIndex = 0;
       } else {
         // Mostrar errores de validación del backend si existen

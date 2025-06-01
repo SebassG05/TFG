@@ -241,3 +241,36 @@ body, html {
     font-size: 1.1rem;
   }
 }
+.producto-tallas {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.7rem 0 0.7rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: opacity 0.18s;
+  opacity: 1;
+}
+.producto-talla-cuadro {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  font-weight: 700;
+  font-size: 1.08rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+  box-shadow: none;
+  user-select: none;
+}
+.producto-talla-cuadro.selected, .producto-talla-cuadro:hover {
+  background: #fff;
+  color: #23272f;
+  border: 2px solid #fff;
+}
+.producto-card .producto-tallas {
+  display: none;
+}
+.producto-card:hover .producto-tallas {
+  display: flex;
+}
