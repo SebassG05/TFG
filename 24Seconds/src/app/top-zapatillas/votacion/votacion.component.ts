@@ -19,6 +19,8 @@ export class VotacionComponent implements OnInit {
   votos: { [key: string]: number } = {};
   chart: any;
   userId: string | null = null;
+  paginaActual = 1;
+  zapatillasPorPagina = 5;
   private zapatillaService = inject(ZapatillaService);
   private notificacionService = inject(NotificacionService);
 
@@ -88,16 +90,26 @@ export class VotacionComponent implements OnInit {
 
   renderChart() {
     if (this.chart) this.chart.destroy();
+    // Ordenar por votos descendente y tomar las 4 más votadas
+    const zapatillasConVotos = this.zapatillas.map(z => ({...z, votos: this.votos[z._id] || 0}));
+    const top4 = zapatillasConVotos.sort((a, b) => b.votos - a.votos).slice(0, 4);
+    const colores = [
+      'rgba(255, 26, 106, 0.8)', // rosa fuerte
+      'rgb(34, 130, 255)',  // naranja
+      'rgba(0, 212, 255, 0.8)',  // azul claro
+      'rgba(80, 68, 255, 0.8)' // amarillo pastel
+    ];
     const ctx = (document.getElementById('votacionChart') as HTMLCanvasElement).getContext('2d');
     const isSmall = window.innerWidth <= 820;
     this.chart = new Chart(ctx!, {
       type: 'bar',
       data: {
-        labels: this.zapatillas.map(z => z.name),
+        labels: top4.map(z => z.name),
         datasets: [{
           label: 'Votos',
-          data: this.zapatillas.map(z => this.votos[z._id] || 0),
-          backgroundColor: 'rgba(255, 99, 132, 0.5)'
+          data: top4.map(z => z.votos),
+          backgroundColor: colores.slice(0, top4.length),
+          borderRadius: 8
         }]
       },
       options: {
@@ -112,5 +124,21 @@ export class VotacionComponent implements OnInit {
         }
       }
     });
+  }
+
+  get zapatillasPaginadas() {
+    const start = (this.paginaActual - 1) * this.zapatillasPorPagina;
+    return this.zapatillas.slice(start, start + this.zapatillasPorPagina);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.zapatillas.length / this.zapatillasPorPagina);
+  }
+
+  cambiarPagina(delta: number) {
+    const nuevaPagina = this.paginaActual + delta;
+    if (nuevaPagina >= 1 && nuevaPagina <= this.totalPaginas) {
+      this.paginaActual = nuevaPagina;
+    }
   }
 }

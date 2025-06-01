@@ -3,7 +3,14 @@ body, html {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background: #181922;
+  /* Elimina el fondo sólido para que se vea el decorativo */
+  background: none !important;
+}
+
+:host {
+  position: relative;
+  z-index: 0;
+  display: block;
 }
 
 .votacion-container {
@@ -106,6 +113,32 @@ button:hover:not([disabled]) {
   color: #fff;
   transform: scale(1.04);
 }
+.paginacion-zapatillas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.paginacion-zapatillas button {
+  background: linear-gradient(90deg, #ff1a6a 0%, #ff6a00 100%);
+  color: #fff;
+  border: none;
+  border-radius: 1.2rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.paginacion-zapatillas button:disabled {
+  background: #444;
+  cursor: not-allowed;
+}
+.paginacion-zapatillas span {
+  color: #fff;
+  font-size: 1.1rem;
+}
 @media (max-width: 900px) {
   .votacion-table, .grafica-container {
     width: 98vw;
@@ -137,4 +170,26 @@ button:hover:not([disabled]) {
   .grafica-container h3 {
     font-size: 1rem;
   }
+}
+
+/* Fondo decorativo igual que home */
+.home-bg-exclusive {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(ellipse at 60% 20%, rgba(255, 230, 180, 0.13) 0%, rgba(255,255,255,0.01) 60%),
+              linear-gradient(120deg, rgba(34,34,44,0.98) 0%, rgba(44,44,54,0.98) 100%);
+  box-shadow: 0 0 120px 0 rgba(255, 215, 0, 0.08), 0 0 0 100vw #fff0;
+  transition: opacity 0.7s;
+}
+.home-bg-exclusive::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, rgba(255, 215, 0, 0.03) 0 2px, transparent 2px 24px);
+  opacity: 0.5;
+  pointer-events: none;
 }

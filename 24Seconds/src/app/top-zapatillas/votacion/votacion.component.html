@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let zapa of zapatillas">
+        <tr *ngFor="let zapa of zapatillasPaginadas">
           <td><img [src]="zapa.images[0]" alt="Imagen zapatilla" class="votacion-img" /></td>
           <td>{{ zapa.name }}</td>
           <td>{{ zapa.price }} €</td>
@@ -21,10 +21,16 @@
         </tr>
       </tbody>
     </table>
+    <div *ngIf="totalPaginas > 1" class="paginacion-zapatillas">
+      <button (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">Anterior</button>
+      <span>Página {{paginaActual}} de {{totalPaginas}}</span>
+      <button (click)="cambiarPagina(1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+    </div>
     <div class="grafica-container">
       <h3>Resultados de la votación</h3>
       <canvas id="votacionChart"></canvas>
     </div>
   </div>
 </div>
+<div class="home-bg-exclusive"></div>
 <app-footer></app-footer>
