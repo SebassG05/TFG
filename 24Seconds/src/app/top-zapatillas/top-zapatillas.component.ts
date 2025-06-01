@@ -2,6 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartService } from '../cart.service';
+import { NotificacionService } from '../notificacion.service';
 
 @Component({
   selector: 'app-top-zapatillas',
@@ -14,6 +15,7 @@ export class TopZapatillasComponent {
   zapatillas: any[] = [];
   mainImageIndexes: number[] = [];
   private cartService = inject(CartService);
+  private notiSrv = inject(NotificacionService);
 
   async ngOnInit() {
     // Llama a la API para obtener las más votadas, pero si no hay votos, muestra las 4 primeras SOLO de zapatillas
@@ -48,15 +50,15 @@ export class TopZapatillasComponent {
   async addToCart(productId: string) {
     const token = localStorage.getItem('token');
     if (!token) {
-      alert('Debes iniciar sesión para añadir productos al carrito');
+      this.notiSrv.mostrar({ mensaje: 'Debes iniciar sesión para añadir productos al carrito', tipo: 'warning' });
       return;
     }
     try {
       await this.cartService.addToCart(productId, 1, token);
       this.cartService.notifyCartUpdated();
-      alert('Producto añadido al carrito');
+      this.notiSrv.mostrar({ mensaje: 'Producto añadido al carrito', tipo: 'success' });
     } catch (e) {
-      alert('Error al añadir al carrito');
+      this.notiSrv.mostrar({ mensaje: 'Error al añadir al carrito', tipo: 'error' });
     }
   }
 }
