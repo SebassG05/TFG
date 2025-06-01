@@ -138,4 +138,8 @@ export class Balon3dComponent implements OnInit, OnDestroy {
       this.notiSrv.mostrar({ mensaje: 'Error al añadir al carrito', tipo: 'error' });
     }
   }
+
+  irACoomingSoon() {
+    window.location.href = '/coomingsoon';
+  }
 }
