@@ -73,3 +73,59 @@ input[type="color"] {
   gap: 32px;
   z-index: 10;
 }
+
+/* iPhone 14 Pro */
+@media (max-width: 400px) {
+  .btn-carrito{
+    max-width: 180px;
+    width: 100%;
+    margin-top: 430px;
+  }
+  .btn-siguiente {
+    max-width: 150px;
+    width: 100%;
+    margin-top: 430px;
+  }
+
+  canvas{
+    width: 300px;
+    height: 300px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 0 60px 20px var(--balon-aura, gold), 0 0 0 8px rgba(255,255,255,0.1);
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+}
+
+/* Pixel 7 Pro */
+@media (min-width: 460px) and (max-width: 480px){
+  .btn-carrito{
+    max-width: 180px;
+    width: 100%;
+    margin-top: 590px;
+  }
+  .btn-siguiente {
+    max-width: 150px;
+    width: 100%;
+    margin-top: 590px;
+  }
+}
+
+/* iPad Pro 11 */
+@media (min-width: 580px) and (max-width: 900px) {
+  .btn-carrito{
+    max-width: 180px;
+    width: 100%;
+    margin-top: 400px;
+  }
+  .btn-siguiente {
+    max-width: 150px;
+    width: 100%;
+    margin-top: 400px;
+  }
+
+  canvas{
+    margin-top: 70px;
+  }
+}

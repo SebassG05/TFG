@@ -88,3 +88,55 @@
     margin-top: 24px;
   }
 }
+
+/* iPhone 14 Pro */
+@media (max-width: 400px) {
+  .balon-sueno-container {
+    max-width: 350px;
+  }
+  .balon-sueno-content h2 {
+    font-size: 1.5rem;
+  }
+  .balon-sueno-content p {
+    font-size: 0.95rem;
+  }
+  .balon-sueno-img img {
+    max-width: 140px;
+  }
+}
+
+/* Pixel 7 Pro */
+@media (min-width: 460px) and (max-width: 480px){
+  .balon-sueno-container {
+    max-width: 400px;
+    padding: 32px 16px;
+    min-height: 360px;
+  }
+  .balon-sueno-content h2 {
+    font-size: 1.7rem;
+  }
+  .balon-sueno-content p {
+    font-size: 1rem;
+  }
+  .balon-sueno-img img {
+    max-width: 160px;
+  }
+}
+
+/* iPad Pro 11 */
+@media (min-width: 580px) and (max-width: 900px) {
+  .balon-sueno-container {
+    max-width: 500px;
+    padding: 40px 24px;
+    min-height: 400px;
+  }
+  .balon-sueno-content h2 {
+    font-size: 2.8rem;
+  }
+  .balon-sueno-content p {
+    font-size: 1.25rem;
+  }
+  .balon-sueno-img img {
+    max-width: 260px;
+  }
+}
