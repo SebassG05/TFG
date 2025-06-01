@@ -4,13 +4,14 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NotificacionService } from '../notificacion.service';
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-productos',
   standalone: true,
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css'],
-  imports: [NgFor, NgIf, FormsModule, RouterModule]
+  imports: [NgFor, NgIf, FormsModule, RouterModule, FooterComponent]
 })
 export class ProductosComponent {
   productos: any[] = [];

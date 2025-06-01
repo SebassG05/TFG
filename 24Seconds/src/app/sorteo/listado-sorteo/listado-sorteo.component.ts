@@ -1,11 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NotificacionService } from '../../notificacion.service';
+import { FooterComponent } from '../../footer/footer.component';
 
 @Component({
   selector: 'app-listado-sorteo',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, DatePipe, FooterComponent],
   templateUrl: './listado-sorteo.component.html',
   styleUrls: ['./listado-sorteo.component.css']
 })

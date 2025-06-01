@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
   templateUrl: './contacto.component.html',
   styleUrls: ['./contacto.component.css'],
-  imports: [FormsModule, NgIf]
+  imports: [FormsModule, NgIf, FooterComponent]
 })
 export class ContactoComponent {
   sugerencia: string = '';

@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ZapatillaService } from '../../zapatilla.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NotificacionService } from '../../notificacion.service';
+import { FooterComponent } from "../../footer/footer.component";
 
 @Component({
   selector: 'app-votacion',
   standalone: true,
   templateUrl: './votacion.component.html',
   styleUrls: ['./votacion.component.css'],
-  imports: [CommonModule, HttpClientModule]
+  imports: [CommonModule, HttpClientModule, FooterComponent]
 })
 export class VotacionComponent implements OnInit {
   zapatillas: any[] = [];
