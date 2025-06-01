@@ -1,9 +1,5 @@
 @import '../../home/home.component.css';
 
-.crear-container {
-  /* ...tus estilos aquí... */
-}
-
 /* Fondo de home reutilizado */
 .home-bg-exclusive {
   position: fixed;

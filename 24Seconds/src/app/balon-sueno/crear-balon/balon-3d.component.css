@@ -64,7 +64,7 @@ input[type="color"] {
   color: #222;
 }
 .balon3d-actions-bottom {
-  position: fixed;
+  margin-top: 38vw;
   left: 0;
   right: 0;
   bottom: 48px;
