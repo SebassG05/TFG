@@ -81,6 +81,7 @@
   text-decoration: none;
   font-weight: 600;
   transition: color 0.18s;
+  cursor: pointer; /* Cambia el cursor a manita en hover */
 }
 .footer-links a:hover {
   color: #dd09ba;
