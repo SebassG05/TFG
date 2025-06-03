@@ -5,5 +5,5 @@
   ],
   "cleanUrls": true,
   "trailingSlash": false,
-  "outputDirectory": "dist/24-seconds"
+  "outputDirectory": "dist/24-seconds/browser"
 }
