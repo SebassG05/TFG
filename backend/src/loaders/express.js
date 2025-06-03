@@ -5,12 +5,9 @@ import indexRoutes from '../routes/indexRoutes.js';
 import { swaggerUi, swaggerSpec } from '../config/swagger.js';
 
 const expressLoader = (app) => {
+    // Permitir todos los orígenes temporalmente para descartar problemas de CORS
     app.use(cors({
-        origin: [
-            'http://localhost:4200',
-            'https://tfg-jirn-8zpoxhfqo-sebas-projects-2fad30d5.vercel.app'
-        ],
-        credentials: true
+        origin: '*'
     }));
     app.use(express.json());
     app.use(cookieParser());
