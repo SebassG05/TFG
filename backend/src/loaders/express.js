@@ -6,7 +6,10 @@ import { swaggerUi, swaggerSpec } from '../config/swagger.js';
 
 const expressLoader = (app) => {
     app.use(cors({
-        origin: 'http://localhost:4200', // Permite peticiones desde tu frontend Angular
+        origin: [
+            'http://localhost:4200',
+            'https://tfg-jirn-8zpoxhfqo-sebas-projects-2fad30d5.vercel.app'
+        ],
         credentials: true
     }));
     app.use(express.json());
