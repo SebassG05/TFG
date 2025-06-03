@@ -25,7 +25,7 @@ export class AdminSorteosComponent implements OnInit {
       this.isMobile = window.innerWidth <= 700;
     });
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:4001/api/sorteos/all', {
+    const res = await fetch('https://tfg-z7pz.onrender.com/api/sorteos/all', {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
     });
     if (res.ok) {
@@ -103,7 +103,7 @@ export class AdminSorteosComponent implements OnInit {
         texto: 'Eliminar',
         callback: async () => {
           const token = localStorage.getItem('token');
-          const res = await fetch(`http://localhost:4001/api/sorteos/${id}`, {
+          const res = await fetch(`https://tfg-z7pz.onrender.com/api/sorteos/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
           });

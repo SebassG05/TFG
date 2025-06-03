@@ -40,13 +40,13 @@ export class FormularioZapaidealComponent implements AfterViewInit {
 
   async finalizarTest() {
     // Obtener todas las zapatillas
-    const res = await fetch('http://localhost:4001/api/products/search');
+    const res = await fetch('https://tfg-z7pz.onrender.com/api/products/search');
     let zapatillas = [];
     if (res.ok) {
       zapatillas = await res.json();
     }
     // Llamar a la IA real en el backend
-    const iaRes = await fetch('http://localhost:4001/api/ia/recomendar-zapatilla', {
+    const iaRes = await fetch('https://tfg-z7pz.onrender.com/api/ia/recomendar-zapatilla', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ respuestas: this.respuestas, zapatillas })

@@ -17,7 +17,7 @@ export class PerfilComponent implements OnInit {
     this.loading = true;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:4001/api/auth/profile', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('No se pudo cargar el perfil');

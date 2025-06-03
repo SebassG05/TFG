@@ -120,7 +120,7 @@ export class Balon3dComponent implements OnInit, OnDestroy {
     }
     try {
       // 1. Crear producto personalizado
-      const res = await fetch('http://localhost:4001/api/products/custom-ball', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/products/custom-ball', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

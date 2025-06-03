@@ -59,13 +59,13 @@ export class AdminInscripcionesComponent implements OnInit {
     this.cargando = true;
     const token = localStorage.getItem('token');
     if (this.vista === 'eventos') {
-      const res = await fetch('http://localhost:4001/api/admin/inscripciones/eventos', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/admin/inscripciones/eventos', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       this.inscripcionesEventos = res.ok ? await res.json() : [];
       this.totalPaginasEventos = Math.max(1, Math.ceil(this.inscripcionesEventos.length / this.inscripcionesPorPagina));
     } else {
-      const res = await fetch('http://localhost:4001/api/admin/inscripciones/sorteos', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/admin/inscripciones/sorteos', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       this.inscripcionesSorteos = res.ok ? await res.json() : [];

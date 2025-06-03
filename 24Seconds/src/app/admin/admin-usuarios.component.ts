@@ -94,7 +94,7 @@ export class AdminUsuariosComponent implements OnInit, AfterViewInit {
 
   cargarUsuarios = async () => {
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:4001/api/admin/usuarios', {
+    const res = await fetch('https://tfg-z7pz.onrender.com/api/admin/usuarios', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -171,7 +171,7 @@ export class AdminUsuariosComponent implements OnInit, AfterViewInit {
         texto: 'Eliminar',
         callback: async () => {
           const token = localStorage.getItem('token');
-          const res = await fetch(`http://localhost:4001/api/admin/usuarios/${id}`, {
+          const res = await fetch(`https://tfg-z7pz.onrender.com/api/admin/usuarios/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
           });

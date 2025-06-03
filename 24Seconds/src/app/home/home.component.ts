@@ -25,7 +25,7 @@ export class HomeComponent {
   constructor(private router: Router) {}
 
   logout() {
-    fetch('http://localhost:4001/api/auth/logout', {
+    fetch('https://tfg-z7pz.onrender.com/api/auth/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

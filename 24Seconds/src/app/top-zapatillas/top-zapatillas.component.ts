@@ -20,7 +20,7 @@ export class TopZapatillasComponent {
   async ngOnInit() {
     // Llama a la API para obtener las más votadas, pero si no hay votos, muestra las 4 primeras SOLO de zapatillas
     try {
-      const res = await fetch('http://localhost:4001/api/products/top');
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/products/top');
       if (res.ok) {
         let data = await res.json();
         // Filtrar solo zapatillas (por category === 'shoe')
@@ -28,7 +28,7 @@ export class TopZapatillasComponent {
         if (data.length >= 4) {
           this.zapatillas = data.slice(0, 4);
         } else {
-          const resAll = await fetch('http://localhost:4001/api/products/search');
+          const resAll = await fetch('https://tfg-z7pz.onrender.com/api/products/search');
           if (resAll.ok) {
             let all = await resAll.json();
             all = all.filter((p: any) => p.category && p.category.toLowerCase() === 'shoe');

@@ -91,7 +91,7 @@ export class CrearSorteoComponent implements AfterViewInit {
       if (this.sorteoForm.get('image')?.value) {
         formData.append('image', this.sorteoForm.get('image')?.value);
       }
-      fetch('http://localhost:4001/sorteos', {
+      fetch('https://tfg-z7pz.onrender.com/sorteos', {
         method: 'POST',
         body: formData,
         credentials: 'include',

@@ -49,7 +49,7 @@ export class AdminProveedoresComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     const token = localStorage.getItem('token');
-    fetch('http://localhost:4001/api/auth/proveedores-pendientes', {
+    fetch('https://tfg-z7pz.onrender.com/api/auth/proveedores-pendientes', {
       headers: token ? { 'Authorization': 'Bearer ' + token } : {}
     })
       .then(async res => {
@@ -117,7 +117,7 @@ export class AdminProveedoresComponent implements OnInit, AfterViewInit {
 
   aprobarProveedor(id: string) {
     const token = localStorage.getItem('token');
-    fetch('http://localhost:4001/api/auth/approve-proveedor', {
+    fetch('https://tfg-z7pz.onrender.com/api/auth/approve-proveedor', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ export class AdminProveedoresComponent implements OnInit, AfterViewInit {
 
   denegarProveedor(id: string) {
     const token = localStorage.getItem('token');
-    fetch('http://localhost:4001/api/auth/reject-proveedor', {
+    fetch('https://tfg-z7pz.onrender.com/api/auth/reject-proveedor', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

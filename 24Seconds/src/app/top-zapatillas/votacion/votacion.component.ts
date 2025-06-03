@@ -38,7 +38,7 @@ export class VotacionComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (!token) return;
     try {
-      const res = await fetch('http://localhost:4001/api/auth/profile', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/profile', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {

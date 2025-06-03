@@ -44,7 +44,7 @@ export class ProductosComponent {
 
   async cargarProductos(filtrar = false) {
     this.cargando = true;
-    let url = 'http://localhost:4001/api/products/search?';
+    let url = 'https://tfg-z7pz.onrender.com/api/products/search?';
     if (filtrar) {
       if (this.filtros.nombre) url += `name=${encodeURIComponent(this.filtros.nombre)}&`;
       if (this.filtros.marca) url += `brand=${encodeURIComponent(this.filtros.marca)}&`;
@@ -77,7 +77,7 @@ export class ProductosComponent {
       return;
     }
     try {
-      const res = await fetch('http://localhost:4001/api/cart/add', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

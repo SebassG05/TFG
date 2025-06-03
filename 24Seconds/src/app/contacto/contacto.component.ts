@@ -23,7 +23,7 @@ export class ContactoComponent {
       return;
     }
     try {
-      const res = await fetch('http://localhost:4001/api/sugerencias', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/sugerencias', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: this.email, mensaje: this.sugerencia })

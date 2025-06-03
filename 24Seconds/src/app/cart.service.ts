@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private apiUrl = 'http://localhost:4001/api/cart';
+  private apiUrl = 'https://tfg-z7pz.onrender.com/api/cart';
   cartUpdated$ = new Subject<void>();
 
   async getCart(token: string) {
@@ -43,7 +43,7 @@ export class CartService {
   }
 
   async checkoutCart(token: string) {
-    const res = await fetch('http://localhost:4001/api/payments/create', {
+    const res = await fetch('https://tfg-z7pz.onrender.com/api/payments/create', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({})

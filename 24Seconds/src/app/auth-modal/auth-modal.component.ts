@@ -53,7 +53,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
   async login() {
     const body: any = { email: this.email, password: this.password };
     try {
-      const res = await fetch('http://localhost:4001/api/auth/login', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -80,7 +80,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
     };
     if (this.isProveedor) body.proveedorData = this.proveedorData;
     try {
-      const res = await fetch('http://localhost:4001/api/auth/register', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -105,7 +105,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
     if (!this.proveedorId) return;
     this.approvalInterval = setInterval(async () => {
       try {
-        const res = await fetch(`http://localhost:4001/api/auth/proveedor-status/${this.proveedorId}`);
+        const res = await fetch(`https://tfg-z7pz.onrender.com/api/auth/proveedor-status/${this.proveedorId}`);
         const data = await res.json();
         console.log('Proveedor status polling:', data); // DEBUG
         if (res.ok && data.status) {
@@ -120,7 +120,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
 
   async forgotPassword() {
     try {
-      const res = await fetch('http://localhost:4001/api/auth/forgot-password', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: this.forgotEmail })

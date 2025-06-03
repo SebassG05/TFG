@@ -42,7 +42,7 @@ export class ProductManagementComponent implements OnInit, AfterViewInit {
   async ngOnInit() {
     const token = localStorage.getItem('token');
     if (!token) return;
-    const res = await fetch('http://localhost:4001/api/products/mis-productos', {
+    const res = await fetch('https://tfg-z7pz.onrender.com/api/products/mis-productos', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -113,7 +113,7 @@ export class ProductManagementComponent implements OnInit, AfterViewInit {
   async eliminarProducto(id: string) {
     if (!confirm('¿Seguro que quieres eliminar este producto?')) return;
     const token = localStorage.getItem('token');
-    const res = await fetch(`http://localhost:4001/api/products/delete/${id}`, {
+    const res = await fetch(`https://tfg-z7pz.onrender.com/api/products/delete/${id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     });
@@ -159,7 +159,7 @@ export class ProductManagementComponent implements OnInit, AfterViewInit {
     formData.append('image', file);
     const token = localStorage.getItem('token');
     // Puedes tener un endpoint específico para subir imagen, aquí se asume update
-    const res = await fetch(`http://localhost:4001/api/products/update/${producto._id}`, {
+    const res = await fetch(`https://tfg-z7pz.onrender.com/api/products/update/${producto._id}`, {
       method: 'PUT',
       headers: { 'Authorization': `Bearer ${token}` },
       body: formData
@@ -181,7 +181,7 @@ export class ProductManagementComponent implements OnInit, AfterViewInit {
 
   async guardarCampo(producto: any) {
     const token = localStorage.getItem('token');
-    await fetch(`http://localhost:4001/api/products/update/${producto._id}`, {
+    await fetch(`https://tfg-z7pz.onrender.com/api/products/update/${producto._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

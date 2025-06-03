@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ZapatillaService {
-  private apiUrl = 'http://localhost:4001/api/products';
+  private apiUrl = 'https://tfg-z7pz.onrender.com/api/products';
 
   constructor(private http: HttpClient) {}
 

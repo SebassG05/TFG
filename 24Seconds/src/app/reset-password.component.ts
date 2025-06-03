@@ -35,7 +35,7 @@ export class ResetPasswordComponent {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:4001/api/auth/reset-password/${token}`, {
+      const res = await fetch(`https://tfg-z7pz.onrender.com/api/auth/reset-password/${token}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newPassword: this.newPassword, confirmPassword: this.confirmPassword })

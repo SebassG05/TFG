@@ -145,7 +145,7 @@ export class CrearProductoComponent implements AfterViewInit {
     orderedImages.forEach(img => formData.append('images', img));
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:4001/api/products/create', {
+      const res = await fetch('https://tfg-z7pz.onrender.com/api/products/create', {
         method: 'POST',
         headers: token ? { 'Authorization': 'Bearer ' + token } : {},
         body: formData

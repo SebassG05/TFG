@@ -20,7 +20,7 @@ export class ListadoSorteoComponent implements OnInit {
   async ngOnInit() {
     this.cargando = true;
     const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:4001/api/sorteos/public/all', {
+    const res = await fetch('https://tfg-z7pz.onrender.com/api/sorteos/public/all', {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
     });
     const data = await res.json();
@@ -30,7 +30,7 @@ export class ListadoSorteoComponent implements OnInit {
     // Marcar sorteos como inscritos si el usuario ya está apuntado
     if (token) {
       try {
-        const perfilRes = await fetch('http://localhost:4001/api/auth/profile', {
+        const perfilRes = await fetch('https://tfg-z7pz.onrender.com/api/auth/profile', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (perfilRes.ok) {
@@ -59,7 +59,7 @@ export class ListadoSorteoComponent implements OnInit {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:4001/api/sorteos/${sorteo._id}/inscribirse`, {
+      const res = await fetch(`https://tfg-z7pz.onrender.com/api/sorteos/${sorteo._id}/inscribirse`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });

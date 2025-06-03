@@ -28,7 +28,7 @@ export class ProveedorComponent implements AfterViewInit, OnInit {
   async ngOnInit() {
     const token = localStorage.getItem('token');
     if (!token) return;
-    const res = await fetch('http://localhost:4001/api/auth/profile', {
+    const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/profile', {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -70,7 +70,7 @@ export class ProveedorComponent implements AfterViewInit, OnInit {
   }
 
   logout() {
-    fetch('http://localhost:4001/api/auth/logout', {
+    fetch('https://tfg-z7pz.onrender.com/api/auth/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
