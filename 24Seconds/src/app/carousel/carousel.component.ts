@@ -53,7 +53,7 @@ export class CarouselComponent {
     this.current = i;
   }
   goToProductos() {
-    window.location.href = 'http://localhost:4200/productos';
+    window.location.href = '/productos';
   }
   isMobile(): boolean {
     return window.innerWidth <= 700;

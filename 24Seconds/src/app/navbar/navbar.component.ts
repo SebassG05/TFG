@@ -96,7 +96,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   goToEventosInscripcion(event: Event) {
     event.preventDefault();
-    window.location.href = 'http://localhost:4200/eventos/inscripcion';
+    window.location.href = '/eventos/inscripcion';
   }
 
   isEventosActive(): boolean {
