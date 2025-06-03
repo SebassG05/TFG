@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { API_URL } from './api-url';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private apiUrl = 'https://tfg-z7pz.onrender.com/api/cart';
+  private apiUrl = `${API_URL}/cart`;
   cartUpdated$ = new Subject<void>();
 
   async getCart(token: string) {
@@ -43,7 +44,7 @@ export class CartService {
   }
 
   async checkoutCart(token: string) {
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/payments/create', {
+    const res = await fetch(`${API_URL}/payments/create`, {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({})

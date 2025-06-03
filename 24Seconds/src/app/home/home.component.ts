@@ -11,6 +11,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { NgIf } from '@angular/common';
 import { NotificacionService } from '../notificacion.service';
 import { inject } from '@angular/core';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,7 @@ export class HomeComponent {
   constructor(private router: Router) {}
 
   logout() {
-    fetch('https://tfg-z7pz.onrender.com/api/auth/logout', {
+    fetch(`${API_URL}/auth/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

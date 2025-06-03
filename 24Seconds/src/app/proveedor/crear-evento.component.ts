@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-crear-evento',
@@ -117,7 +118,7 @@ export class CrearEventoComponent implements AfterViewInit {
       formData.append('eventDate', this.eventoForm.get('eventDate')?.value);
       formData.append('img', this.eventoForm.get('img')?.value);
 
-      fetch('https://tfg-z7pz.onrender.com/api/events/create', {
+      fetch(`${API_URL}/events/create`, {
         method: 'POST',
         body: formData,
         credentials: 'include',

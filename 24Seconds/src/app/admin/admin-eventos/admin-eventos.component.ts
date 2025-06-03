@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf, DatePipe } from '@angular/common';
 import { NotificacionService } from '../../notificacion.service';
+import { API_URL } from '../../api-url';
 
 @Component({
   selector: 'app-admin-eventos',
@@ -40,7 +41,7 @@ export class AdminEventosComponent implements OnInit {
       this.isMobile = window.innerWidth <= 700;
     });
     const token = localStorage.getItem('token');
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/events/all', {
+    const res = await fetch(`${API_URL}/events/all`, {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
     });
     if (res.ok) {
@@ -109,7 +110,7 @@ export class AdminEventosComponent implements OnInit {
         texto: 'Eliminar',
         callback: async () => {
           const token = localStorage.getItem('token');
-          const res = await fetch(`https://tfg-z7pz.onrender.com/api/events/delete/${id}`, {
+          const res = await fetch(`${API_URL}/events/delete/${id}`, {
             method: 'DELETE',
             headers: token ? { 'Authorization': `Bearer ${token}` } : {}
           });

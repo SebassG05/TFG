@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { NotificacionService } from '../notificacion.service';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-admin-proveedores',
@@ -49,7 +50,7 @@ export class AdminProveedoresComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     const token = localStorage.getItem('token');
-    fetch('https://tfg-z7pz.onrender.com/api/auth/proveedores-pendientes', {
+    fetch(`${API_URL}/auth/proveedores-pendientes`, {
       headers: token ? { 'Authorization': 'Bearer ' + token } : {}
     })
       .then(async res => {
@@ -117,7 +118,7 @@ export class AdminProveedoresComponent implements OnInit, AfterViewInit {
 
   aprobarProveedor(id: string) {
     const token = localStorage.getItem('token');
-    fetch('https://tfg-z7pz.onrender.com/api/auth/approve-proveedor', {
+    fetch(`${API_URL}/auth/approve-proveedor`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -131,7 +132,7 @@ export class AdminProveedoresComponent implements OnInit, AfterViewInit {
 
   denegarProveedor(id: string) {
     const token = localStorage.getItem('token');
-    fetch('https://tfg-z7pz.onrender.com/api/auth/reject-proveedor', {
+    fetch(`${API_URL}/auth/reject-proveedor`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

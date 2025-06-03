@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf, DatePipe } from '@angular/common';
 import { NotificacionService } from '../../notificacion.service';
+import { API_URL } from '../../api-url';
 
 @Component({
   selector: 'app-admin-sorteos',
@@ -25,7 +26,7 @@ export class AdminSorteosComponent implements OnInit {
       this.isMobile = window.innerWidth <= 700;
     });
     const token = localStorage.getItem('token');
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/sorteos/all', {
+    const res = await fetch(`${API_URL}/sorteos/all`, {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
     });
     if (res.ok) {
@@ -103,7 +104,7 @@ export class AdminSorteosComponent implements OnInit {
         texto: 'Eliminar',
         callback: async () => {
           const token = localStorage.getItem('token');
-          const res = await fetch(`https://tfg-z7pz.onrender.com/api/sorteos/${id}`, {
+          const res = await fetch(`${API_URL}/sorteos/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
           });

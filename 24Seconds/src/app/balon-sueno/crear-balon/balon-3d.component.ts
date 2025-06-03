@@ -9,6 +9,7 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../cart.service';
 import { NotificacionService } from '../../notificacion.service';
+import { API_URL } from '../../api-url';
 
 @Component({
   selector: 'app-balon-3d',
@@ -120,7 +121,7 @@ export class Balon3dComponent implements OnInit, OnDestroy {
     }
     try {
       // 1. Crear producto personalizado
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/products/custom-ball', {
+      const res = await fetch(`${API_URL}/products/custom-ball`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NotificacionService } from '../../notificacion.service';
 import { FooterComponent } from '../../footer/footer.component';
+import { API_URL } from '../../api-url';
 
 @Component({
   selector: 'app-listado-sorteo',
@@ -20,7 +21,7 @@ export class ListadoSorteoComponent implements OnInit {
   async ngOnInit() {
     this.cargando = true;
     const token = localStorage.getItem('token');
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/sorteos/public/all', {
+    const res = await fetch(`${API_URL}/sorteos/public/all`, {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
     });
     const data = await res.json();
@@ -30,7 +31,7 @@ export class ListadoSorteoComponent implements OnInit {
     // Marcar sorteos como inscritos si el usuario ya está apuntado
     if (token) {
       try {
-        const perfilRes = await fetch('https://tfg-z7pz.onrender.com/api/auth/profile', {
+        const perfilRes = await fetch(`${API_URL}/auth/profile`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (perfilRes.ok) {
@@ -59,7 +60,7 @@ export class ListadoSorteoComponent implements OnInit {
       return;
     }
     try {
-      const res = await fetch(`https://tfg-z7pz.onrender.com/api/sorteos/${sorteo._id}/inscribirse`, {
+      const res = await fetch(`${API_URL}/sorteos/${sorteo._id}/inscribirse`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });

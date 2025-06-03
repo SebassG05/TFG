@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgFor, NgIf, DatePipe } from '@angular/common';
 import { NotificacionService } from '../notificacion.service';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-admin-usuarios',
@@ -94,7 +95,7 @@ export class AdminUsuariosComponent implements OnInit, AfterViewInit {
 
   cargarUsuarios = async () => {
     const token = localStorage.getItem('token');
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/admin/usuarios', {
+    const res = await fetch(`${API_URL}/admin/usuarios`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -171,7 +172,7 @@ export class AdminUsuariosComponent implements OnInit, AfterViewInit {
         texto: 'Eliminar',
         callback: async () => {
           const token = localStorage.getItem('token');
-          const res = await fetch(`https://tfg-z7pz.onrender.com/api/admin/usuarios/${id}`, {
+          const res = await fetch(`${API_URL}/admin/usuarios/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
           });

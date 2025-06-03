@@ -3,6 +3,7 @@ import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartService } from '../cart.service';
 import { NotificacionService } from '../notificacion.service';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-top-zapatillas',
@@ -20,7 +21,7 @@ export class TopZapatillasComponent {
   async ngOnInit() {
     // Llama a la API para obtener las más votadas, pero si no hay votos, muestra las 4 primeras SOLO de zapatillas
     try {
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/products/top');
+      const res = await fetch(`${API_URL}/products/top`);
       if (res.ok) {
         let data = await res.json();
         // Filtrar solo zapatillas (por category === 'shoe')
@@ -28,7 +29,7 @@ export class TopZapatillasComponent {
         if (data.length >= 4) {
           this.zapatillas = data.slice(0, 4);
         } else {
-          const resAll = await fetch('https://tfg-z7pz.onrender.com/api/products/search');
+          const resAll = await fetch(`${API_URL}/products/search`);
           if (resAll.ok) {
             let all = await resAll.json();
             all = all.filter((p: any) => p.category && p.category.toLowerCase() === 'shoe');

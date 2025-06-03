@@ -5,6 +5,7 @@ import { ZapatillaService } from '../../zapatilla.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NotificacionService } from '../../notificacion.service';
 import { FooterComponent } from "../../footer/footer.component";
+import { API_URL } from '../../api-url';
 
 @Component({
   selector: 'app-votacion',
@@ -38,7 +39,7 @@ export class VotacionComponent implements OnInit {
     const token = localStorage.getItem('token');
     if (!token) return;
     try {
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/profile', {
+      const res = await fetch(`${API_URL}/auth/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {

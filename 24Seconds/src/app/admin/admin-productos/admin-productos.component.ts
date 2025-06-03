@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgFor, NgIf, CurrencyPipe } from '@angular/common';
 import { NotificacionService } from '../../notificacion.service';
+import { API_URL } from '../../api-url';
 
 @Component({
   selector: 'app-admin-productos',
@@ -51,7 +52,7 @@ export class AdminProductosComponent implements OnInit, AfterViewInit {
   async cargarProductos() {
     const token = localStorage.getItem('token');
     // Obtener productos y poblar el proveedor
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/products/search', {
+    const res = await fetch(`${API_URL}/products/search`, {
       headers: token ? { 'Authorization': `Bearer ${token}` } : {}
     });
     if (res.ok) {
@@ -61,7 +62,7 @@ export class AdminProductosComponent implements OnInit, AfterViewInit {
       // Si los productos no traen el proveedor poblado, hacer fetch extra
       if (productos.length && productos[0].proveedor && typeof productos[0].proveedor === 'string') {
         // Hacer fetch de proveedores y mapear
-        const usersRes = await fetch('https://tfg-z7pz.onrender.com/api/admin/usuarios', {
+        const usersRes = await fetch(`${API_URL}/admin/usuarios`, {
           headers: token ? { 'Authorization': `Bearer ${token}` } : {}
         });
         if (usersRes.ok) {
@@ -85,7 +86,7 @@ export class AdminProductosComponent implements OnInit, AfterViewInit {
         texto: 'Eliminar',
         callback: async () => {
           const token = localStorage.getItem('token');
-          const res = await fetch(`https://tfg-z7pz.onrender.com/api/products/delete/${id}`, {
+          const res = await fetch(`${API_URL}/products/delete/${id}`, {
             method: 'DELETE',
             headers: token ? { 'Authorization': `Bearer ${token}` } : {}
           });

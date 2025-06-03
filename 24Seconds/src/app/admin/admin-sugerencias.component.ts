@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf, NgClass, DatePipe } from '@angular/common';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-admin-sugerencias',
@@ -18,7 +19,7 @@ export class AdminSugerenciasComponent implements OnInit {
   async ngOnInit() {
     this.loading = true;
     const token = localStorage.getItem('token');
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/sugerencias', {
+    const res = await fetch(`${API_URL}/sugerencias`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -89,7 +90,7 @@ export class AdminSugerenciasComponent implements OnInit {
 
   async cambiarEstado(id: string, estado: 'realizada' | 'rechazada') {
     const token = localStorage.getItem('token');
-    const res = await fetch(`https://tfg-z7pz.onrender.com/api/sugerencias/${id}/estado`, {
+    const res = await fetch(`${API_URL}/sugerencias/${id}/estado`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ estado })

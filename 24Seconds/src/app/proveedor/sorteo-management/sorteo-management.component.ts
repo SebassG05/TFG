@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgIf, NgFor, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { API_URL } from '../../api-url';
 
 @Component({
   selector: 'app-sorteo-management',
@@ -41,7 +42,7 @@ export class SorteoManagementComponent implements OnInit, AfterViewInit {
     window.addEventListener('resize', this.checkIsMobile.bind(this));
     const token = localStorage.getItem('token');
     if (!token) return;
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/sorteos/mis-sorteos', {
+    const res = await fetch(`${API_URL}/sorteos/mis-sorteos`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -60,7 +61,7 @@ export class SorteoManagementComponent implements OnInit, AfterViewInit {
   async eliminarSorteo(id: string) {
     if (!confirm('¿Seguro que quieres eliminar este sorteo?')) return;
     const token = localStorage.getItem('token');
-    const res = await fetch(`https://tfg-z7pz.onrender.com/api/sorteos/${id}`, {
+    const res = await fetch(`${API_URL}/sorteos/${id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     });
@@ -120,7 +121,7 @@ export class SorteoManagementComponent implements OnInit, AfterViewInit {
 
   async guardarCampo(sorteo: any) {
     const token = localStorage.getItem('token');
-    await fetch(`https://tfg-z7pz.onrender.com/api/sorteos/${sorteo._id}`,
+    await fetch(`${API_URL}/sorteos/${sorteo._id}`,
       {
         method: 'PUT',
         headers: {

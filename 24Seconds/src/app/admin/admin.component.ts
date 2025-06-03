@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AdminMobileNavbarComponent } from './admin-mobile-navbar/admin-mobile-navbar.component';
 import { NotificacionService } from '../notificacion.service';
 import { inject } from '@angular/core';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-admin',
@@ -78,7 +79,7 @@ export class AdminComponent {
   }
 
   logout() {
-    fetch('https://tfg-z7pz.onrender.com/api/auth/logout', {
+    fetch(`${API_URL}/auth/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

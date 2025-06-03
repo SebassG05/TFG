@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { FooterComponent } from "../footer/footer.component";
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-contacto',
@@ -23,7 +24,7 @@ export class ContactoComponent {
       return;
     }
     try {
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/sugerencias', {
+      const res = await fetch(`${API_URL}/sugerencias`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: this.email, mensaje: this.sugerencia })

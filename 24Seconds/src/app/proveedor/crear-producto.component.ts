@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-crear-producto',
@@ -145,7 +146,7 @@ export class CrearProductoComponent implements AfterViewInit {
     orderedImages.forEach(img => formData.append('images', img));
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/products/create', {
+      const res = await fetch(`${API_URL}/products/create`, {
         method: 'POST',
         headers: token ? { 'Authorization': 'Bearer ' + token } : {},
         body: formData

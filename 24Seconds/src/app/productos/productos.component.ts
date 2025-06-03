@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { NotificacionService } from '../notificacion.service';
 import { FooterComponent } from "../footer/footer.component";
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-productos',
@@ -44,7 +45,7 @@ export class ProductosComponent {
 
   async cargarProductos(filtrar = false) {
     this.cargando = true;
-    let url = 'https://tfg-z7pz.onrender.com/api/products/search?';
+    let url = `${API_URL}/products/search?`;
     if (filtrar) {
       if (this.filtros.nombre) url += `name=${encodeURIComponent(this.filtros.nombre)}&`;
       if (this.filtros.marca) url += `brand=${encodeURIComponent(this.filtros.marca)}&`;
@@ -77,7 +78,7 @@ export class ProductosComponent {
       return;
     }
     try {
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/cart/add', {
+      const res = await fetch(`${API_URL}/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

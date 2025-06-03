@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgIf, NgFor, DatePipe } from '@angular/common';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-perfil',
@@ -17,7 +18,7 @@ export class PerfilComponent implements OnInit {
     this.loading = true;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/profile', {
+      const res = await fetch(`${API_URL}/auth/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('No se pudo cargar el perfil');

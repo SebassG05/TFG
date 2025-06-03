@@ -2,6 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-crear-sorteo',
@@ -91,7 +92,7 @@ export class CrearSorteoComponent implements AfterViewInit {
       if (this.sorteoForm.get('image')?.value) {
         formData.append('image', this.sorteoForm.get('image')?.value);
       }
-      fetch('https://tfg-z7pz.onrender.com/sorteos', {
+      fetch(`${API_URL}/sorteos`, {
         method: 'POST',
         body: formData,
         credentials: 'include',

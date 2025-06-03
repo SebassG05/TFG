@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { API_URL } from './api-url';
 
 @Injectable({ providedIn: 'root' })
 export class ZapatillaService {
-  private apiUrl = 'https://tfg-z7pz.onrender.com/api/products';
+  private apiUrl = `${API_URL}/products`;
 
   constructor(private http: HttpClient) {}
 

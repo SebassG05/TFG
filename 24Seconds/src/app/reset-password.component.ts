@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { API_URL } from './api-url';
 
 @Component({
   selector: 'app-reset-password',
@@ -35,7 +36,7 @@ export class ResetPasswordComponent {
       return;
     }
     try {
-      const res = await fetch(`https://tfg-z7pz.onrender.com/api/auth/reset-password/${token}`, {
+      const res = await fetch(`${API_URL}/auth/reset-password/${token}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newPassword: this.newPassword, confirmPassword: this.confirmPassword })

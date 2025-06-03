@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificacionService } from '../../notificacion.service';
 import { FooterComponent } from '../../footer/footer.component';
+import { API_URL } from '../../api-url';
 
 @Component({
   selector: 'app-listado-eventos',
@@ -23,12 +24,12 @@ export class ListadoEventosComponent implements OnInit {
       const token = localStorage.getItem('token');
       let headers: any = {};
       if (token) headers['Authorization'] = `Bearer ${token}`;
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/events/all', { headers });
+      const res = await fetch(`${API_URL}/events/all`, { headers });
       if (!res.ok) throw new Error('No se pudieron cargar los eventos');
       this.eventos = await res.json();
       // Marcar eventos en los que el usuario ya está inscrito
       if (token) {
-        const perfilRes = await fetch('https://tfg-z7pz.onrender.com/api/auth/profile', { headers });
+        const perfilRes = await fetch(`${API_URL}/auth/profile`, { headers });
         if (perfilRes.ok) {
           const user = await perfilRes.json();
           const inscritos = user.registeredEvents?.map((ev: any) => ev._id) || [];
@@ -77,7 +78,7 @@ export class ListadoEventosComponent implements OnInit {
       return;
     }
     try {
-      const res = await fetch(`https://tfg-z7pz.onrender.com/api/events/register/${evento._id}`, {
+      const res = await fetch(`${API_URL}/events/register/${evento._id}`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });

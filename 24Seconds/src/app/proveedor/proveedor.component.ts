@@ -8,6 +8,7 @@ import { ProductManagementComponent } from './product-management/product-managem
 import { CommonModule } from '@angular/common';
 import { VotationTopratedComponent } from '../votation-toprated/votation-toprated.component';
 import { NotificacionService } from '../notificacion.service';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-proveedor',
@@ -28,7 +29,7 @@ export class ProveedorComponent implements AfterViewInit, OnInit {
   async ngOnInit() {
     const token = localStorage.getItem('token');
     if (!token) return;
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/profile', {
+    const res = await fetch(`${API_URL}/auth/profile`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -70,7 +71,7 @@ export class ProveedorComponent implements AfterViewInit, OnInit {
   }
 
   logout() {
-    fetch('https://tfg-z7pz.onrender.com/api/auth/logout', {
+    fetch(`${API_URL}/auth/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

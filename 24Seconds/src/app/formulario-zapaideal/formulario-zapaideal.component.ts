@@ -2,6 +2,7 @@ import { Component, inject, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../cart.service';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-formulario-zapaideal',
@@ -40,13 +41,13 @@ export class FormularioZapaidealComponent implements AfterViewInit {
 
   async finalizarTest() {
     // Obtener todas las zapatillas
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/products/search');
+    const res = await fetch(`${API_URL}/products/search`);
     let zapatillas = [];
     if (res.ok) {
       zapatillas = await res.json();
     }
     // Llamar a la IA real en el backend
-    const iaRes = await fetch('https://tfg-z7pz.onrender.com/api/ia/recomendar-zapatilla', {
+    const iaRes = await fetch(`${API_URL}/ia/recomendar-zapatilla`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ respuestas: this.respuestas, zapatillas })

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { Router } from '@angular/router';
+import { API_URL } from '../api-url';
 
 @Component({
   selector: 'app-auth-modal',
@@ -53,7 +54,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
   async login() {
     const body: any = { email: this.email, password: this.password };
     try {
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/login', {
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -80,7 +81,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
     };
     if (this.isProveedor) body.proveedorData = this.proveedorData;
     try {
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/register', {
+      const res = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -105,7 +106,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
     if (!this.proveedorId) return;
     this.approvalInterval = setInterval(async () => {
       try {
-        const res = await fetch(`https://tfg-z7pz.onrender.com/api/auth/proveedor-status/${this.proveedorId}`);
+        const res = await fetch(`${API_URL}/auth/proveedor-status/${this.proveedorId}`);
         const data = await res.json();
         console.log('Proveedor status polling:', data); // DEBUG
         if (res.ok && data.status) {
@@ -120,7 +121,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
 
   async forgotPassword() {
     try {
-      const res = await fetch('https://tfg-z7pz.onrender.com/api/auth/forgot-password', {
+      const res = await fetch(`${API_URL}/auth/forgot-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: this.forgotEmail })

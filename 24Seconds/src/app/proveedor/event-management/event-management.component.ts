@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgIf, NgFor, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { API_URL } from '../../api-url';
 
 @Component({
   selector: 'app-event-management',
@@ -41,7 +42,7 @@ export class EventManagementComponent implements OnInit, AfterViewInit {
     window.addEventListener('resize', this.checkIsMobile.bind(this));
     const token = localStorage.getItem('token');
     if (!token) return;
-    const res = await fetch('https://tfg-z7pz.onrender.com/api/events/mis-eventos', {
+    const res = await fetch(`${API_URL}/events/mis-eventos`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     if (res.ok) {
@@ -60,7 +61,7 @@ export class EventManagementComponent implements OnInit, AfterViewInit {
   async eliminarEvento(id: string) {
     if (!confirm('¿Seguro que quieres eliminar este evento?')) return;
     const token = localStorage.getItem('token');
-    const res = await fetch(`https://tfg-z7pz.onrender.com/api/events/delete/${id}`, {
+    const res = await fetch(`${API_URL}/events/delete/${id}`, {
       method: 'DELETE',
       headers: { 'Authorization': `Bearer ${token}` }
     });
@@ -95,7 +96,7 @@ export class EventManagementComponent implements OnInit, AfterViewInit {
 
   async guardarCampo(evento: any) {
     const token = localStorage.getItem('token');
-    await fetch(`https://tfg-z7pz.onrender.com/api/events/update/${evento._id}`,
+    await fetch(`${API_URL}/events/update/${evento._id}`,
       {
         method: 'PUT',
         headers: {
