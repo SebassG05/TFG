@@ -428,7 +428,7 @@
     margin-top: 1.7rem; /* añadido para separar de la X */
   }
   .auth-modal__tab-underline {
-    top: 4.2rem;
+    top: 5rem;
     height: 2px;
   }
   .auth-modal__form {
