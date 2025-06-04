@@ -25,10 +25,8 @@ export class CarouselComponent {
     'assets/carrusel3.png',
     'assets/carrusel4.png',
     'assets/carrusel5.png',
-    'assets/carrusel7.png',
-    'assets/carrusel9.gif',
 
-    ...(this.isMobile() ? [] : ['assets/carrusel6.png'])
+    ...(this.isMobile() ? [] : ['assets/carrusel7.png', 'assets/carrusel9.gif', 'assets/carrusel6.png'])
   ];
   current = 0;
   interval: any;

@@ -41,8 +41,10 @@ export class Balon3dComponent implements OnInit, OnDestroy {
   }
 
   initThree() {
-    const width = 400;
-    const height = 400;
+    // Detectar si es móvil (iPhone 14 Pro u otro <= 400px)
+    const isMobile = window.innerWidth <= 400;
+    const width = isMobile ? 280 : 400;
+    const height = isMobile ? 280 : 400;
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     this.camera.position.set(0, 0, 2.2);
