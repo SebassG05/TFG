@@ -13,11 +13,11 @@ import { API_URL } from '../api-url';
 })
 export class FormularioZapaidealComponent implements AfterViewInit {
   preguntas = [
-    { texto: '¿Para qué tipo de uso buscas las zapatillas?', opciones: ['Pista cubierta', 'Pista exterior', 'Ambas', 'Aún no lo sé'] },
+    { texto: '¿Para qué tipo de uso buscas las zapatillas?', opciones: ['Pista cubierta', 'Pista exterior', 'Exterior e interior', 'Aún no lo sé'] },
     { texto: '¿Qué tipo de jugador eres?', opciones: ['Base', 'Alero', 'Pívot', 'Ala-pívot'] },
-    { texto: '¿Qué color prefieres?', opciones: ['Blanco', 'Negro', 'Colorido', 'Otro'] },
+    { texto: '¿Qué color prefieres?', opciones: ['Blanco', 'Negro', 'Colorido', 'Rosa'] },
     { texto: '¿Qué rango de precio buscas?', opciones: ['<50€', '50-100€', '100-150€', '>150€'] },
-    { texto: '¿Qué marca prefieres?', opciones: ['Nike', 'Adidas', 'Puma', 'Sin preferencia'] }
+    { texto: '¿Qué marca prefieres?', opciones: ['Nike', 'Adidas', 'Puma', 'New Balance', 'Jordan', 'Sin preferencia'] }
   ];
   respuestas: string[] = [];
   showResult = false;

@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   z-index: 2;
+  margin-top: 10%;
 }
 canvas {
   width: 400px;
@@ -60,7 +61,7 @@ input[type="color"] {
   color: #222;
 }
 .balon3d-actions-bottom {
-  margin-top: 38vw;
+  margin-top: 10vw;
   left: 0;
   right: 0;
   bottom: 48px;
