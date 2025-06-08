@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onUserClick() {
     this.menuOpen = false;
-    window.location.href = '/perfil';
+    window.location.href = '/profile';
   }
 
   async removeItem(productId: string) {

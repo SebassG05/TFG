@@ -30,7 +30,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'historia', loadComponent: () => import('./historia/historia.component').then(m => m.HistoriaComponent) },
   { path: 'votation-toprated', component: VotationTopratedComponent },
-  { path: 'perfil', loadComponent: () => import('./perfil/perfil.component').then(m => m.PerfilComponent) },
+  { path: 'profile', loadComponent: () => import('./perfil/perfil.component').then(m => m.PerfilComponent) },
   { path: 'eventos/inscripcion', loadChildren: () => import('./eventos/listado-eventos/listado-eventos.routes').then(m => m.default) },
   { path: 'inscripcion-sorteos', loadComponent: () => import('./sorteo/listado-sorteo/listado-sorteo.component').then(m => m.ListadoSorteoComponent) },
   { path: 'contacto', loadComponent: () => import('./contacto/contacto.component').then(m => m.ContactoComponent) },
