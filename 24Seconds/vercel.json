@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/(.*)", "destination": "/" },
     { "source": "/api/(.*)", "destination": "https://tfg-z7pz.onrender.com/api/$1" },
     { "source": "/((?!api).*)", "destination": "/index.html" }
   ],
