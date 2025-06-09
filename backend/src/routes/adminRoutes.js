@@ -4,6 +4,47 @@ import isAdmin from '../middlewares/isAdmin.js';
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /admin/usuarios:
+ *   get:
+ *     summary: Obtener todos los usuarios registrados (solo admin)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de usuarios obtenida correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       401:
+ *         description: No autorizado
+ *
+ *   delete:
+ *     summary: Eliminar usuario por ID (solo admin)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID del usuario a eliminar
+ *     responses:
+ *       200:
+ *         description: Usuario eliminado correctamente
+ *       404:
+ *         description: Usuario no encontrado
+ *       401:
+ *         description: No autorizado
+ */
+
 // Obtener todos los usuarios registrados (solo admin)
 router.get('/usuarios', isAdmin, async (req, res) => {
   try {
@@ -28,6 +69,21 @@ router.delete('/usuarios/:id', isAdmin, async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /admin/inscripciones/eventos:
+ *   get:
+ *     summary: Obtener inscripciones a eventos (admin)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Inscripciones a eventos obtenidas correctamente
+ *       401:
+ *         description: No autorizado
+ */
+
 // Obtener inscripciones a eventos (admin)
 router.get('/inscripciones/eventos', isAdmin, async (req, res) => {
   try {
@@ -46,6 +102,21 @@ router.get('/inscripciones/eventos', isAdmin, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+/**
+ * @swagger
+ * /admin/inscripciones/sorteos:
+ *   get:
+ *     summary: Obtener inscripciones a sorteos (admin)
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Inscripciones a sorteos obtenidas correctamente
+ *       401:
+ *         description: No autorizado
+ */
 
 // Obtener inscripciones a sorteos (admin)
 router.get('/inscripciones/sorteos', isAdmin, async (req, res) => {
