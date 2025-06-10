@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { Router } from '@angular/router';
 import { API_URL } from '../api-url';
+import { NotificacionService } from '../notificacion.service';
 
 @Component({
   selector: 'app-auth-modal',
@@ -29,6 +30,7 @@ export class AuthModalComponent implements OnInit, OnDestroy {
   isProveedor = false;
   disableClose = false;
   private approvalInterval: any;
+  private notiSrv = inject(NotificacionService);
 
   constructor(private router: Router) {}
 
@@ -74,6 +76,24 @@ export class AuthModalComponent implements OnInit, OnDestroy {
   }
 
   async register() {
+    // Validación frontend de contraseña fuerte
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
+    if (!passwordRegex.test(this.password)) {
+      this.notiSrv.mostrar({
+        mensaje: 'La contraseña debe tener al menos 6 caracteres, un número y un carácter especial.',
+        tipo: 'error',
+        duracion: 3500
+      });
+      return;
+    }
+    if (this.password !== this.confirmPassword) {
+      this.notiSrv.mostrar({
+        mensaje: 'Las contraseñas no coinciden.',
+        tipo: 'error',
+        duracion: 3000
+      });
+      return;
+    }
     const body: any = {
       username: this.username,
       email: this.email,
@@ -94,11 +114,19 @@ export class AuthModalComponent implements OnInit, OnDestroy {
         this.proveedorApprovalStatus = 'pending';
         this.startApprovalPolling();
       } else {
-        alert(data.message || 'Registro exitoso');
+        this.notiSrv.mostrar({
+          mensaje: data.message || 'Registro exitoso',
+          tipo: 'success',
+          duracion: 2500
+        });
         this.close();
       }
     } catch (err: any) {
-      alert(err.message);
+      this.notiSrv.mostrar({
+        mensaje: err.message,
+        tipo: 'error',
+        duracion: 3500
+      });
     }
   }
 
