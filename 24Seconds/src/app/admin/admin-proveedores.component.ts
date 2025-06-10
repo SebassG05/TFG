@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { NotificacionService } from '../notificacion.service';
 import { API_URL } from '../api-url';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-proveedores',
@@ -46,7 +47,7 @@ import { API_URL } from '../api-url';
 export class AdminProveedoresComponent implements OnInit, AfterViewInit {
   proveedores: any[] = [];
 
-  constructor(private notificacionService: NotificacionService) {}
+  constructor(private notificacionService: NotificacionService, private router: Router) {}
 
   ngOnInit() {
     const token = localStorage.getItem('token');
@@ -127,7 +128,13 @@ export class AdminProveedoresComponent implements OnInit, AfterViewInit {
       body: JSON.stringify({ proveedorId: id })
     })
       .then(res => res.json())
-      .then(() => this.proveedores = this.proveedores.filter(p => p._id !== id));
+      .then(data => {
+        this.proveedores = this.proveedores.filter(p => p._id !== id);
+        this.notificacionService.mostrar({ mensaje: data.message || 'Proveedor aprobado correctamente', tipo: 'success' });
+        setTimeout(() => {
+          this.router.navigate(['/proveedores']);
+        }, 1200);
+      });
   }
 
   denegarProveedor(id: string) {
