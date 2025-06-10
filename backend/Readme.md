@@ -1,132 +1,156 @@
-# 24Seconds - Plataforma de Basket y Comunidad
+# Proyecto TFG - Backend
 
-24Seconds es una plataforma web integral que combina e-commerce, comunidad y eventos para los amantes del baloncesto y las zapatillas. El proyecto está compuesto por un frontend moderno desarrollado en Angular y un backend robusto basado en Node.js, Express y MongoDB. Incluye funcionalidades avanzadas como recomendaciones con IA, sorteos, eventos, panel de administración, pagos online y mucho más.
-
----
-
-## Índice
-- [Descripción General](#descripción-general)
-- [Arquitectura y Tecnologías](#arquitectura-y-tecnologías)
-- [Principales Funcionalidades](#principales-funcionalidades)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Despliegue y Calidad](#despliegue-y-calidad)
-- [Cómo Ejecutar el Proyecto](#cómo-ejecutar-el-proyecto)
-- [Documentación de la API](#documentación-de-la-api)
-
----
-
-## Descripción General
-
-24Seconds nace con el objetivo de ofrecer una experiencia única a los fans del basket, permitiendo no solo comprar zapatillas y productos exclusivos, sino también participar en sorteos, eventos, y formar parte de una comunidad activa. El sistema está preparado para escalar y adaptarse a diferentes roles de usuario: clientes, proveedores y administradores.
-
-El backend expone una API RESTful segura y bien documentada, mientras que el frontend proporciona una interfaz atractiva, responsiva y dinámica, optimizada para cualquier dispositivo.
-
----
-
-## Arquitectura y Tecnologías
-
-### Backend
-- **Node.js & Express**: Motor principal de la API REST.
-- **MongoDB & Mongoose**: Base de datos NoSQL y modelado de datos.
-- **Zod**: Validación de datos robusta en endpoints.
-- **JWT**: Autenticación y autorización segura.
-- **Nodemailer**: Envío de emails (notificaciones, recuperación de contraseña, etc).
-- **Swagger**: Documentación interactiva de la API.
-- **Cloudinary**: Almacenamiento y gestión de imágenes en la nube.
-- **OpenAI API**: Recomendaciones inteligentes de zapatillas mediante IA.
-- **Docker & Docker Compose**: Contenerización y despliegue sencillo.
-- **SonarQube**: Análisis de calidad y seguridad del código.
-
-### Frontend
-- **Angular**: Framework SPA para el desarrollo del frontend.
-- **TypeScript**: Lenguaje principal para robustez y escalabilidad.
-- **Tailwind CSS**: Utilidades CSS para un diseño moderno y responsivo.
-- **Angular Material**: Componentes UI profesionales.
-- **RxJS**: Programación reactiva y gestión de estados.
-- **Chart.js**: Visualización de datos y estadísticas.
-- **Three.js**: Efectos y animaciones 3D.
-- **AOS, Animate.css, Particles.js**: Animaciones y efectos visuales.
-
-![Stack Tecnológico Backend](src/public/Backend.png)
----
-
-## Principales Funcionalidades
-
-- **Registro y autenticación de usuarios** (clientes, proveedores, admins)
-- **Gestión de productos**: alta, edición, borrado, votación y ranking
-- **Carrito de la compra y pagos online**
-- **Panel de usuario y panel de administración**
-- **Participación en sorteos y eventos**
-- **Recomendación de zapatillas mediante IA**
-- **Subida y gestión de imágenes en la nube**
-- **Notificaciones y emails automáticos**
-- **Documentación Swagger para la API**
-- **Despliegue con Docker y control de calidad con SonarQube**
-
----
+Este proyecto es la parte backend de una aplicación de comercio electrónico sobre una tienda de zapatillas de baloncesto. A continuación se describe la estructura del proyecto y la funcionalidad de cada archivo.
 
 ## Estructura del Proyecto
 
-### Backend
-- **src/config/**: Configuración general y Swagger
-- **src/models/**: Modelos de datos (usuarios, productos, pedidos, etc.)
-- **src/controllers/**: Lógica de negocio
-- **src/routes/**: Endpoints de la API
-- **src/schemas/**: Validaciones y esquemas Swagger
-- **src/middlewares/**: Seguridad, validación y logs
-- **src/utils/**: Utilidades y helpers
-- **src/public/**: Archivos estáticos
-- **src/app.js / src/index.js**: Inicialización de la app
+![Estructura del Proyecto](src/public/Backend.png)
 
-### Frontend
-- **src/app/**: Componentes, servicios y rutas principales
-- **src/assets/**: Imágenes y recursos estáticos
-- **src/environments/**: Configuración de entornos
-- **angular.json / tailwind.config.js**: Configuración global
+### ⚙️ Configuración y Carga Inicial
+
+- **src/config.js**: Configuración de variables de entorno.
+- **src/loaders/index.js**: Inicializa las cargas de Express y la base de datos.
+- **src/loaders/express.js**: Configura Express, incluyendo middlewares y rutas.
+- **src/loaders/db.js**: Conexión a la base de datos MongoDB.
+
+### 🗂️ Modelos
+
+- **src/models/userModel.js**: Esquema y modelo de usuario.
+- **src/models/proveedorModel.js**: Esquema y modelo de proveedor.
+- **src/models/productModel.js**: Esquema y modelo de producto.
+- **src/models/orderModel.js**: Esquema y modelo de orden.
+- **src/models/cartModel.js**: Esquema y modelo de carrito de compras.
+- **src/models/reviewModel.js**: Esquema y modelo de reseña.
+- **src/models/shippingAddressModel.js**: Esquema y modelo de dirección de envío.
+- **src/models/purchaseHistoryModel.js**: Esquema y modelo de historial de compras.
+- **src/models/eventModel.js**: Esquema y modelo de evento.
+- **src/models/inventoryModel.js**: Esquema y modelo de inventario.
+- **src/models/favoriteShoesModel.js**: Esquema y modelo de zapatos favoritos.
+- **src/models/categoryModel.js**: Esquema y modelo de categoría.
+
+### 🛠️ Controladores
+
+- **src/controllers/authController.js**: Controlador para autenticación y gestión de usuarios.
+- **src/controllers/productController.js**: Controlador para gestión de productos.
+- **src/controllers/cartController.js**: Controlador para gestión de carritos de compras.
+- **src/controllers/eventController.js**: Controlador para gestión de eventos.
+
+### 🌐 Rutas
+
+- **src/routes/authRoutes.js**: Rutas de autenticación.
+- **src/routes/productRoutes.js**: Rutas de productos.
+- **src/routes/cartRoutes.js**: Rutas de carritos de compras.
+- **src/routes/eventRoutes.js**: Rutas de eventos.
+- **src/routes/indexRoutes.js**: Archivo principal de rutas que importa y usa todas las rutas anteriores.
+
+### ✅ Esquemas de Validación
+
+- **src/schemas/registerSchema.js**: Esquema de validación para registro de usuarios.
+- **src/schemas/loginSchema.js**: Esquema de validación para inicio de sesión.
+- **src/schemas/createProductSchema.js**: Esquema de validación para creación de productos.
+- **src/schemas/updateProductSchema.js**: Esquema de validación para actualización de productos.
+- **src/schemas/voteProductSchema.js**: Esquema de validación para votación de productos.
+- **src/schemas/addToCartSchema.js**: Esquema de validación para añadir productos al carrito.
+- **src/schemas/swaggerSchemas.js**: Esquemas para la documentación Swagger.
+
+### 🔒 Middlewares
+
+- **src/middlewares/validateSchema.js**: Middleware para validar esquemas.
+- **src/middlewares/isProveedor.js**: Middleware para verificar si el usuario es proveedor.
+- **src/middlewares/isAdmin.js**: Middleware para verificar si el usuario es administrador.
+- **src/middlewares/loggerMiddleware.js**: Middleware para registrar logs.
+- **src/middlewares/errorHandlingMiddleware.js**: Middleware para manejar errores.
+
+### 🔧 Utilidades
+
+- **src/utils/logger.js**: Configuración del logger.
+
+### 📄 Documentación
+
+- **src/config/swagger.js**: Configuración de Swagger para la documentación de la API.
+
+### 🚀 Inicialización
+
+- **src/index.js**: Punto de entrada de la aplicación.
+- **src/app.js**: Configuración de la aplicación Express.
+
+## Funcionamiento
+
+El proyecto está estructurado para manejar un sistema de comercio electrónico con autenticación de usuarios, gestión de productos, carritos de compras, eventos, sorteos, sugerencias y más. Utiliza MongoDB como base de datos y Express como framework de servidor. Incluye integración con Stripe para pagos, sistema de roles (admin, proveedor, usuario), y validación robusta de datos.
+
+Para más detalles sobre la estructura y funcionamiento, puedes consultar la [documentación Swagger](https://tfg-z7pz.onrender.com/api-docs).
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Node.js**: Entorno de ejecución para JavaScript en el servidor.
+- **Express**: Framework web para Node.js, utilizado para construir la API REST.
+- **MongoDB**: Base de datos NoSQL utilizada para almacenar datos.
+- **Mongoose**: Biblioteca de modelado de datos para MongoDB y Node.js.
+- **Zod**: Biblioteca de validación de esquemas para validar datos de entrada.
+- **JWT (JSON Web Tokens)**: Utilizado para la autenticación y autorización de usuarios.
+- **Swagger**: Herramienta para documentar la API REST.
+- **bcrypt**: Biblioteca para el hashing de contraseñas.
+- **dotenv**: Carga variables de entorno desde un archivo `.env`.
+- **crypto**: Módulo de Node.js para operaciones criptográficas.
+- **nodemailer**: Biblioteca para enviar correos electrónicos desde Node.js.
+- **Stripe**: Plataforma de pagos online.
+- **Cloudinary**: Gestión de imágenes en la nube.
 
 ---
 
-## Despliegue y Calidad
-- **Docker**: Permite levantar el backend, frontend y base de datos con un solo comando.
-- **SonarQube**: Analiza el código para asegurar calidad y seguridad.
-- **Render/Vercel**: Despliegue automático en la nube.
+# Proyecto TFG - Frontend (24Seconds)
+
+Este proyecto es la parte frontend de la aplicación, desarrollado en Angular. Permite a los usuarios navegar, comprar productos, inscribirse en eventos y sorteos, votar zapatillas, gestionar perfiles y más.
+
+## Estructura del Proyecto
+
+- **src/app/**: Contiene todos los módulos, componentes y servicios principales.
+  - **admin/**: Panel de administración (gestión de usuarios, productos, eventos, sorteos, sugerencias, inscripciones).
+  - **productos/**: Listado y filtrado de productos.
+  - **eventos/**: Visualización e inscripción a eventos.
+  - **sorteo/**: Visualización e inscripción a sorteos.
+  - **proveedor/**: Gestión de productos, eventos y sorteos para proveedores.
+  - **formulario-zapaideal/**: Encuesta para recomendación de zapatilla ideal (IA).
+  - **balon-sueno/**: Creación y visualización de balones personalizados.
+  - **top-zapatillas/**: Ranking y votación de zapatillas.
+  - **perfil/**: Gestión de perfil de usuario.
+  - **navbar/**, **footer/**, **home/**, **contacto/**, **auth-modal/**, etc.
+- **src/assets/**: Imágenes y recursos estáticos.
+- **src/environments/**: Configuración de entornos.
+
+## Funcionamiento
+
+El frontend consume la API REST del backend y ofrece:
+- Registro, login y gestión de usuarios.
+- Visualización y compra de productos.
+- Carrito de compras y pagos con Stripe.
+- Inscripción y gestión de eventos y sorteos.
+- Panel de administración completo.
+- Sugerencias y votaciones.
+- Recomendación de zapatilla ideal mediante IA.
+- Diseño responsive y moderno.
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Angular**: Framework principal del frontend.
+- **TypeScript**: Lenguaje principal.
+- **RxJS**: Programación reactiva.
+- **Angular Material**: Componentes UI.
+- **Three.js**: Visualización 3D (balón de los sueños).
+- **Chart.js**: Gráficas y estadísticas.
+- **Tailwind CSS**: Utilidades de estilos.
+- **AOS, animate.css**: Animaciones.
+- **Vercel**: Despliegue frontend.
 
 ---
 
-## Cómo Ejecutar el Proyecto
+# 📦 Recursos y Documentación
 
-1. Clona el repositorio y entra en la carpeta del backend:
-   ```powershell
-   git clone <repo-url>
-   cd backend
-   npm install
-   ```
-2. Configura las variables de entorno en un archivo `.env` (puedes usar `.env.example` como referencia).
-3. Arranca el backend:
-   ```powershell
-   npm start
-   ```
-4. Para el frontend:
-   ```powershell
-   cd ../24Seconds
-   npm install
-   npm start
-   ```
-5. Accede a la web en [http://localhost:4200](http://localhost:4200) y a la documentación de la API en [http://localhost:4000/api-docs](http://localhost:4000/api-docs) (o el puerto que uses).
+- **Backend Render:** [https://tfg-z7pz.onrender.com](https://tfg-z7pz.onrender.com)
+- **Frontend Vercel:** [https://tfg-sable.vercel.app](https://tfg-sable.vercel.app)
+- **Documentación Swagger (YAML):** [https://tfg-z7pz.onrender.com/api-docs](https://tfg-z7pz.onrender.com/api-docs)
+- **Colección de Postman:** [Descargar colección Postman TFG](./postman/TFG.postman_collection.json)
 
----
 
-## Documentación de la API
-
-La API está documentada con Swagger. Puedes probar todos los endpoints y ver los esquemas de datos accediendo a:
-- [http://localhost:4000/api-docs](http://localhost:4000/api-docs)
-
----
-
-## Créditos y agradecimientos
-
-Este proyecto ha sido desarrollado como Trabajo de Fin de Grado, integrando tecnologías modernas y buenas prácticas de desarrollo web. Gracias a la comunidad open source y a todos los recursos que han hecho posible este proyecto.
-
----
 
 

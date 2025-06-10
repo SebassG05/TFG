@@ -1,0 +1,1815 @@
+{
+	"info": {
+		"_postman_id": "80bb809e-1f3a-43b2-8b5c-732cc23821b6",
+		"name": "TFG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33368015"
+	},
+	"item": [
+		{
+			"name": "PRODUCT",
+			"item": [
+				{
+					"name": "RegisterProveedor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"usuario\",\r\n  \"email\": \"correo@ejemplo.com\",\r\n  \"password\": \"tuPassword\",\r\n  \"confirmPassword\": \"tuPassword\",\r\n  \"empresa\": \"Nombre de la empresa o CIF\",\r\n  \"role\": \"proveedor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/register",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Proveedor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"NewBalance@gmail.com\",\r\n    \"password\": \"newbalance123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE SHOE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFhMjkxYzc4ZDY0ZDg4Yjc2ZTVlMSIsInJvbGUiOiJwcm92ZWVkb3IiLCJpYXQiOjE3NDk1NzEzNDAsImV4cCI6MTc0OTU3NDk0MH0.iM0MsqcxoLAZmjcvkmxdm_5YsfE7CiaTpZIkN6OHVfM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"TWO WXY V5\",\r\n    \"brand\": \"NEW BALANCE\",\r\n    \"sizeMin\": 40,\r\n    \"sizeMax\": 46,\r\n    \"color\": \"Black and Grey\",\r\n    \"price\": 80,\r\n    \"stock\": 50,\r\n    \"category\": \"shoe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/products/create",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"products",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE SHOE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/products/delete/684857a1b0deb59a427be74e",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"products",
+								"delete",
+								"684857a1b0deb59a427be74e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE SHOE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nuevo nombre\",\r\n  \"brand\": \"Nueva marca\",\r\n  \"sizeMin\": 41,\r\n  \"sizeMax\": 45,\r\n  \"color\": \"Azul\",\r\n  \"price\": 130,\r\n  \"stock\": 8,\r\n  \"category\": \"shoe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/products/update/:id",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"products",
+								"update",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SEARCH",
+			"item": [
+				{
+					"name": "FILTROSHOE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/products/search?brand=New Balance",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Jordan",
+									"disabled": true
+								},
+								{
+									"key": "brand",
+									"value": "New Balance"
+								},
+								{
+									"key": "category",
+									"value": "Zapatillas",
+									"disabled": true
+								},
+								{
+									"key": "color",
+									"value": "Rojo",
+									"disabled": true
+								},
+								{
+									"key": "priceMin",
+									"value": "50",
+									"disabled": true
+								},
+								{
+									"key": "priceMax",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CARRITO",
+			"item": [
+				{
+					"name": "AGREGAR PRODUCTO CARRITO",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzMyNmE0MzU3OTVhMzc2MzRkZjVjMiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ4MzU3MzQyLCJleHAiOjE3NDgzNjA5NDJ9.OYJfgz5r7sRbrf8M5tl-K5fsm5eTJEts7riv65lOo1Y",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"6832d4a9336c2b3044ca028c\",\r\n    \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/cart/add",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PRODUCT CARRITO",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzYwZDkyYzIwMTMzMTAwODc3M2VhNCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQxMTA0NzIxLCJleHAiOjE3NDExMDgzMjF9.ooslKCqSJB1hWNXQIDKdkVscokKTQyx3iJudjCxTAS8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/cart/remove/ID_DEL_PRODUCTO",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"cart",
+								"remove",
+								"ID_DEL_PRODUCTO"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OBTENER CARRITO ACTUAL",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/cart",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VACIAR EL CARRITO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/cart/clear",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"cart",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FORGOT PASSWORD",
+			"item": [
+				{
+					"name": "Request Reset PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sebastiangandiagutierrez@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/forgot-password",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RESET PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"newpassword123\",\r\n    \"confirmPassword\": \"newpassword123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "POST https://tfg-z7pz.onrender.com/api/auth/reset-password/{token}",
+							"protocol": "POST https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reset-password",
+								"{token}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EVENTS",
+			"item": [
+				{
+					"name": "CREATE EVENT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzYwZWE0OTE5M2JjMDZmMzIzMGQwZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0MTEwNTYwOSwiZXhwIjoxNzQxMTA5MjA5fQ.8d5Rbk3ERzJfq2F1IrkOUWGPvVp9Hy0SOiI_6I0bnvY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nuevo nombre\",\r\n    \"description\": \"Descripción actualizada\",\r\n    \"location\": \"Nueva ubicación\",\r\n    \"hasStands\": true,\r\n    \"registrationDates\": {\r\n    \"start\": \"2025-06-01\",\r\n    \"end\": \"2025-08-10\"\r\n  },\r\n  \"eventDate\": \"2025-06-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/events/create",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"events",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE EVENT",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzYwZWE0OTE5M2JjMDZmMzIzMGQwZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0MTEwNTYwOSwiZXhwIjoxNzQxMTA5MjA5fQ.8d5Rbk3ERzJfq2F1IrkOUWGPvVp9Hy0SOiI_6I0bnvY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Nuevo nombre\",\r\n  \"description\": \"Descripción actualizada\",\r\n  \"location\": \"Nueva ubicación\",\r\n  \"hasStands\": true,\r\n  \"registrationDates\": {\r\n    \"start\": \"2025-06-01\",\r\n    \"end\": \"2025-06-10\"\r\n  },\r\n  \"eventDate\": \"2025-06-15\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/events/update/ID_DEL_EVENTO",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"events",
+								"update",
+								"ID_DEL_EVENTO"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE EVENT",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzYwZWE0OTE5M2JjMDZmMzIzMGQwZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0MTEwNTYwOSwiZXhwIjoxNzQxMTA5MjA5fQ.8d5Rbk3ERzJfq2F1IrkOUWGPvVp9Hy0SOiI_6I0bnvY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/events/delete/ID_DEL_EVENTO",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"events",
+								"delete",
+								"ID_DEL_EVENTO"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inscripcion EVENTOS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Yzc0YjgzZTc1ZDZkMjc5MmRiNmU2NyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQxMTE0MjYyLCJleHAiOjE3NDExMTc4NjJ9.czz5gNlfPMlw2n8ZSBeVh7dJMTLDFFAj9YgDG-rh9MY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/events/register/ID_DEL_EVENTO",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"events",
+								"register",
+								"ID_DEL_EVENTO"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OBTAIN ALL EVENTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/events/all",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"events",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OBTAIN PROVEEDORES EVENTS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/events/mis-eventos",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"events",
+								"mis-eventos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RANKING",
+			"item": [
+				{
+					"name": "VOTACION RANKING",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"productId\": \"67cc2b39e8940ef61a383524\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/products/vote",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"products",
+								"vote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VER RANKING",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/products/top",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"products",
+								"top"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PAYMENT",
+			"item": [
+				{
+					"name": "Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzMyNmE0MzU3OTVhMzc2MzRkZjVjMiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ4MTgyODA4LCJleHAiOjE3NDgxODY0MDh9.BtWiJIsuIHtirsEQtxD8OhkTX8PvDrFspjxvVqslYjM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 10000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/payments/create",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"payments",
+								"create"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SORTEOS",
+			"item": [
+				{
+					"name": "ADD SORTEOS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFhMjkxYzc4ZDY0ZDg4Yjc2ZTVlMSIsInJvbGUiOiJwcm92ZWVkb3IiLCJpYXQiOjE3NDU3NzI4MTMsImV4cCI6MTc0NTc3NjQxM30.yWSBM0KwEsgvwgpBNkJqAzcUacL5rsheoJqavb97Sb8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Sorteo Premium\",\r\n  \"description\": \"Un sorteoooo especial\",\r\n  \"expirationDate\": \"2025-12-31T23:59:59.000Z\",\r\n  \"hoopCoinsCost\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/sorteos",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"sorteos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTORIZAR SORTEO",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFhMjQzYzc4ZDY0ZDg4Yjc2ZTVkOCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NTc3Mjg1MCwiZXhwIjoxNzQ1Nzc2NDUwfQ.TyOz0wS0ohc5UswwDYvrH3-aG3rxfufaAoXsyb5v2g0",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/sorteos/{id}/authorize",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"sorteos",
+								"{id}",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "INSCRIPCCION SORTEO",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MGU0ZmRmN2U1NzkzZjNjNmUzNDMyNCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ1NzcyOTA0LCJleHAiOjE3NDU3NzY1MDR9.8asu7gtHcumSV_oLzWbuJqnLukbDz8QojmsgK_pvGcA",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "POST https://tfg-z7pz.onrender.com/api/sorteos/{id}/inscribirse",
+							"protocol": "POST https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"sorteos",
+								"{id}",
+								"inscribirse"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEE INCRITOS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFhMjkxYzc4ZDY0ZDg4Yjc2ZTVlMSIsInJvbGUiOiJwcm92ZWVkb3IiLCJpYXQiOjE3NDU3NzM3MzQsImV4cCI6MTc0NTc3NzMzNH0.emddF_YxLGdGTTkiY8RPcdJBXsP8ziu8fPlvcebzQf8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/sorteos/{id}/participants",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"sorteos",
+								"{id}",
+								"participants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEE MY SORTEOS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer id",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/sorteos/mis-sorteos",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"sorteos",
+								"mis-sorteos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEE ALL SORTEOS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/sorteos/public/all",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"sorteos",
+								"public",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "GESTION USERS ADMIN",
+					"item": [
+						{
+							"name": "OBTAIN ALL USERS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/admin/usuarios",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"admin",
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DEETE USERS BY ID",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/admin/usuarios/:id",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"admin",
+										"usuarios",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PRODUCTS ADMIN",
+					"item": [
+						{
+							"name": "DELETE PRODUCT",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/products/delete/:id",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"products",
+										"delete",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "EVENTS ADMIN",
+					"item": [
+						{
+							"name": "OBTAIN ALL EVENTS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/events/all",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"events",
+										"all"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE EVENTS BY ID",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/events/:eventId",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"events",
+										":eventId"
+									],
+									"variable": [
+										{
+											"key": "eventId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SEE INSCRIPTIONS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/admin/inscripciones/eventos",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"admin",
+										"inscripciones",
+										"eventos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SORTEOS ADMIN",
+					"item": [
+						{
+							"name": "OBTAIN ALL SORTEOS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/sorteos/all",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"sorteos",
+										"all"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE SORTEOS BY ID",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/sorteos/:id",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"sorteos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SEE INSCRIPTIONS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/admin/inscripciones/sorteos",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"admin",
+										"inscripciones",
+										"sorteos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PEDIDOS",
+					"item": [
+						{
+							"name": "SEE ALL PEDIDOS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/admin/orders",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"admin",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SUGERENCIAS",
+					"item": [
+						{
+							"name": "LISTAR SUGERENCIAS",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/sugerencias",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"sugerencias"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE SUGERENCIA",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"estado\": \"realizada\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://tfg-z7pz.onrender.com/api/sugerencias/:id/estado",
+									"protocol": "https",
+									"host": [
+										"tfg-z7pz",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"sugerencias",
+										":id",
+										"estado"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"sebas\",\r\n  \"email\": \"sebas@gmail.com\",\r\n  \"password\": \"soyadmin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/register",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LoginAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ivansito@gmail.com\",\r\n    \"password\": \"awawa111\",\r\n    \"adminPassword\": \"soyadmin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ApproveProveedor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGFhMjQzYzc4ZDY0ZDg4Yjc2ZTVkOCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0MjM4MTY0MCwiZXhwIjoxNzQyMzg1MjQwfQ.fcgUGjCM5aviEFriL8EcU7vEBMdYeJymOv7RndfyQWQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"proveedorId\": \"67daa253c78d64d88b76e5db\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/approve-proveedor",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"approve-proveedor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RejectProveedor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"proveedorId\": \"67be1adc956fb42ad3d19b78\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/reject-proveedor",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reject-proveedor"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "REGISTER USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"isa\",\r\n    \"email\": \"mapamundiss@gmail.com\",\r\n    \"password\": \"Kira2019\",\r\n    \"role\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/register",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sebasss@gmail.com\",\r\n    \"password\": \"seba123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGOUT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MGU0ZmRmN2U1NzkzZjNjNmUzNDMyNCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ3MDc1NjA0LCJleHAiOjE3NDcwNzkyMDR9.GfKv7sGB1CtNzsX79Pq0J7YNKFM4110ljwzYQjyRcB8",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/logout",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzMyNmE0MzU3OTVhMzc2MzRkZjVjMiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzQ5Mzk5NDY0LCJleHAiOjE3NDk0MDMwNjR9._ZxXuwPuYs_1-iPVMPZWf7BbkUzT40td6K9suUqEicE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/auth/profile",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HISTORIAL COMPRAS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/user/orders",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"user",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREAR SUGERENCIA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"usuario@email.com\",\r\n  \"mensaje\": \"Me gustaría que añadieran más productos de baloncesto.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tfg-z7pz.onrender.com/api/sugerencias",
+							"protocol": "https",
+							"host": [
+								"tfg-z7pz",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"sugerencias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
